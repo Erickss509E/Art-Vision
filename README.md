@@ -73,6 +73,8 @@ Restrições e Requisitos Não Funcionais
 •	O sistema será acessível em dispositivos móveis, tablets e desktops, com design adaptável para diferentes tamanhos de tela.
 •	Segurança de Dados:
 •	O banco de dados será protegido com criptografia para garantir a privacidade das informações das obras e dos funcionários.
+
+<img src="https://github.com/Erickss509E/PI3/blob/main/Organograma-ArtVision.drawio.png" alt="Texto Alternativo">
 •	Controle de Acesso:
 •	Diferentes níveis de acesso serão configurados:
 •	Administradores: Acesso total ao sistema.
