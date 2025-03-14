@@ -83,3 +83,7 @@ Restrições e Requisitos Não Funcionais
 ### Organograma Sistema ArtVision
 
   <img width=100% src="https://github.com/Erickss509E/PI3/blob/main/Organograma-ArtVision.drawio.png" alt="Texto Alternativo">
+
+### MER Modelo Lógico
+
+  <img width=100% src="https://github.com/Erickss509E/Art-Vision/blob/main/Artvision.jpg" alt="Texto Alternativo">
