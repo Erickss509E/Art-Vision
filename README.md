@@ -90,7 +90,7 @@ Restrições e Requisitos Não Funcionais
 
 ### MER Modelo Conceitual
 
-   <img src="https://github.com/Erickss509E/Art-Vision/blob/main/diagrama-conceitual.jpg" alt="Modelo Conceitual">
+   <img width=100% src="https://github.com/Erickss509E/Art-Vision/blob/main/diagrama-conceitual.jpg" alt="Modelo Conceitual">
   
 ### Prototipo 
   <h3>Home Page:<h3/>
