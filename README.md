@@ -87,3 +87,26 @@ Restrições e Requisitos Não Funcionais
 ### MER Modelo Lógico
 
   <img width=100% src="https://github.com/Erickss509E/Art-Vision/blob/main/Artvision.jpg" alt="Texto Alternativo">
+  
+### Prototipo 
+  <h3>Home Page:<h3/>
+    <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Home_Page.webp" alt="Texto Alternativo"><br/>
+  <h3> Sobre:<h3/>
+    <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Sobre.webp" alt="Texto Alternativo"><br/>
+  <h3> Login:<h3/>
+    <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Login.webp" alt="Texto Alternativo"><br/>
+  <h3> Cadastro:<h3/>
+    <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Cadastro.webp" alt="Texto Alternativo"><br/>
+  <h3> Relatorios:<h3/> 
+     <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Relatorios.webp" alt="Texto Alternativo"><br/>
+  <h3> Sala:<br/><h3/>
+    <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Sala.webp" alt="Texto Alternativo">
+  <h3> Dashboard:<h3/> 
+     <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Dashboard.webp" alt="Texto Alternativo"><br/>
+  <h3> Calculador:<h3/> 
+     <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Calculadora.webp" alt="Texto Alternativo"><br/>
+  <h3> Linha do Tempo:<h3/> <br/>
+     <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Linha_Tempo.webp" alt="Texto Alternativo">
+  <h3> Ajustes:<h3/>
+     <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Ajustes.webp" alt="Texto Alternativo"><br/>
+
