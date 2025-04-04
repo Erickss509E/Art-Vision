@@ -82,35 +82,35 @@ Restrições e Requisitos Não Funcionais
 
 ### Organograma Sistema ArtVision
 
-  <img width=100% src="https://github.com/Erickss509E/PI3/blob/main/Organograma-ArtVision.drawio.png" alt="Organograma">
+  <img width=100% src="https://github.com/Erickss509E/Art-Vision/blob/main/ArtVision/src/main/webapp/img/Organograma-ArtVision.drawio.png" alt="Organograma">
 
 ### DER Modelo Lógico
 
-  <img width=100% src="https://github.com/Erickss509E/Art-Vision/blob/main/Artvision.jpg" alt="Modelo Lógico">
+  <img width=100% src="https://github.com/Erickss509E/Art-Vision/blob/main/ArtVision/src/main/webapp/img/Artvision.jpg" alt="Modelo Lógico">
 
 ### MER Modelo Conceitual
 
-   <img width=100% src="https://github.com/Erickss509E/Art-Vision/blob/main/diagrama-conceitual.jpg" alt="Modelo Conceitual">
+   <img width=100% src="https://github.com/Erickss509E/Art-Vision/blob/main/ArtVision/src/main/webapp/img/diagrama-conceitual.jpg" alt="Modelo Conceitual">
   
 ### Prototipo 
   <h3>Home Page:<h3/>
-    <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Home_Page.webp" alt="Texto Alternativo"><br/>
+    <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/ArtVision/src/main/webapp/img/Home_Page.webp" alt="Texto Alternativo"><br/>
   <h3> Sobre:<h3/>
-    <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Sobre.webp" alt="Texto Alternativo"><br/>
+    <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/ArtVision/src/main/webapp/img/Sobre.webp" alt="Texto Alternativo"><br/>
   <h3> Login:<h3/>
-    <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Login.webp" alt="Texto Alternativo"><br/>
+    <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/ArtVision/src/main/webapp/img/Login.webp" alt="Texto Alternativo"><br/>
   <h3> Cadastro:<h3/>
-    <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Cadastro.webp" alt="Texto Alternativo"><br/>
+    <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/ArtVision/src/main/webapp/img/Cadastro.webp" alt="Texto Alternativo"><br/>
   <h3> Relatorios:<h3/> 
-     <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Relatorios.webp" alt="Texto Alternativo"><br/>
+     <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/ArtVision/src/main/webapp/img/Relatorios.webp" alt="Texto Alternativo"><br/>
   <h3> Sala:<br/><h3/>
-    <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Sala.webp" alt="Texto Alternativo">
+    <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/ArtVision/src/main/webapp/img/Sala.webp" alt="Texto Alternativo">
   <h3> Dashboard:<h3/> 
-     <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Dashboard.webp" alt="Texto Alternativo"><br/>
+     <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/ArtVision/src/main/webapp/img/Dashboard.webp" alt="Texto Alternativo"><br/>
   <h3> Calculador:<h3/> 
-     <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Calculadora.webp" alt="Texto Alternativo"><br/>
+     <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/ArtVision/src/main/webapp/img/Calculadora.webp" alt="Texto Alternativo"><br/>
   <h3> Linha do Tempo:<h3/> <br/>
-     <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Linha_Tempo.webp" alt="Texto Alternativo">
+     <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/ArtVision/src/main/webapp/img/Linha_Tempo.webp" alt="Texto Alternativo">
   <h3> Ajustes:<h3/>
-     <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/Ajustes.webp" alt="Texto Alternativo"><br/>
+     <img width=50% src="https://github.com/Erickss509E/Art-Vision/blob/main/ArtVision/src/main/webapp/img/Ajustes.webp" alt="Texto Alternativo"><br/>
 
