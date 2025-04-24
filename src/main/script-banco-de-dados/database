@@ -1,0 +1,82 @@
+CREATE DATABASE artvision;
+USE artvision;
+
+CREATE TABLE usuarios (
+    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    senha_usuario VARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE TABLE setores (
+    id_setor INT PRIMARY KEY AUTO_INCREMENT,
+    nome_setor VARCHAR(50) NOT NULL UNIQUE,
+    ala VARCHAR(5)
+);
+
+CREATE TABLE cargos (
+    id_cargo INT PRIMARY KEY AUTO_INCREMENT,
+    nome_cargo VARCHAR(100) NOT NULL,
+    id_setor INT NOT NULL,
+    FOREIGN KEY (id_setor) REFERENCES setores(id_setor)
+);
+
+CREATE TABLE departamentos (
+    id_depto INT PRIMARY KEY AUTO_INCREMENT,
+    nome_depto VARCHAR(50) NOT NULL,
+    id_setor INT,
+    FOREIGN KEY (id_setor) REFERENCES setores(id_setor)
+);
+
+CREATE TABLE escalas (
+    id_escala INT PRIMARY KEY AUTO_INCREMENT,
+    nome_escala VARCHAR(5) NOT NULL,
+    hr_entrada VARCHAR(5) NOT NULL,
+    hr_saida VARCHAR(5) NOT NULL,
+    folga VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE funcionarios (
+    id_func INT PRIMARY KEY AUTO_INCREMENT,
+    cpf_func VARCHAR(11),
+    nome_func VARCHAR(50) NOT NULL,
+    email_func VARCHAR(50) NOT NULL,
+    matricula_func VARCHAR(4),
+    telefone_func VARCHAR(11),
+    id_cargo INT,
+    id_setor INT,
+    id_escala INT,
+    id_depto INT,
+    FOREIGN KEY (id_cargo) REFERENCES cargos(id_cargo),
+    FOREIGN KEY (id_setor) REFERENCES setores(id_setor),
+    FOREIGN KEY (id_escala) REFERENCES escalas(id_escala),
+    FOREIGN KEY (id_depto) REFERENCES departamentos(id_depto)
+);
+
+CREATE TABLE obras (
+    id_obra INT PRIMARY KEY AUTO_INCREMENT,
+    nome_obra VARCHAR(50) NOT NULL,
+    nome_autor VARCHAR(50) NOT NULL,
+    data_entrada DATE NOT NULL,
+    data_saida DATE,
+    valor_estimado FLOAT NOT NULL,
+    id_setor INT,
+    id_func INT,
+    id_usuario INT,
+    FOREIGN KEY (id_setor) REFERENCES setores(id_setor),
+    FOREIGN KEY (id_func) REFERENCES funcionarios(id_func),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+CREATE TABLE manutencoes (
+    id_manutencao INT PRIMARY KEY AUTO_INCREMENT,
+    nome_manutencao VARCHAR(50) NOT NULL,
+    data_manutencao DATE NOT NULL,
+    observacao VARCHAR(80),
+    id_obra INT,
+    id_func INT,
+    id_usuario INT,
+    FOREIGN KEY (id_obra) REFERENCES obras(id_obra),
+    FOREIGN KEY (id_func) REFERENCES funcionarios(id_func),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
