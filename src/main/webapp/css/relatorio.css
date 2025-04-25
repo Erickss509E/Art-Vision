@@ -1,0 +1,76 @@
+main .title{
+    padding: 30px;
+}
+main .title>h1{
+    color: #3D393A;
+    font-family: inter;
+    font-weight: bold;
+}
+.card{
+    display: flex;
+    width: 85%!important;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: -2px 5px 18px 8px rgba(0, 0, 0, 0.1);
+    align-items: flex-start;
+    text-decoration: none;
+    margin: 7px;
+}
+
+.card>.description{
+    padding: 40px;
+}
+.card>.description>p{
+    margin: 0;
+    color: #828282;
+}
+.card>.description>h2{
+    margin: 0;
+    color: #0B1354;
+}
+main div>table{
+    border-collapse: collapse;
+    border: 1px solid #F5F5F5F5;
+    height: 11vh;
+    width: 95%;
+}
+main div>table>thead{
+    border-radius: 18px;
+}
+main div>table>thead>tr{
+    height: 40px;
+    background-color: #8C2A44;
+    text-align: start;
+}
+main div>table>thead>tr>th{text-align: start;padding: 0px 11px;}
+main div>table>tbody{
+    height: 46px;
+}
+main div>table>tbody>tr{}
+main div>table>tbody>tr>td{
+    padding: 0px 11px;
+}
+main div>table>tbody>tr>td>div{
+    display: flex;
+    align-items: center;
+}
+main div>table>tbody>tr>td>div>img{padding-right: 10px;}
+main div>table>tbody>trtd>div>p{}
+.title{
+    color: white;
+}
+.content{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.
+.direito{
+width: 65%;
+}
+.content div{
+    width: 62%;
+}
+.relatorio-e{
+    width: 38%!important;
+}
