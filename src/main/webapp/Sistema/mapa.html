@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mapa Interno do Museu</title>
+    <style>
+        #mapa {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-image: url('../assets/img/mapa_museu.png');
+            background-size: cover;
+            border: 1px solid #ccc;
+        }
+        .obra-marker {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: rgba(255, 0, 0, 0.7);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .tooltip {
+            position: absolute;
+            background: #333;
+            color: #fff;
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            display: none;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <h2>Mapa Interno do Museu - Localização das Obras</h2>
+    <div id="mapa"></div>
+    <div id="tooltip" class="tooltip"></div>
+
+    <script>
+        const mapa = document.getElementById('mapa');
+        const tooltip = document.getElementById('tooltip');
+
+        // Exemplo de posições fixas para as localizações (deve ser ajustado conforme o mapa real)
+        const posicoes = {
+            "Sala 1": { x: 100, y: 150 },
+            "Sala 2": { x: 300, y: 200 },
+            "Sala 3": { x: 500, y: 350 },
+            "Setor A": { x: 650, y: 100 },
+            "Setor B": { x: 200, y: 450 }
+        };
+
+        function criarMarcador(obra, pos) {
+            const marker = document.createElement('div');
+            marker.className = 'obra-marker';
+            marker.style.left = pos.x + 'px';
+            marker.style.top = pos.y + 'px';
+            marker.textContent = obra.nome.charAt(0).toUpperCase();
+
+            marker.addEventListener('mouseenter', () => {
+                tooltip.style.display = 'block';
+                tooltip.textContent = `${obra.nome} - ${obra.nomeAutor} - ${obra.localizacao}`;
+                const rect = marker.getBoundingClientRect();
+                tooltip.style.left = rect.left + window.scrollX + 30 + 'px';
+                tooltip.style.top = rect.top + window.scrollY + 'px';
+            });
+            marker.addEventListener('mouseleave', () => {
+                tooltip.style.display = 'none';
+            });
+
+            mapa.appendChild(marker);
+        }
+
+        async function carregarObras() {
+            try {
+                const response = await fetch('/Artvision/obra-localizacao');
+                const obras = await response.json();
+
+                obras.forEach(obra => {
+                    const pos = posicoes[obra.localizacao];
+                    if (pos) {
+                        criarMarcador(obra, pos);
+                    }
+                });
+            } catch (error) {
+                console.error('Erro ao carregar obras:', error);
+            }
+        }
+
+        carregarObras();
+    </script>
+</body>
+</html>
