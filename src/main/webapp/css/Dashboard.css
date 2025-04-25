@@ -18,8 +18,8 @@ main .content{
     justify-content: center;
     margin: 30px;
     box-shadow: 3px 5px 15px 12px rgba(0, 0, 0, 0.1);
-    /* padding: 0px 20px; */
     align-items: flex-start;
+    text-decoration: none;
 }
  .card>.title-card{
     padding: 0px 15px;
@@ -33,6 +33,7 @@ main .content{
  .card>.content{
     display: flex;
     padding: 0px 15px;
+    color: black;
 }
  .card>.content>.img-card{}
  .card>.content>div>img{}

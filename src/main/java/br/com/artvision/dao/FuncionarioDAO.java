@@ -1,5 +1,6 @@
 package br.com.artvision.dao;
 
+import br.com.artvision.model.FuncionarioCount;
 import br.com.artvision.model.Funcionario;
 import br.com.artvision.servlet.database.ConnectionFactory;
 
@@ -57,8 +58,6 @@ public class FuncionarioDAO {
             stmt.setInt(6, funcionario.getIdSetor());
             stmt.setInt(7, funcionario.getIdEscala());
             stmt.setInt(8, funcionario.getIdDepto());
-            stmt.setInt(9, funcionario.getIdNivelAcesso());
-
             stmt.executeUpdate();
 
         } catch (Exception e) {
@@ -85,7 +84,6 @@ public class FuncionarioDAO {
                 f.setIdSetor(rs.getInt("id_setor"));
                 f.setIdEscala(rs.getInt("id_escala"));
                 f.setIdDepto(rs.getInt("id_depto"));
-                f.setIdNivelAcesso(rs.getInt("id_nivel_acesso"));
                 funcionarios.add(f);
             }
 
@@ -110,7 +108,6 @@ public class FuncionarioDAO {
             stmt.setInt(6, funcionario.getIdSetor());
             stmt.setInt(7, funcionario.getIdEscala());
             stmt.setInt(8, funcionario.getIdDepto());
-            stmt.setInt(9, funcionario.getIdNivelAcesso());
             stmt.setInt(10, funcionario.getIdFunc());
 
             stmt.executeUpdate();
