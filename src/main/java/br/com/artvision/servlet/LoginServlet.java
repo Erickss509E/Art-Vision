@@ -10,7 +10,6 @@ import java.io.IOException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -24,11 +23,7 @@ public class LoginServlet extends HttpServlet {
             // Login OK – cria sessão
             HttpSession session = request.getSession();
             session.setAttribute("usuarioLogado", usuario);
-
-            response.sendRedirect("dashboard.jsp");
         } else {
-            // Login falhou – redireciona com erro
-            response.sendRedirect("login.html?erro=1");
         }
     }
 }
