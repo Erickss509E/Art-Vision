@@ -45,3 +45,25 @@
 </body>
 
 </html>
+<script>
+  function login() {
+    const email = document.getElementById("input_email").value;
+    const senha = document.getElementById("input_senha").value;
+
+    fetch("login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: `email=${encodeURIComponent(email)}&senha=${encodeURIComponent(senha)}`
+    })
+            .then(response => {
+              if (response.redirected) {
+                window.location.href = response.url;
+              } else {
+                alert("E-mail ou senha inválidos!");
+              }
+            });
+  }
+</script>
+
