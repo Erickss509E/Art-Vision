@@ -1,0 +1,55 @@
+*{
+margin: 0;
+}
+main{
+
+height: 100vh;
+
+width: 100%;
+}
+main .sidbar{
+
+width: 11%;
+
+height: 100vh;
+
+background-color: #103440;
+}
+main .sidbar>.logo_museu{
+    width: 100%;
+    height: auto;
+    padding-bottom: 106px;
+}
+main .sidbar>.logo_museu img{
+    width: 100%;
+}
+main .sidbar>.link {
+    display: flex;
+    flex-direction: column;
+}
+main .sidbar>.link>div{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding-bottom: 23px;
+}
+main .sidbar>.link>div>a{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+main .sidbar>.link>div>a>img{
+    width: 23px;
+    height: auto;
+    padding-left: 12px;
+}
+main .sidbar>.link>div>a>p{
+    color: white;
+    outline: none;
+    text-decoration: none;
+    padding-left: 20px;
+    font-size: 16px;
+}
+main .sidbar>.link>div>a::hover{}

@@ -1,0 +1,230 @@
+/* Guia
+'#' Referencia um id (id é utilizado para um elemento)
+'.' Referencia a uma classe (classe vários elementos com as mesmas propriedades) 
+*/
+
+/* Estilização da página */
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #103440;
+    background-image: url(/site/public/assets/img/museu_transparente.png);
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: max-content;
+}
+
+b {
+    font-weight: bold;
+}
+
+main {
+    /* Layout do conteúdo principal da página */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5% 5%;
+}
+
+/* Estilização da seção sobre a calculadora */
+
+#div_sobre {
+    padding: 30px;
+    color: white;
+    background-color: rgb(140, 42, 68, 0.9);
+    width: 25%;
+}
+
+#div_sobre p {
+    /* Estiliza apenas a tag <p> do escopo marcado pelo id 'div_sobre' */
+    font-size: 15px;
+    font-family: 'Inter';
+    font-weight: 500;
+    margin: 20px 0px 20px 0px;
+    width: 90%;
+    text-align: justify;
+}
+
+#div_sobre h1 {
+    /* Estiliza apenas a tag <h1> do escopo marcado pelo id 'div_sobre' */
+    font-family: 'Libre Caslon Text';
+    font-weight: bold;
+    font-size: 28px;
+}
+
+#div_sobre h2 {
+    font-family: 'Libre Caslon Text';
+    font-weight: 600;
+    font-size: 24px;
+}
+
+/* Estilização da seção dos campos da calculadora */
+
+#div_calculadora {
+    background-color: white;
+    padding: 30px;
+    width: 60%;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.30);
+}
+
+#div_calculadora h1 {
+    font-family: 'Inter';
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 25px;
+    color: #103440;
+}
+
+#div_calculadora h3 {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 14px;
+    margin: 10px 0 10px 0;
+    color: #103440;
+}
+
+#formulario {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* #grid_input {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+} */
+
+.div_input {
+    width: 250px;
+}
+
+.input {
+    margin: 5px 0 5px 0px;
+    padding: 5px 11px;
+    display: inline-block;
+}
+
+button {
+    margin-top: 20px;
+    color: white;
+    font-weight: bold;
+    display: block;
+    background-color: #8C2A44;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+
+#div_total h1 {
+    font-family: 'Libre Caslon Text';
+    color: #103440;
+    font-size: 22px;
+}
+
+#div_total b {
+    font-weight: bolder;
+    font-size: 18px;
+}
+
+
+/* Estilização da seção do resultado */
+
+.resultado {
+    margin-top: 30px;
+    font-weight: 500;
+    font-family: 'Inter';
+    font-size: 8px;
+}
+
+.div_tabela {
+    font-weight: 500;
+    font-family: 'Inter';
+    font-size: 8px;
+    width: 59%;
+}
+
+.div_tabela h2 {
+    font-family: 'Inter';
+    margin: 20px 0px;
+    font-size: 20px;
+    color: #103440;
+}
+
+#mensagem_instituto {
+    font-family: 'Inter';
+    margin: 10px 0px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #103440;
+}
+
+#resultado h1 {
+    font-family: 'Inter';
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+
+#tabela_cliente {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#tabela_cliente td,
+#tabela_cliente th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    font-size: 14px;
+}
+
+#tabela_cliente tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#tabela_cliente tr:hover {
+    background-color: #ddd;
+}
+
+#tabela_cliente th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #8C2A44;
+    color: white;
+    font-size: 12px;
+}
+
+section {
+    background-color: white;
+    padding: 20px;
+    margin: 30px 5%;
+}
+
+section h2 {
+    color: #103440;
+}
+
+.container-contexto {
+    display: flex;
+    justify-content: space-between;
+}
+
+.texto-contexto {
+    width: 50%;
+    font-size: 17px;
+}
+
+.texto-contexto p{
+    margin-bottom: 15px;
+}
+

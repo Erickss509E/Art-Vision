@@ -1,0 +1,158 @@
+body, html {
+    height: 100%;
+}
+
+body {
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.70) 0%, rgba(0, 0, 0, 0.70) 100%), 
+    url(../assets/img/bg_login.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Inter';
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.texto-quadro1 {
+    justify-content: center;
+    margin: 25% 10%;
+    width: 500px;
+}
+
+.container {
+    height: 80%;
+    width: 60%;
+    display: flex;
+}
+
+.titulo1{
+    color:white;
+    width: fit-content;
+    font-size: 32px;
+    font-weight: bolder;
+    margin: 0;
+}
+
+.titulo2{
+    color: white;
+    width: fit-content;
+    font-size: 14px;
+    margin-top: 10px;
+}
+.quadro1 {
+    width: 35%;
+    background-color: #103440;
+    border: 1px black solid;
+    padding: 25px;
+    border-radius: 30px 0px 0px 30px;
+    border: none;
+}
+
+.campos {
+    margin-bottom: 19px;
+
+}
+
+.campos > input{
+    color: #11111399;
+    width: 250px;
+    height: 30px;
+    border: #11111333 1px solid;
+    border-radius: 5px;
+    padding: 5px;
+    outline: 0;
+}
+
+.campos>input {
+    color: rgb(14, 13, 13);
+    width: 250px;
+    height: 30px;
+    border-radius: 5px;
+    padding: 5px;
+    outline: 0;
+}
+
+.quadro2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65%;
+    background-color: rgb(255, 252, 252);
+    border: 1px black solid;
+    padding: 20px;
+    border-radius: 0px 30px 30px 0px;
+    border: none;
+}
+
+.botao {
+    color: rgb(255, 255, 255);
+    width: 265px;
+    height: 35px;
+    font-size: 17px;
+    cursor: pointer;
+    margin: 3px;
+    background-color: #8c2a44;
+    border-radius: 4px;
+    border: none;
+}
+
+.senha {
+    color: rgb(153, 0, 0);
+    text-decoration: none;
+    border: none;
+}
+
+.login {
+    color: rgb(18, 19, 18);
+    text-decoration: dashed;
+
+}
+
+.form-footer {
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.msgDentro {
+    position: absolute;
+}
+
+#div_nome {
+    color: red;
+    font-size: 13px;
+}
+
+#div_email {
+    color: red;
+    font-size: 13px;
+}
+
+#div_cnpj {
+    color: red;
+    font-size: 13px;
+}
+
+#div_cpf {
+    color: red;
+    font-size: 13px;
+}
+
+#div_senha {
+    color: red;
+    font-size: 13px;
+}
+
+#div_empresa {
+    color: red;
+    font-size: 13px;
+    text-align: left;
+}
+.registro {
+    color: rgb(85, 85, 85);
+    text-decoration: none;
+    font-size: 14px;
+}

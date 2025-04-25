@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+    <!-- Link para referenciar fontes google, fonte 'Inter' -->
+    <link href='https://fonts.googleapis.com/css?family=Libre Caslon Text' rel='stylesheet'>
+    <!-- Link para referenciar fontes google, fonte 'Libre Caslon Text' -->
+    <link rel="stylesheet" href="css/style-header-footer.css">
+    <!-- <link rel="stylesheet" href="css/reset.css"> --> <!-- Link para o arquivo de reset de estilização -->
+    <link rel="stylesheet" href="css/calculadora.css"> <!-- Link para o arquivo de estilização -->
+    <title>Calculadora Financeira</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div> <img class="logo" src="assets/img/logo_avt.png" alt=""></div>
+            <div class="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="calculadora.html">Calculadora</a></li>
+                    <li class="login"><a href="login.html" target="_blank"><b>Login</b></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <main>
+        <div id="div_sobre"> <!-- Coluna da esquerda -->
+            <h1> Calculadora AVT </h1>
+            <p> Para saber a temperatura e umidade ideal da preservação de um acervo, a Art Vision Tech pesquisou um cálculo desenvolvido pelo Instituto de Permanência da Imagem (IPI).</p>
+            <h2> Como funciona: </h2>
+            <p> Valores de PI foram projetados para que 20°C e 45% UR sejam aproximadamente 50 anos. Através destes valores, a AVT com seu sistema de monitoramento, consegue estimar a rapidez a qual sua coleção está se deteriorando em comparação com a taxa de deterioração estimada em seu ambiente.</p>
+        </div>
+        <div id="div_calculadora"> <!-- Coluna da direita -->
+            <h1> Calculadora de preservação </h1>
+            <div id="formulario"> <!-- Formulário (esquerda) -->
+                <div class="div_input">
+                    <h3> A instituição que você representa: </h3>
+                    <input type="text" class="input" id="input_instituto" placeholder="Instituição">
+                    <h3> Temperatura (°C) </h3>
+                    <input type="text" class="input" id="input_temp" placeholder="Temperatura">
+                    <h3> Umidade Relativa (%) </h3>
+                    <input type="text" class="input" id="input_ur" placeholder="Umidade">
+                </div>
+                <div class="div_tabela">
+                    <h2 class="titulo-tabela"> Resultados da análise: </h2>
+                    <table id="tabela_cliente">
+                        <tr>
+                            <th> Temperatura (cº) </th>
+                            <th> Umidade Relativa (%) </th>
+                            <th> Velocidade do desgaste por ano </th>
+                            <th> Tempo de vida (anos) </th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="resultado"> <!-- Saída do programa -->
+                <button onclick="calculadora()"> Consultar valores </button>
+            </div>
+            <h4 id="mensagem_instituto"></h4>
+            <div id="resultado_dano">
+            </div>
+        </div>
+    </main>
+    <section>
+        <h2> Contexto </h2>
+        <div class="container-contexto">
+            <div class="texto-contexto">
+                </p>
+                <p> A temperatura e a umidade relativa do ar devem ser sistematicamente medidas e registradas. Já que os dados produzidos: documentam as condições ambientais existentes; dão
+                    suporte aos pedidos de instalação de controles ambientais; e indicam se o equipamento disponível de
+                    controle climático está ou não funcionando adequadamente e produzindo as condições desejadas.</p>
+                <p> Mas o que estes valores significam para a longevidade dos objetos da sua coleção exatamente? Essas
+                    condições podem estar causando danos ou não? Quanto dano? É difícil dizer apenas olhando apenas os
+                    dados de temperatura e umidade relativa, mas quando reunidos as coisas ficam mais claras.</p>
+                <p>Para avaliar os riscos associados a condições ambientais específicas, o IPI desenvolveu duas
+                    ferramentas: o Índice de Preservação (PI) e o Índice de Preservação Tempo para preservação (IETP). O
+                    PI fornece uma medida comparativa de quanto tempo os materiais orgânicos vulneráveis (por exemplo,
+                    aqueles com vida útil curta, como fita magnética ou papel de jornal) podem sobreviver sob diversas
+                    condições ambientais. A linha de base para esta medição é 20Cº e 45% UR, o que resulta em um IP de
+                    50 anos.</p>
+                <p>
+                    À medida que a temperatura e a umidade aumentam e diminuem, o PI muda. Se uma condição de
+                    armazenamento tiver um IP de 200 anos, então os materiais orgânicos durariam quatro vezes mais tempo
+                    naquela condição específica do que à temperatura ambiente, onde o PI tem apenas 50 anos. É
+                    importante lembrar, contudo, que esta é uma medida comparativa e não uma medida literal de anos. Os
+                    números pretendem ilustrar como diferentes ambientes de armazenamento podem retardar ou acelerar a
+                    deterioração.</p>
+            </div>
+            <div class="container-image">
+                <a href="https://store.imagepermanenceinstitute.org/sustainable-preservation-practices-guidebook" target="_blank">
+                    <img src="assets/img/pi_livro.jpg" alt="Guia prático de preservação sustentavel">
+                </a>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container-footer">
+            <div class="navegacao-footer">
+                <h3> NAVEGAÇÃO </h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="calculadora.html">Calculadora</a></li>
+                </ul>
+            </div>
+            <div class="sobre-footer">
+                <h3>ART VISION TECH</h3>
+                <p>A Art Vision Tech é uma empresa especializada no controle de ambientes importantes para nossa cultura
+                    e
+                    história do país. Com a utilização de tecnologias modernas, ajudamos nossos clientes na preservarão
+                    de sua
+                    instituição</p>
+            </div>
+            <div class="contato-footer">
+                <h3>CONTATO</h3>
+                <p>Endereço: Rua Haddock Lobo,
+                    595 São Paulo - SP</p>
+                <p>Tel: (11) 2759-8172</p>
+                <p>Email: consultoria@artvisiontech.com</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+<script>
+    function calculadora() {
+        var instituto = input_instituto.value;
+        var temp = Number(input_temp.value);
+        var ur = Number(input_ur.value);
+        //Formula elabora por Tim Padfield https://www.conservationphysics.org/twpi/twpi_01.html.
+        var ip = Math.exp((95220 - 134.9 * ur) / (8.314 * (temp + 273.15)) + (0.0284 * ur) - 28.023) / 365;
+        var desgaste = 1 / ip * 100;
+        var ip_ideal = 51;
+        // Porcentagem: índice de preservação calculado através dos inputs / índice de preservação ideal para um ambiente
+        var porcentagem_dano = ip / ip_ideal;
+        // Se porcentaul for maior do que 1 (ou seja 100%) calcular acréscimo se não calcular redução
+        if (porcentagem_dano > 1) {
+            // Exemplo: 58 / 50  = 1,6 -> 1,16 - 1 = 0,16 -> 0,16 * 100 = 16% de acréscimo 
+            porcentagem_dano = (porcentagem_dano - 1) * 100;
+            resultado_dano.innerHTML = `${instituto}, utilizando nosso sistema, sua coleção terá  expectativa de vida 
+            aumentado em <span style="color: green"> ${porcentagem_dano.toFixed(2)}% </span>`
+        } else if (porcentagem_dano < 1) {
+            // Exemplo: 45 / 50  = 0,9 -> 1 - 0,9 = 0,1 -> 0,1 * 100 = 10% de redução 
+            porcentagem_dano = (1 - porcentagem_dano) * 100;
+            resultado_dano.innerHTML = `${instituto}, sem o nosso sistema, sua coleção terá expectativa de vida reduzida em 
+            <span style="color: red"> ${porcentagem_dano.toFixed(2)}% </span>, seu acervo está correndo riscos!`
+        }
+
+        tabela_cliente.innerHTML += `
+        <div>
+            <tr>
+                <td> ${temp} </td>
+                <td> ${ur}</td>
+                <td> ${desgaste.toFixed(1)}</td>
+                <td> ${ip.toFixed(0)}</td>
+            </tr>
+        </div>`
+
+    }
+</script>
