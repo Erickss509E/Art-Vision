@@ -1,21 +1,20 @@
 package br.com.artvision.dao;
 
-import br.com.artvision.model.Cargo;
-
+import br.com.artvision.model.Setor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class CargoDAO {
+public class SetorDAO {
 
-    public boolean cadastrar(Cargo cargo) {
-        String sql = "INSERT INTO cargos (nome_cargo, id_setor) VALUES (?, ?)";
+    public boolean cadastrar(Setor setor) {
+        String sql = "INSERT INTO setores (nome_setor, ala) VALUES (?, ?)";
 
         try (Connection conn = Conexao.obterConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, cargo.getNome());
-            stmt.setInt(2, cargo.getIdSetor());
+            stmt.setString(1, setor.getNome());
+            stmt.setString(2, setor.getAla());
 
             stmt.execute();
             return true;

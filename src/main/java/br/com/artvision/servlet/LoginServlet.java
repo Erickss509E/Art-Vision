@@ -1,32 +1,46 @@
 package br.com.artvision.servlet;
 
-import br.com.artvision.dao.UsuarioDAO;
-import br.com.artvision.model.Usuario;
-
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.sql.*;
 
-@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
 
-        UsuarioDAO dao = new UsuarioDAO();
-        Usuario usuario = dao.autenticar(email, senha);
+        try {
+            // Conectar ao banco (ajuste os dados da conexão)
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/artvision", "root", "TbX77HHVdbXWca");
 
-        if (usuario != null) {
-            
-            HttpSession session = request.getSession();
-            session.setAttribute("usuarioLogado", usuario);
-            response.sendRedirect("dashboard.jsp"); 
-        } else {
+            PreparedStatement stmt = conn.prepareStatement(
+                    "SELECT * FROM usuarios WHERE email = ? AND senha = ?");
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
 
-            response.sendRedirect("login.jsp?erro=1");
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                response.getWriter().println("Login realizado com sucesso!");
+            } else {
+                response.getWriter().println("Email ou senha inválidos.");
+            }
+
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.getWriter().println("Erro no login: " + e.getMessage());
         }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.sendRedirect("login.html");
     }
 }

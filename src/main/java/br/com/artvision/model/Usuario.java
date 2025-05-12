@@ -8,8 +8,6 @@ public class Usuario {
     private String cpf;
     private String empresa;
 
-    // Getters e Setters
-
     public int getId() {
         return id;
     }

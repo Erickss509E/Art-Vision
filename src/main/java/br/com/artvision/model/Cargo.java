@@ -1,22 +1,32 @@
+// Cargo.java
 package br.com.artvision.model;
 
 public class Cargo {
-    private int idCargo;
-    private String nomeCargo;
+    private int id;
+    private String nome;
+    private int idSetor;
 
-    public int getIdCargo() {
-        return idCargo;
+    public int getId() {
+        return id;
     }
 
-    public void setIdCargo(int idCargo) {
-        this.idCargo = idCargo;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getNomeCargo() {
-        return nomeCargo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeCargo(String nomeCargo) {
-        this.nomeCargo = nomeCargo;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getIdSetor() {
+        return idSetor;
+    }
+
+    public void setIdSetor(int idSetor) {
+        this.idSetor = idSetor;
     }
 }

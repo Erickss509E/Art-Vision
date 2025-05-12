@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="css/styles_login.css" />
 </head>
 <body>
 <h2>Login</h2>
@@ -16,4 +17,3 @@
 </form>
 </body>
 </html>
-
