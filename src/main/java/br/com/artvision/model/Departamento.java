@@ -3,6 +3,13 @@ package br.com.artvision.model;
 public class Departamento {
     private int idDepto;
     private String nomeDepto;
+    private String idSetor;
+
+    public Departamento(int idDepto, String nomeDepto, String idSetor) {
+        this.idDepto = idDepto;
+        this.nomeDepto = nomeDepto;
+        this.idSetor = idSetor;
+    }
 
     public int getIdDepto() {
         return idDepto;
@@ -19,4 +26,14 @@ public class Departamento {
     public void setNomeDepto(String nomeDepto) {
         this.nomeDepto = nomeDepto;
     }
+
+    public String getIdSetor() {
+        return idSetor;
+    }
+
+    public void setIdSetor(String idSetor) {
+        this.idSetor = idSetor;
+    }
 }
+
+

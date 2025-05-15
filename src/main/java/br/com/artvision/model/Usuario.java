@@ -8,6 +8,19 @@ public class Usuario {
     private String cpf;
     private String empresa;
 
+    public Usuario(int id, String nome, String email, String senha, String cpf, String empresa) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.cpf = cpf;
+        this.empresa = empresa;
+    }
+
+    public Usuario() {
+
+    }
+
     public int getId() {
         return id;
     }

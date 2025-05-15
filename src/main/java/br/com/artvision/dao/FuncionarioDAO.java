@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FuncionarioDAO {
+public class    FuncionarioDAO {
 
     public List<FuncionarioCount> contarFuncionariosPorSetorECargo() {
         List<FuncionarioCount> counts = new ArrayList<>();
