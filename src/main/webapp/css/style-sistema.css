@@ -1,92 +1,53 @@
 *{
-margin: 0;
+margin:0;
 }
 main{
-
-height: 100vh;
-
-width: 100%;
-
-display: flex;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
 }
 main .sidbar{
-
-width: 11%;
-
-height: 100vh;
-
-background-color: #103440;
+    width: 13%;
+    height: 100vh;
+    background-color: #103440;
 }
-main .sidbar>.logo_museu{
+main .sidbar>div{
+    height: 72%;
     width: 100%;
-    height: auto;
-    padding-bottom: 106px;
-}
-main .sidbar>.logo_museu img{
-    width: 100%;
-}
-main .sidbar>.link {
     display: flex;
     flex-direction: column;
-}
-main .sidbar>.link>div{
-    display: flex;
-    width: 100%;
     align-items: center;
-    padding-bottom: 23px;
+    justify-content: space-between;
 }
-main .sidbar>.link>div>a{
+main .sidbar>div>.img{}
+main .sidbar>div>.img>img{}
+main .sidbar>div>.nav{
     display: flex;
-    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 64%;
+    /* align-items: center; */
+    height: 53%;
+}
+main .sidbar>div>.nav>div{}
+main .sidbar>div>.nav>div>a{
+    display: flex;
     align-items: center;
     text-decoration: none;
-    font-size: 16px;
-}
-main .sidbar>.link>div>a>img{
-    width: 23px;
-    height: auto;
-    padding-left: 12px;
-}
-main .sidbar>.link>div>a>p{
-    color: white;
     outline: none;
-    text-decoration: none;
-    padding-left: 20px;
-    font-size: 16px;
+    color: white;
 }
-main .sidbar>.link>div>a::hover{}
-
-.content{
-    width: 89%;
-    height: 100vh;
-    background-color: white;
+main .sidbar>div>.nav>div>a>img{
+    padding-right: 14px;
 }
-.iframe{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-.nav{
-    width: 100%;
-    height: 9vh;
-    box-shadow: 8px 0px 9px 5px rgba(0, 0, 0, 0.05);
-    margin-bottom: 108px;
-}
-main .nav>div{
-    display: flex;
-    align-items: center;
-    justify-content: end;
+main .iframe{
+    width: 87%;
     height: 100%;
-    padding-right: 24px;
 }
-main .nav>div>p{
-    font-size: 21px;
-    padding-right: 22px;
-}
-main .nav>div>img{}
-iframe{
-    box-shadow: 8px 0px 9px 5px rgba(0, 0, 0, 0.05);
+main .iframe>iframe{
+    width: 99.7%;
+    height: 99%;
     border: none;
-    width: 90%;
-    height: 75vh;
 }

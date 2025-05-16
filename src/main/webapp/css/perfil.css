@@ -1,0 +1,162 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+
+    display: flex;
+    padding: 20px 0px;
+}
+
+header h1 {
+    font-size: 2em;
+    color: black;
+    padding: 0px 42px;
+}
+
+main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.perfil-museu-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.perfil, .museu {
+    flex-basis: calc(50% - 70px);
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.perfil h2, .museu h2, .lista-sensores h2, .intervalo-registros h2 {
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.perfil p, .museu p {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.perfil button {
+    background-color: #8c365b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 15px;
+}
+
+.perfil button:hover {
+    background-color: #702b49;
+}
+
+.logo-container {
+    flex-basis: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.logo-placeholder {
+    width: 120px;
+    height: 100px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.logo-text-artemis {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 0;
+    color: #50263d;
+}
+
+.logo-text-vintage {
+    font-size: 0.8em;
+    margin: 0;
+    color: #50263d;
+}
+
+.logo-caption {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+}
+
+.lista-sensores {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.lista-sensores table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.lista-sensores th, .lista-sensores td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    font-size: 0.95em;
+}
+
+.lista-sensores th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+.lista-sensores td:last-child {
+    text-align: center;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.intervalo-registros {
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.intervalo-registros select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    min-width: 150px;
+}
+
