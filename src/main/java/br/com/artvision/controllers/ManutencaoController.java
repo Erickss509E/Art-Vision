@@ -54,7 +54,7 @@ public class ManutencaoServlet extends HttpServlet {
             manutencao.setIdFunc(idFunc);
             manutencao.setIdUsuario(idUsuario);
 
-            manutencaoDAO.cadastrarManutencao(manutencao);
+            manutencaoDAO.cadastrarManu(manutencao);
 
             response.sendRedirect(request.getContextPath() + "/manutencao?obraId=" + idObra);
         } catch (Exception e) {
