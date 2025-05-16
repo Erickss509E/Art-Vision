@@ -1,8 +1,8 @@
 package br.com.artvision.dao;
 
-import br.com.artvision.model.FuncionarioCount;
-import br.com.artvision.model.Funcionario;
-import br.com.artvision.servlet.database.ConnectionFactory;
+import br.com.artvision.models.FuncionarioCount;
+import br.com.artvision.models.Funcionario;
+import br.com.artvision.database.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FuncionarioDAO {
+public class    FuncionarioDAO {
 
     public List<FuncionarioCount> contarFuncionariosPorSetorECargo() {
         List<FuncionarioCount> counts = new ArrayList<>();
