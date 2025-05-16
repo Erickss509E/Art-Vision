@@ -1,6 +1,5 @@
 package br.com.artvision.dao;
 
-import br.com.artvision.models.FuncionarioCount;
 import br.com.artvision.models.Funcionario;
 import br.com.artvision.database.ConnectionFactory;
 

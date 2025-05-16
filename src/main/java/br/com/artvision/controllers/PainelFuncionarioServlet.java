@@ -1,7 +1,6 @@
 package br.com.artvision.controllers;
 
 import br.com.artvision.dao.FuncionarioDAO;
-import br.com.artvision.models.FuncionarioCount;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
