@@ -5,7 +5,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.*;
 
-public class LoginServlet extends HttpServlet {
+public class LoginController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

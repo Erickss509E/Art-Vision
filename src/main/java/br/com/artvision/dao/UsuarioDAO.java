@@ -15,7 +15,7 @@ public class UsuarioDAO {
     private static final String UPDATE_USUARIO_SQL = "UPDATE usuarios SET nome = ?, email = ?, senha_usuario = ?, cpf = ?, empresa = ? WHERE id = ?";
     private static final String DELETE_USUARIO_SQL = "DELETE FROM usuarios WHERE id = ?";
 
-    public boolean cadastrar(Usuario usuario) {
+    public boolean cadastrarUsuario(Usuario usuario) {
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = connection.prepareStatement(INSERT_USUARIO_SQL)) {
 
@@ -33,7 +33,7 @@ public class UsuarioDAO {
         }
     }
 
-    public List<Usuario> listar() {
+    public List<Usuario> listarUsuario() {
         List<Usuario> usuarios = new ArrayList<>();
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
@@ -59,7 +59,7 @@ public class UsuarioDAO {
         return usuarios;
     }
 
-    public Usuario buscarPorId(int id) {
+    public Usuario buscarUsuarioPorId(int id) {
         Usuario usuario = null;
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
@@ -86,7 +86,7 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public boolean atualizar(Usuario usuario) {
+    public boolean atualizarUsuario(Usuario usuario) {
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = connection.prepareStatement(UPDATE_USUARIO_SQL)) {
 
@@ -105,7 +105,7 @@ public class UsuarioDAO {
         }
     }
 
-    public boolean excluir(int id) {
+    public boolean excluirUsuario(int id) {
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = connection.prepareStatement(DELETE_USUARIO_SQL)) {
 

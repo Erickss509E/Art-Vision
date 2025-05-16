@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 
-public class CadastrarCargoServlet extends HttpServlet {
+public class CargoController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -7,7 +7,6 @@
 
   <display-name>ArtVision</display-name>
 
-  <!-- Cadastro de Usuário -->
   <servlet>
     <servlet-name>CadastroUsuario</servlet-name>
     <servlet-class>br.com.artvision.servlet.CadastroUsuarioServlet</servlet-class>
@@ -17,7 +16,6 @@
     <url-pattern>/cadastrar-usuario</url-pattern>
   </servlet-mapping>
 
-  <!-- Login -->
   <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>br.com.artvision.servlet.LoginServlet</servlet-class>
@@ -27,7 +25,6 @@
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
 
-  <!-- Cadastro de Setor -->
   <servlet>
     <servlet-name>CadastrarSetor</servlet-name>
     <servlet-class>br.com.artvision.servlet.CadastrarSetorServlet</servlet-class>
@@ -37,17 +34,15 @@
     <url-pattern>/cadastrar-setor</url-pattern>
   </servlet-mapping>
 
-  <!-- Cadastro de Cargo -->
   <servlet>
     <servlet-name>CadastrarCargo</servlet-name>
-    <servlet-class>br.com.artvision.servlet.CadastrarCargoServlet</servlet-class>
+    <servlet-class>br.com.artvision.servlet.CadastrarCargo</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CadastrarCargo</servlet-name>
     <url-pattern>/cadastrar-cargo</url-pattern>
   </servlet-mapping>
 
-  <!-- Página de boas-vindas padrão -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>

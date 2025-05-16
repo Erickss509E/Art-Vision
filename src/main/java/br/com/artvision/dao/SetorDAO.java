@@ -16,7 +16,7 @@ public class SetorDAO {
     private static final String UPDATE_SETOR_SQL = "UPDATE setores SET nome = ?, ala = ?";
     private static final String DELETE_SETOR_SQL = "DELETE setores WHERE id = ?";
 
-    public boolean cadastrar(Setor setor) {
+    public boolean cadastrarSetor(Setor setor) {
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = connection.prepareStatement(INSERT_INTO_SQL)) {
@@ -33,7 +33,7 @@ public class SetorDAO {
         }
     }
 
-    public List<Setor> listar() {
+    public List<Setor> listarSetor() {
         List<Setor> setores = new ArrayList<>();
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
@@ -55,7 +55,7 @@ public class SetorDAO {
         return setores;
     }
 
-    public Setor buscarPorId(int id) {
+    public Setor buscarSetorPorId(int id) {
         Setor setor = null;
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
@@ -78,7 +78,7 @@ public class SetorDAO {
         return setor;
     }
 
-    public boolean atualizar(Setor setor) {
+    public boolean atualizarSetor(Setor setor) {
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = connection.prepareStatement(UPDATE_SETOR_SQL)) {
 
@@ -93,7 +93,7 @@ public class SetorDAO {
         }
     }
 
-    public boolean excluir(int id) {
+    public boolean excluirSetor(int id) {
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = connection.prepareStatement(DELETE_SETOR_SQL)) {
 

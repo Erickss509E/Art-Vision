@@ -2,13 +2,11 @@ package br.com.artvision.dao;
 
 import br.com.artvision.database.ConnectionPoolConfig;
 import br.com.artvision.models.Obra;
-import br.com.artvision.database.ConnectionFactory;
-import br.com.artvision.models.Setor;
-import com.sun.org.apache.xpath.internal.objects.XString;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +14,7 @@ public class ObraDAO {
     private static final String insert_sql = "INSERT INTO obras (nome, descricao) VALUES (?, ?)";
     private static final String list_sql = "SELECT o.*, MAX(m.data_manutencao) AS ultima_manutencao " + "FROM obras o LEFT JOIN manutencoes m ON o.id = m.id_obra " + "GROUP BY o.id, o.nome, o.nome_autor, o.data_entrada_museu, o.valor_estimado, o.localizacao, o.descricao, o.area_museu";
     private static final String read_sql = "SELECT * FROM obras WHERE id = ?";
+    private static final String list_all_sql = "SELECT * FROM obras";
 
     public boolean cadastrar(Obra obra) {
 
@@ -55,5 +54,27 @@ public class ObraDAO {
         }
 
         return obra;
+    }
+
+    public List<Obra> listarObras() {
+        List<Obra> obras = new ArrayList<>();
+
+        try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
+             Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(list_all_sql)) {
+
+            while (rs.next()) {
+                Obra obra = new Obra(
+                        rs.getString("nome"),
+                        rs.getString("descricao")
+                );
+                obras.add(obra);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return obras;
     }
 }

@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @WebServlet("/manutencao")
-public class ManutencaoServlet extends HttpServlet {
+public class ManutencaoController extends HttpServlet {
 
     private ManutencaoDAO manutencaoDAO = new ManutencaoDAO();
 

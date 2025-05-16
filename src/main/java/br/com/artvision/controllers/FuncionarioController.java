@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet("/painelFuncionarios")
-public class PainelFuncionarioServlet extends HttpServlet {
+public class FuncionarioController extends HttpServlet {
 
     private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
     private Gson gson = new Gson();
