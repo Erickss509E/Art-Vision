@@ -1,84 +1,98 @@
-# ArtVision
+# ArtVision — Sistema de Gerenciamento para Museus
 
-## Funcionalidades do sistema
+Bem-vindo ao ArtVision, um sistema completo para o gerenciamento eficiente de museus. Nosso objetivo é facilitar o controle do acervo, funcionários e manutenções para que o museu funcione de forma organizada e segura.
 
-### 1.1. Gerenciamento de Preservação de Obras (Funcionalidade Principal)
-1.	Monitoramento e Controle do Estado de Conservação: 
-* O sistema permitirá o registro detalhado do estado de conservação de cada obra de arte, com a possibilidade de incluir descrições, imagens e histórico de manutenção.
-* Alertas automáticos serão gerados para obras que estejam próximas de necessitar manutenção.
-2.	Registro de Manutenções e Preservações Periódicas:
-* Os usuários poderão registrar todas as manutenções realizadas, incluindo a data, tipo de manutenção, responsável pela preservação e observações adicionais.
-* Um calendário integrado ajudará na organização de manutenções futuras.
-3.	Emissão de Relatórios:
-* Relatórios periódicos sobre o estado das obras serão gerados automaticamente, com gráficos e dados organizados para facilitar a análise.
-* Os relatórios poderão ser exportados em formatos como PDF ou enviados diretamente aos administradores e clientes.
 
-### 1.2. Gerenciamento de Funcionários
-1.	Cadastro e Gerenciamento de Funcionários:
-* O sistema permitirá o registro de informações básicas dos funcionários, como nome, CPF, telefone e e-mail.
-* Será possível adicionar informações específicas, como cargo, setor, horário de trabalho e histórico de atividades.
-2.	Controle da Quantidade de Funcionários Ativos:
-* O painel administrativo exibirá o número total de funcionários ativos, separados por setor e função.
-3.	Registro de Cargos e Funções:
-* Cargos e funções serão cadastrados previamente, permitindo que os dados sejam associados corretamente a cada funcionário.
-4.	Armazenamento de Dados:
-* O sistema armazenará o histórico de entrada e saída dos funcionários, além de informações relacionadas a treinamentos e qualificações.
-* Níveis de acesso serão definidos para cada funcionário, garantindo maior segurança.
 
-### 1.3. Gerenciamento de Obras
-1.	Registro de Obras:
-*	Cada obra poderá ser registrada com informações como:
-*	Nome da obra.
-*	Nome do autor.
-*	Data de entrada no museu.
-*	Valor estimado.
-*	Localização dentro do museu.
-2.	Monitoramento de Manutenção:
-*	O sistema exibirá a última data de manutenção de cada obra e calculará automaticamente o tempo decorrido desde a última preservação.
-3.	Cálculo do Tempo de Preservação:
-*	Com base na data de entrada e no histórico de manutenções, o sistema calculará o tempo total desde a última intervenção.
-4.	Geração de Relatórios:
-*	Relatórios detalhados sobre cada obra estarão disponíveis, incluindo informações sobre valor estimado, localização atual, e histórico de manutenção.
-5.	Localização das Obras:
-*	O sistema incluirá um mapa interno do museu, mostrando a localização exata das obras em cada sala ou setor.
-6.	Registro do Valor Estimado:
-*	O valor estimado de cada obra será armazenado no sistema, permitindo análises financeiras e relatórios para seguros ou auditorias.
+## Visão Geral
 
-### 1.4. Gerenciamento de Salas do Museu
-1.	Organização por Áreas do Museu:
-*	O museu será dividido em áreas principais (Sul, Norte, Leste, Oeste), e cada área poderá conter várias salas e setores.
-2.	Cadastro de Setores e Departamentos:
-*	Os setores e departamentos serão cadastrados para facilitar a organização interna do museu. Cada setor será associado a uma área específica.
-3.	Controle de Equipamentos:
-*	Será possível registrar e monitorar os equipamentos disponíveis em cada sala, como iluminação, climatização ou dispositivos de segurança.
+O ArtVision oferece funcionalidades que permitem aos gestores administrar todas as áreas do museu com facilidade, incluindo:
 
-### Fluxo de Uso do Sistema
-1.	Tabela Principal:
-*	O usuário terá acesso a um painel inicial com métricas em tempo real, como:
-*	Quantidade de obras cadastradas.
-*	Estado de conservação das obras.
-*	Funcionários ativos no momento.
-*	Salas disponíveis e equipamentos em uso.
-2.	Cadastro de Dados:
-*	Através de formulários intuitivos, será possível cadastrar novos funcionários, obras, setores e equipamentos.
-3.	Relatórios e Exportação:
-*	O sistema permitirá a geração de relatórios detalhados para análise interna ou envio a clientes e administradores.
-4.	Alertas e Notificações:
-*	Notificações automáticas serão enviadas em casos de:
-*	Obras necessitando de manutenção.
-*	Funcionários ausentes sem justificativa.
-*	Equipamentos com falhas ou necessidade de substituição.
-Restrições e Requisitos Não Funcionais
-*	Interface Responsiva:
-*	O sistema será acessível em dispositivos móveis, tablets e desktops, com design adaptável para diferentes tamanhos de tela.
-*	Segurança de Dados:
-*	O banco de dados será protegido com criptografia para garantir a privacidade das informações das obras e dos funcionários.
-*	Controle de Acesso:
-*	Diferentes níveis de acesso serão configurados:
-*	Administradores: Acesso total ao sistema.
-*	Funcionários: Acesso limitado às suas funções e setores.
-*	Acessibilidade via Web:
-*	O sistema será acessado diretamente através de navegadores modernos, sem a necessidade de instalação de software local.
+- Cadastro e controle de funcionários  
+- Registro e acompanhamento das manutenções  
+- Controle detalhado das obras e seu status  
+- Gerenciamento das ferramentas e equipamentos usados  
+- Calculadora interativa para estimar o custo do sistema conforme o porte do museu  
+
+
+
+## Funcionalidades Principais
+
+### 1. Gerenciamento de Funcionários  
+- Cadastro básico: nome, CPF e setor.  
+- Controle dos funcionários ativos e suas funções.  
+
+### 2. Gerenciamento de Manutenção  
+- Registro detalhado das manutenções feitas nas obras.  
+- Responsável pela manutenção e status da intervenção.  
+- Visualização das manutenções realizadas.  
+
+### 3. Gerenciamento de Obras  
+- Cadastro das obras com informações do setor.  
+- Acompanhamento do status e localização atual da obra.  
+- Registro de ferramentas/equipamentos associados e responsáveis.  
+
+### 4. Gerenciamento de Ferramentas e Equipamentos  
+- Cadastro e controle das ferramentas e equipamentos do museu.  
+- Monitoramento da localização e responsável por cada item.  
+
+### 5. Login e Cadastro de Usuários  
+- Sistema de login seguro para acesso controlado.  
+- Cadastro de usuários com diferentes níveis (gestores, funcionários).  
+
+### 6. Home e Sobre  
+- Página inicial (Home) com visão geral do sistema.  
+- Página Sobre explicando a proposta e benefícios do ArtVision.  
+
+### 7. Calculadora de Interação  
+- Simule o custo do sistema baseado no porte do museu.  
+- Informe quantidade de funcionários e setores.  
+- Veja o impacto no custo estimado.  
+
+
+
+## Fluxo do Sistema ArtVision
+
+1. Home  
+   Tela inicial com informações básicas e navegação.  
+
+2. Sobre  
+   Detalhes sobre o sistema e seus benefícios.  
+
+3. Calculadora de Interação  
+   Cliente informa dados do museu para simular custos.  
+
+4. Login  
+   Acesso ao sistema com credenciais.  
+
+5. Painel Principal  
+   Acesso rápido às áreas:  
+   - Gerenciar Funcionários  
+   - Gerenciar Obras  
+   - Gerenciar Manutenção  
+   - Gerenciar Ferramentas e Equipamentos  
+   - Logout  
+
+6. Gerenciamento de Funcionários  
+   Visualizar, cadastrar, editar e excluir funcionários.  
+
+7. Gerenciamento de Obras  
+   Visualizar, cadastrar, editar e excluir obras; acompanhar status e localização.  
+
+8. Gerenciamento de Manutenção  
+   Visualizar, registrar e acompanhar manutenções.  
+
+9. Gerenciamento de Ferramentas e Equipamentos  
+   Visualizar, cadastrar, editar, excluir e acompanhar ferramentas.  
+
+10. Logout  
+    Finalizar sessão do usuário.  
+
+
+
+Obrigado por escolher o ArtVision para facilitar a gestão do seu museu!
+
+
 
 ### Organograma Sistema ArtVision
 
