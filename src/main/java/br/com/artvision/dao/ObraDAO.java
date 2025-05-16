@@ -1,7 +1,7 @@
 package br.com.artvision.dao;
 
-import br.com.artvision.model.Obra;
-import br.com.artvision.servlet.database.ConnectionFactory;
+import br.com.artvision.models.Obra;
+import br.com.artvision.database.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

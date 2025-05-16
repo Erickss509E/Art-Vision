@@ -1,12 +1,13 @@
 package br.com.artvision.dao;
 
-import br.com.artvision.model.Cargo;
+import br.com.artvision.database.Conexao;
+import br.com.artvision.models.Cargo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class CargoDAO {
+public class CargoDAO    {
 
     public boolean cadastrar(Cargo cargo) {
         String sql = "INSERT INTO cargos (nome_cargo, id_setor) VALUES (?, ?)";

@@ -1,7 +1,6 @@
 package br.com.artvision.dao;
 
-import br.com.artvision.model.Funcionario;
-import br.com.artvision.model.Usuario;
+import br.com.artvision.models.Usuario;
 
 import java.sql.*;
 import java.util.ArrayList;

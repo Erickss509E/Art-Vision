@@ -1,6 +1,6 @@
 package br.com.artvision.dao;
 
-import br.com.artvision.model.Departamento;
+import br.com.artvision.models.Departamento;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

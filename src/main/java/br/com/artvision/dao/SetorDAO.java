@@ -1,6 +1,7 @@
 package br.com.artvision.dao;
 
-import br.com.artvision.model.Setor;
+import br.com.artvision.database.Conexao;
+import br.com.artvision.models.Setor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
