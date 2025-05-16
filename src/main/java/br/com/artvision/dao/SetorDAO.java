@@ -1,18 +1,25 @@
 package br.com.artvision.dao;
 
-import br.com.artvision.database.Conexao;
+import br.com.artvision.database.ConnectionPoolConfig;
 import br.com.artvision.models.Setor;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import br.com.artvision.models.Usuario;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SetorDAO {
 
-    public boolean cadastrar(Setor setor) {
-        String sql = "INSERT INTO setores (nome_setor, ala) VALUES (?, ?)";
+    private static final String INSERT_INTO_SQL = "INSERT INTO setores (nome_setor, ala) VALUES (?, ?)";
+    private static final String SELECT_ALL_SETORES_SQL = "SELECT * FROM setores";
+    private static final String SELECT_BY_SETOR_ID_SQL = "SELECT * FROM setores WHERE id = ?";
+    private static final String UPDATE_SETOR_SQL = "UPDATE setores SET nome = ?, ala = ?";
+    private static final String DELETE_SETOR_SQL = "DELETE setores WHERE id = ?";
 
-        try (Connection conn = Conexao.obterConexao();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public boolean cadastrar(Setor setor) {
+
+        try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
+             PreparedStatement stmt = connection.prepareStatement(INSERT_INTO_SQL)) {
 
             stmt.setString(1, setor.getNome());
             stmt.setString(2, setor.getAla());
@@ -21,6 +28,79 @@ public class SetorDAO {
             return true;
 
         } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public List<Setor> listar() {
+        List<Setor> setores = new ArrayList<>();
+
+        try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
+             Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(SELECT_ALL_SETORES_SQL)) {
+
+            while (rs.next()) {
+                Setor setor = new Setor(
+                        rs.getString("nome"),
+                        rs.getString("ala")
+                );
+                setores.add(setor);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return setores;
+    }
+
+    public Setor buscarPorId(int id) {
+        Setor setor = null;
+
+        try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
+             PreparedStatement stmt = connection.prepareStatement(SELECT_BY_SETOR_ID_SQL)) {
+
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    setor = new Setor(
+                            rs.getString("nome"),
+                            rs.getString("ala")
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return setor;
+    }
+
+    public boolean atualizar(Setor setor) {
+        try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
+             PreparedStatement stmt = connection.prepareStatement(UPDATE_SETOR_SQL)) {
+
+            stmt.setString(1, setor.getNome());
+            stmt.setString(2, setor.getAla());
+
+            return stmt.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean excluir(int id) {
+        try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
+             PreparedStatement stmt = connection.prepareStatement(DELETE_SETOR_SQL)) {
+
+            stmt.setInt(1, id);
+            return stmt.executeUpdate() > 0;
+
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

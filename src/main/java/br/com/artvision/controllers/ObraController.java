@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/obra-localizacao")
-public class ObraLocalizacaoServlet extends HttpServlet {
+public class ObraController extends HttpServlet {
 
     private ObraDAO obraDAO = new ObraDAO();
 
