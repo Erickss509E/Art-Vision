@@ -2,6 +2,9 @@ package br.com.artvision.database;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 public class ConnectionPoolConfig {
     private static BasicDataSource dataSource;
 
@@ -19,6 +22,11 @@ public class ConnectionPoolConfig {
             System.out.println("Sucesso na conexão com o banco de dados!");
         }
         return dataSource;
+    }
+    public static Connection getConnection() throws SQLException {
+
+        return getDataSource().getConnection();
+
     }
 }
 
