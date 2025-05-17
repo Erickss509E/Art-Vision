@@ -2,7 +2,6 @@ DROP DATABASE IF EXISTS artvision;
 CREATE DATABASE artvision;
 USE artvision;
 
--- Tabela de Usuários
 CREATE TABLE usuarios (
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
@@ -12,14 +11,12 @@ CREATE TABLE usuarios (
     empresa VARCHAR(100)
 );
 
--- Tabela de Setores
 CREATE TABLE setores (
     id_setor INT PRIMARY KEY AUTO_INCREMENT,
     nome_setor VARCHAR(50) NOT NULL UNIQUE,
     ala VARCHAR(5)
 );
 
--- Tabela de Cargos
 CREATE TABLE cargos (
     id_cargo INT PRIMARY KEY AUTO_INCREMENT,
     nome_cargo VARCHAR(100) NOT NULL,
@@ -27,7 +24,6 @@ CREATE TABLE cargos (
     FOREIGN KEY (id_setor) REFERENCES setores(id_setor)
 );
 
--- Tabela de Departamentos
 CREATE TABLE departamentos (
     id_depto INT PRIMARY KEY AUTO_INCREMENT,
     nome_depto VARCHAR(50) NOT NULL,
@@ -35,7 +31,6 @@ CREATE TABLE departamentos (
     FOREIGN KEY (id_setor) REFERENCES setores(id_setor)
 );
 
--- Tabela de Escalas
 CREATE TABLE escalas (
     id_escala INT PRIMARY KEY AUTO_INCREMENT,
     nome_escala VARCHAR(5) NOT NULL,
@@ -44,7 +39,6 @@ CREATE TABLE escalas (
     folga VARCHAR(50) NOT NULL
 );
 
--- Tabela de Funcionários
 CREATE TABLE funcionarios (
     id_func INT PRIMARY KEY AUTO_INCREMENT,
     cpf_func VARCHAR(11),
@@ -62,7 +56,6 @@ CREATE TABLE funcionarios (
     FOREIGN KEY (id_depto) REFERENCES departamentos(id_depto)
 );
 
--- Tabela de Obras
 CREATE TABLE obras (
     id_obra INT PRIMARY KEY AUTO_INCREMENT,
     nome_obra VARCHAR(50) NOT NULL,
@@ -78,7 +71,6 @@ CREATE TABLE obras (
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
--- Tabela de Manutenções
 CREATE TABLE manutencoes (
     id_manutencao INT PRIMARY KEY AUTO_INCREMENT,
     nome_manutencao VARCHAR(50) NOT NULL,
@@ -91,6 +83,3 @@ CREATE TABLE manutencoes (
     FOREIGN KEY (id_func) REFERENCES funcionarios(id_func),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
-
--- Consulta rápida para validar
-SELECT * FROM usuarios;

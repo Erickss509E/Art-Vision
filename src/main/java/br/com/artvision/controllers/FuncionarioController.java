@@ -1,38 +1,143 @@
 package br.com.artvision.controllers;
 
 import br.com.artvision.dao.FuncionarioDAO;
-import com.google.gson.Gson;
+import br.com.artvision.dto.FuncionarioDTO;
+import br.com.artvision.models.Funcionario;
+import br.com.artvision.services.FuncionarioService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet("/painelFuncionarios")
+@WebServlet("/funcionario")
 public class FuncionarioController extends HttpServlet {
 
-    private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-    private Gson gson = new Gson();
+    private FuncionarioService funcionarioService = new FuncionarioService();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void init() {
+        funcionarioService = new FuncionarioService();
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String action = request.getParameter("action");
+        if (action == null) action = "listar";
+
+        switch (action) {
+            case "listar":
+                listarFuncionarios(request, response);
+                break;
+
+            case "buscar":
+                buscarFuncionarioPorId(request, response);
+                break;
+
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação GET não reconhecida.");
+        }
+    }
+
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String action = request.getParameter("action");
+        if (action == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parâmetro 'action' é obrigatório.");
+            return;
+        }
+
+        switch (action) {
+            case "cadastrar":
+                cadastrarFuncionario(request, response);
+                break;
+            case "atualizar":
+                atualizarFuncionario(request, response);
+                break;
+            case "excluir":
+                excluirFuncionario(request, response);
+                break;
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação POST não reconhecida.");
+        }
+    }
+
+    private void listarFuncionarios(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<FuncionarioDTO> lista = funcionarioService.listarFuncionarios();
+        request.setAttribute("funcionario", lista);
+        request.getRequestDispatcher("funcionario.html").forward(request, response); // ou JSP se usar
+    }
+
+    private void buscarFuncionarioPorId(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
-            List<FuncionarioCount> counts = funcionarioDAO.contarFuncionariosPorSetorECargo();
+            int id = Integer.parseInt(request.getParameter("id_func"));
+            Funcionario funcionario = funcionarioService.buscarFuncionarioPorId(id);
 
-            String json = gson.toJson(counts);
+            if (funcionario != null) {
+                request.setAttribute("funcionario", funcionario);
+                request.getRequestDispatcher("editar-funcionario.html").forward(request, response);
+            } else {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Funcionário não encontrado.");
+            }
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID inválido.");
+        }
+    }
 
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            PrintWriter out = response.getWriter();
-            out.print(json);
-            out.flush();
+    private void cadastrarFuncionario(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        Funcionario funcionario = new Funcionario();
+        funcionario.setCpfFunc(request.getParameter("cpf_func"));
+        funcionario.setNomeFunc(request.getParameter("nome_func"));
+        funcionario.setTelefoneFunc(request.getParameter("telefone_func"));
+        funcionario.setEmailFunc(request.getParameter("email_func"));
+        funcionario.setIdCargo(Integer.parseInt(request.getParameter("id_cargo")));
+        funcionario.setIdSetor(Integer.parseInt(request.getParameter("id_setor")));
+        funcionario.setIdDepto(Integer.parseInt(request.getParameter("id_depto")));
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao buscar dados do painel de funcionários");
+        boolean sucesso = funcionarioService.cadastrarFuncionario(funcionario);
+        if (sucesso) {
+            response.sendRedirect("/funcionario");
+        } else {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao cadastrar funcionário!");
+        }
+    }
+
+    private void atualizarFuncionario(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Funcionario funcionario = new Funcionario();
+        funcionario.setIdFunc(Integer.parseInt(request.getParameter("id_func")));
+        funcionario.setCpfFunc(request.getParameter("cpf_func"));
+        funcionario.setNomeFunc(request.getParameter("nome_func"));
+        funcionario.setTelefoneFunc(request.getParameter("telefone_func"));
+        funcionario.setEmailFunc(request.getParameter("email_func"));
+        funcionario.setIdCargo(Integer.parseInt(request.getParameter("id_cargo")));
+        funcionario.setIdSetor(Integer.parseInt(request.getParameter("id_setor")));
+        funcionario.setIdDepto(Integer.parseInt(request.getParameter("id_depto")));
+
+        boolean sucesso = funcionarioService.atualizarFuncionario(funcionario);
+        if (sucesso) {
+            response.sendRedirect("/funcionario");
+        } else {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao atualizar funcionário!");
+        }
+    }
+
+    private void excluirFuncionario(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id_func"));
+        boolean sucesso = funcionarioService.excluirFuncionario(id);
+
+        if (sucesso) {
+            response.sendRedirect("/funcionario");
+        } else {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao excluir funcionário!");
         }
     }
 }

@@ -15,15 +15,13 @@ public class    FuncionarioDAO {
             "JOIN setores s ON f.id_setor = s.id_setor " +
             "JOIN cargos c ON f.id_cargo = c.id_cargo " +
             "GROUP BY s.nome_setor, c.nome_cargo";
-    public static String INSERT_INTO_SQL = "INSERT INTO funcionarios (cpf_func, nome_func, telefone_func, email_func, id_cargo, id_setor, id_escala, id_depto, id_nivel_acesso) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public static String INSERT_INTO_SQL = "INSERT INTO funcionarios (cpf_func, nome_func, telefone_func, email_func, id_cargo, id_setor, id_depto) VALUES (?, ?, ?, ?, ?, ?, ?)";
     public static String SELECT_FUNC_SQL = "SELECT * FROM funcionarios";
-    public static String UPDATE_FUNC_SQL = "UPDATE funcionarios SET cpf_func = ?, nome_func = ?, telefone_func = ?, email_func = ?, id_cargo = ?, id_setor = ?, id_escala = ?, id_depto = ?, id_nivel_acesso = ? WHERE id_func = ?";
+    public static String SELECT_BY_ID_SQL = "SELECT * FROM funcionarios WHERE id_func = ?";
+    public static String UPDATE_FUNC_SQL = "UPDATE funcionarios SET cpf_func = ?, nome_func = ?, telefone_func = ?, email_func = ?, id_cargo = ?, id_setor = ?, id_depto = ? WHERE id_func = ?";
     public static String DELETE_FUNC_SQL = "DELETE FROM funcionarios WHERE id_func = ?";
 
-    
-
-    public void cadastrarFuncionario(Funcionario funcionario) {
-
+    public boolean cadastrarFuncionario(Funcionario funcionario) {
 
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_INTO_SQL)) {
@@ -34,35 +32,33 @@ public class    FuncionarioDAO {
             stmt.setString(4, funcionario.getEmailFunc());
             stmt.setInt(5, funcionario.getIdCargo());
             stmt.setInt(6, funcionario.getIdSetor());
-            stmt.setInt(7, funcionario.getIdEscala());
-            stmt.setInt(8, funcionario.getIdDepto());
-            stmt.executeUpdate();
+            stmt.setInt(7, funcionario.getIdDepto());
+            return stmt.executeUpdate() > 0;
 
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 
     public List<Funcionario> listarFuncionarios() {
         List<Funcionario> funcionarios = new ArrayList<>();
 
-
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_FUNC_SQL);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                Funcionario f = new Funcionario();
-                f.setIdFunc(rs.getInt("id_func"));
-                f.setCpfFunc(rs.getString("cpf_func"));
-                f.setNomeFunc(rs.getString("nome_func"));
-                f.setTelefoneFunc(rs.getString("telefone_func"));
-                f.setEmailFunc(rs.getString("email_func"));
-                f.setIdCargo(rs.getInt("id_cargo"));
-                f.setIdSetor(rs.getInt("id_setor"));
-                f.setIdEscala(rs.getInt("id_escala"));
-                f.setIdDepto(rs.getInt("id_depto"));
-                funcionarios.add(f);
+                Funcionario func = new Funcionario(
+                        rs.getInt("id_func"),
+                        rs.getString("nome_func"),
+                        rs.getString("telefone_func"),
+                        rs.getString("email_func"),
+                        rs.getInt("id_cargo"),
+                        rs.getInt("id_setor"),
+                        rs.getInt("id_depto")
+                        );
+                funcionarios.add(func);
             }
 
         } catch (Exception e) {
@@ -72,7 +68,33 @@ public class    FuncionarioDAO {
         return funcionarios;
     }
 
-    public void atualizarFuncionario(Funcionario funcionario) {
+    public Funcionario buscarFuncionarioPorId(int id) {
+        Funcionario funcionario = null;
+
+        try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID_SQL)){
+
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    funcionario = new Funcionario(
+                        rs.getInt("id_func"),
+                        rs.getString("nome_func"),
+                        rs.getString("telefone_func"),
+                        rs.getString("email_func"),
+                        rs.getInt("id_cargo"),
+                        rs.getInt("id_setor"),
+                        rs.getInt("id_depto")
+                    );
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return funcionario;
+    }
+
+    public boolean atualizarFuncionario(Funcionario funcionario) {
 
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(UPDATE_FUNC_SQL)) {
@@ -83,27 +105,28 @@ public class    FuncionarioDAO {
             stmt.setString(4, funcionario.getEmailFunc());
             stmt.setInt(5, funcionario.getIdCargo());
             stmt.setInt(6, funcionario.getIdSetor());
-            stmt.setInt(7, funcionario.getIdEscala());
-            stmt.setInt(8, funcionario.getIdDepto());
-            stmt.setInt(10, funcionario.getIdFunc());
+            stmt.setInt(7, funcionario.getIdDepto());
+            stmt.setInt(8, funcionario.getIdFunc());
 
-            stmt.executeUpdate();
+            return stmt.executeUpdate() > 0;
 
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void excluirFuncionario(int idFunc) {
+    public boolean excluirFuncionario(int id_func) {
 
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(DELETE_FUNC_SQL)) {
 
-            stmt.setInt(1, idFunc);
-            stmt.executeUpdate();
+            stmt.setInt(1, id_func);
+            return stmt.executeUpdate() > 0;
 
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 }

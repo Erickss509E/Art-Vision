@@ -85,7 +85,7 @@ public class UsuarioController extends HttpServlet {
         boolean sucesso = usuarioService.cadastrarUsuario(usuario);
 
         if (sucesso) {
-            resp.sendRedirect("usuario");
+            resp.sendRedirect("login.html");
         } else {
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao cadastrar usuário.");
         }
