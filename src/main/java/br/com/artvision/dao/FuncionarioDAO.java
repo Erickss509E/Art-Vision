@@ -1,9 +1,6 @@
 package br.com.artvision.dao;
-
-<<<<<<< Updated upstream
-=======
 import br.com.artvision.database.ConnectionPoolConfig;
->>>>>>> Stashed changes
+
 import br.com.artvision.models.Funcionario;
 
 import java.sql.Connection;
@@ -23,15 +20,12 @@ public class    FuncionarioDAO {
     public static String UPDATE_FUNC_SQL = "UPDATE funcionarios SET cpf_func = ?, nome_func = ?, telefone_func = ?, email_func = ?, id_cargo = ?, id_setor = ?, id_escala = ?, id_depto = ?, id_nivel_acesso = ? WHERE id_func = ?";
     public static String DELETE_FUNC_SQL = "DELETE FROM funcionarios WHERE id_func = ?";
 
-    private Connection getConnection() throws Exception {
-        ConnectionFactory factory = new ConnectionFactory();
-        return factory.getConnection();
-    }
+    
 
     public void cadastrarFuncionario(Funcionario funcionario) {
 
 
-        try (Connection conn = getConnection();
+        try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_INTO_SQL)) {
 
             stmt.setString(1, funcionario.getCpfFunc());
@@ -53,7 +47,7 @@ public class    FuncionarioDAO {
         List<Funcionario> funcionarios = new ArrayList<>();
 
 
-        try (Connection conn = getConnection();
+        try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_FUNC_SQL);
              ResultSet rs = stmt.executeQuery()) {
 

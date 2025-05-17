@@ -67,7 +67,7 @@ public class SetorController extends HttpServlet {
         String ala = request.getParameter("ala");
 
         Setor setor = new Setor(nome, ala);
-        boolean sucesso = setorDAO.cadastrar(setor);
+        boolean sucesso = setorDAO.cadastrarSetor(setor);
 
         if (sucesso) {
             response.sendRedirect("setor");
@@ -77,7 +77,7 @@ public class SetorController extends HttpServlet {
     }
 
     private void listarSetores(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Setor> setores = setorDAO.listar();
+        List<Setor> setores = setorDAO.listarSetor();
         request.setAttribute("setores", setores);
         RequestDispatcher dispatcher = request.getRequestDispatcher("listar_setores.jsp");
         dispatcher.forward(request, response);
@@ -85,7 +85,7 @@ public class SetorController extends HttpServlet {
 
     private void mostrarFormularioEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Setor setor = setorDAO.buscarPorId(id);
+        Setor setor = setorDAO.buscarSetorPorId(id);
         request.setAttribute("setor", setor);
         RequestDispatcher dispatcher = request.getRequestDispatcher("form_editar_setor.jsp");
         dispatcher.forward(request, response);
@@ -101,7 +101,7 @@ public class SetorController extends HttpServlet {
         setor.setNome(nome);
         setor.setAla(ala);
 
-        boolean sucesso = setorDAO.atualizar(setor);
+        boolean sucesso = setorDAO.atualizarSetor(setor);
 
         if (sucesso) {
             response.sendRedirect("setor");
@@ -112,7 +112,7 @@ public class SetorController extends HttpServlet {
 
     private void excluirSetor(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        boolean sucesso = setorDAO.excluir(id);
+        boolean sucesso = setorDAO.excluirSetor(id);
 
         if (sucesso) {
             response.sendRedirect("setor");

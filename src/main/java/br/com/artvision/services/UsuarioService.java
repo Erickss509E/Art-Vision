@@ -12,7 +12,7 @@ public class UsuarioService {
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
     public List<UsuarioDTO> listarUsuarios() {
-        List<Usuario> usuarios = usuarioDAO.listar();
+        List<Usuario> usuarios = usuarioDAO.listarUsuario();
         List<UsuarioDTO> dtos = new ArrayList<>();
 
         for (Usuario usuario : usuarios) {
@@ -32,18 +32,18 @@ public class UsuarioService {
     public boolean cadastrarUsuario(Usuario usuario) {
         // Aqui você pode aplicar regras de negócio antes de cadastrar
         // Por exemplo: validar CPF, verificar se e-mail já existe, criptografar senha, etc.
-        return usuarioDAO.cadastrar(usuario);
+        return usuarioDAO.cadastrarUsuario(usuario);
     }
 
     public Usuario buscarPorId(int id) {
-        return usuarioDAO.buscarPorId(id);
+        return usuarioDAO.buscarUsuarioPorId(id);
     }
 
     public boolean atualizarUsuario(Usuario usuario) {
-        return usuarioDAO.atualizar(usuario);
+        return usuarioDAO.atualizarUsuario(usuario);
     }
 
     public boolean excluirUsuario(int id) {
-        return usuarioDAO.excluir(id);
+        return usuarioDAO.excluirUsuario(id);
     }
 }

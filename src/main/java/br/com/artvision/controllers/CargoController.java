@@ -38,7 +38,7 @@ public class CargoController extends HttpServlet {
                 cargo.setIdSetor(idSetor);
 
                 CargoDAO cargoDAO = new CargoDAO();
-                boolean sucesso = cargoDAO.cadastrar(cargo);
+                boolean sucesso = cargoDAO.cadastrarCargo(cargo);
 
                 if (sucesso) {
                     out.println("<p>Cargo cadastrado com sucesso!</p>");
