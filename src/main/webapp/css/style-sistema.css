@@ -14,14 +14,16 @@ main .sidbar{
     background-color: #103440;
 }
 main .sidbar>div{
-    height: 72%;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
-main .sidbar>div>.img{}
+main .sidbar>div>.img{
+    padding-bottom: 36px;
+}
 main .sidbar>div>.img>img{}
 main .sidbar>div>.nav{
     display: flex;
@@ -31,7 +33,9 @@ main .sidbar>div>.nav{
     /* align-items: center; */
     height: 53%;
 }
-main .sidbar>div>.nav>div{}
+main .sidbar>div>.nav>div{
+    padding-bottom: 30px;
+}
 main .sidbar>div>.nav>div>a{
     display: flex;
     align-items: center;

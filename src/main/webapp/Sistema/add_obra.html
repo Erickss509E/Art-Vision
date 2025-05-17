@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Obra - ArtVision</title>
+    <link rel="stylesheet" href="../css/add_obra.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<div class="dashboard-container">
+    <main class="main-content">
+        <section class="content-area">
+            <div class="content-header">
+                <h1>Adicionar Nova Obra</h1>
+                <button class="btn btn-secondary">
+                    <span class="material-icons">arrow_back</span> Voltar para Listagem
+                </button>
+            </div>
+            <div class="form-container">
+                <form id="formObra">
+                    <div class="form-section">
+                        <h3>Detalhes da Obra</h3>
+                        <div class="form-row">
+                            <div class="form-group input-half">
+                                <label for="nomeObra">Nome da Obra</label>
+                                <input type="text" id="nomeObra" name="nomeObra" required>
+                            </div>
+                            <div class="form-group input-half">
+                                <label for="nomeAutor">Nome do Autor</label>
+                                <input type="text" id="nomeAutor" name="nomeAutor" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group input-half">
+                                <label for="dataEntrada">Data de Entrada</label>
+                                <input type="date" id="dataEntrada" name="dataEntrada" required>
+                            </div>
+                            <div class="form-group input-half">
+                                <label for="dataSaida">Data de Saída (Opcional)</label>
+                                <input type="date" id="dataSaida" name="dataSaida">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group input-half">
+                                <label for="valorEstimado">Valor Estimado (R$)</label>
+                                <input type="text" id="valorEstimado" name="valorEstimado" placeholder="0.00" required>
+                            </div>
+                            <div class="form-group input-half">
+                                <label for="setorObra">Setor da Obra</label>
+                                <select id="setorObra" name="setorObra" required>
+                                    <option value="" disabled selected>Selecione o Setor</option>
+                                    <option value="1">Pinturas Clássicas</option>
+                                    <option value="2">Esculturas</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Informações Adicionais</h3>
+                        <div class="form-group">
+                            <label for="funcionarioResponsavel">Funcionário Responsável</label>
+                            <select id="funcionarioResponsavel" name="funcionarioResponsavel">
+                                <option value="" disabled selected>Selecione o Funcionário</option>
+                                <option value="1">João Silva</option>
+                                <option value="2">Maria Oliveira</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="observacoes">Observações</label>
+                            <textarea id="observacoes" name="observacoes" rows="4"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>
