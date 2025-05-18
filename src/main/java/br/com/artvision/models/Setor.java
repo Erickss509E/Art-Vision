@@ -12,6 +12,13 @@ public class Setor {
 
     public Setor () {}
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -27,9 +34,5 @@ public class Setor {
 
     public void setAla(String ala) {
         this.ala = ala;
-    }
-
-    public void setId(int id) {
-
     }
 }

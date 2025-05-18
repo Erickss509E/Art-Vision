@@ -1,7 +1,9 @@
 package br.com.artvision.controllers;
 
 import br.com.artvision.dao.SetorDAO;
+import br.com.artvision.dto.SetorDTO;
 import br.com.artvision.models.Setor;
+import br.com.artvision.services.SetorService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,28 +15,30 @@ import java.util.List;
 @WebServlet("/setor")
 public class SetorController extends HttpServlet {
 
-    private SetorDAO setorDAO;
+    private SetorService setorService = new SetorService();
 
     @Override
     public void init() {
-        setorDAO = new SetorDAO();
+        setorService = new SetorService();
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String acao = request.getParameter("acao");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String action = request.getParameter("action");
 
         try {
-            switch (acao != null ? acao : "") {
-                case "editar":
-                    mostrarFormularioEdicao(request, response);
-                    break;
-                case "excluir":
-                    excluirSetor(request, response);
-                    break;
-                default:
+            switch (action != null ? action : "") {
+                case "listar":
                     listarSetores(request, response);
                     break;
+                /*case "buscar":
+                    buscarSetorPorId(request, response);
+                    break;*/
+                default:
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação GET não reconhecida.");
+                    break;
             }
         } catch (Exception e) {
             throw new ServletException(e);
@@ -42,32 +46,37 @@ public class SetorController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String acao = request.getParameter("acao");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-        try {
-            switch (acao != null ? acao : "") {
-                case "cadastrar":
-                    cadastrarSetor(request, response);
-                    break;
-                case "atualizar":
-                    atualizarSetor(request, response);
-                    break;
-                default:
-                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Ação inválida");
-                    break;
-            }
-        } catch (Exception e) {
-            throw new ServletException(e);
+        String action = request.getParameter("action");
+        if (action == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parâmetro 'action' é obrigatório.");
+            return;
+        }
+
+        switch (action) {
+            case "cadastrar":
+                cadastrarSetor(request, response);
+                break;
+            case "atualizar":
+                atualizarSetor(request, response);
+                break;
+            case "excluir":
+                excluirSetor(request, response);
+                break;
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação POST não reconhecida.");
         }
     }
 
-    private void cadastrarSetor(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void cadastrarSetor(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
         String nome = request.getParameter("nome");
         String ala = request.getParameter("ala");
 
         Setor setor = new Setor(nome, ala);
-        boolean sucesso = setorDAO.cadastrarSetor(setor);
+        boolean sucesso = setorService.cadastrarSetor(setor);
 
         if (sucesso) {
             response.sendRedirect("setor");
@@ -76,22 +85,16 @@ public class SetorController extends HttpServlet {
         }
     }
 
-    private void listarSetores(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Setor> setores = setorDAO.listarSetor();
+    private void listarSetores(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<SetorDTO> setores = setorService.listarSetor();
         request.setAttribute("setores", setores);
         RequestDispatcher dispatcher = request.getRequestDispatcher("listar_setores.jsp");
         dispatcher.forward(request, response);
     }
 
-    private void mostrarFormularioEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Setor setor = setorDAO.buscarSetorPorId(id);
-        request.setAttribute("setor", setor);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("form_editar_setor.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    private void atualizarSetor(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void atualizarSetor(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
         String ala = request.getParameter("ala");
@@ -101,7 +104,7 @@ public class SetorController extends HttpServlet {
         setor.setNome(nome);
         setor.setAla(ala);
 
-        boolean sucesso = setorDAO.atualizarSetor(setor);
+        boolean sucesso = setorService.atualizarSetores(setor);
 
         if (sucesso) {
             response.sendRedirect("setor");
@@ -112,7 +115,7 @@ public class SetorController extends HttpServlet {
 
     private void excluirSetor(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        boolean sucesso = setorDAO.excluirSetor(id);
+        boolean sucesso = setorService.excluirSetor(id);
 
         if (sucesso) {
             response.sendRedirect("setor");

@@ -28,6 +28,54 @@ public class CargoController extends HttpServlet {
         cargoService = new CargoService();
     }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String action = request.getParameter("action");
+
+        try {
+            switch (action != null ? action : "") {
+                case "listar":
+                    listarCargos(request, response);
+                    break;
+                case "buscar":
+                    buscarCargoPorId(request, response);
+                    break;
+                default:
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação GET não reconhecida.");
+                    break;
+            }
+        } catch (Exception e) {
+            throw new ServletException(e);
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String action = request.getParameter("action");
+        if (action == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parâmetro 'action' é obrigatório.");
+            return;
+        }
+
+        switch (action) {
+            case "cadastrar":
+                cadastrarCargo(request, response);
+                break;
+            case "atualizar":
+                atualizarCargo(request, response);
+                break;
+            case "excluir":
+                excluirCargo(request, response);
+                break;
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação POST não reconhecida.");
+        }
+    }
+
     private void listarCargos(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<CargoDTO> lista = cargoService.listarCargos();

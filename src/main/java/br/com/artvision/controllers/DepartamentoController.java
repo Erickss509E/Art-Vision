@@ -25,6 +25,55 @@ public class DepartamentoController extends HttpServlet {
         departamentoService = new DepartamentoService();
     }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String acao = request.getParameter("acao");
+
+        try {
+            switch (acao != null ? acao : "") {
+                case "listar":
+                    listarDepartamentos(request, response);
+                    break;
+                case "buscar":
+                    buscarDepartamentoPorId(request, response);
+                    break;
+                default:
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação GET não reconhecida.");
+                    break;
+            }
+        } catch (Exception e) {
+            throw new ServletException(e);
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String action = request.getParameter("action");
+        if (action == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parâmetro 'action' é obrigatório.");
+            return;
+        }
+
+        switch (action) {
+            case "cadastrar":
+                cadastrarDepto(request, response);
+                break;
+            case "atualizar":
+                atualizarDepartamento(request, response);
+                break;
+            case "excluir":
+                excluirDepartamento(request, response);
+                break;
+            default:
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação POST não reconhecida.");
+        }
+    }
+
+
     private void listarDepartamentos(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<DepartamentoDTO> lista = departamentoService.listarDepartamentos();
