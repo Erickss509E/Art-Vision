@@ -6,6 +6,13 @@ public class Cargo {
     private String nome;
     private int idSetor;
 
+    public Cargo(int idCargo, String nomeCargo, int idSetor) {
+    }
+
+    public Cargo() {
+
+    }
+
     public int getId() {
         return id;
     }
