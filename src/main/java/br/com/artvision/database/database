@@ -31,14 +31,6 @@ CREATE TABLE departamentos (
     FOREIGN KEY (id_setor) REFERENCES setores(id_setor)
 );
 
-CREATE TABLE escalas (
-    id_escala INT PRIMARY KEY AUTO_INCREMENT,
-    nome_escala VARCHAR(5) NOT NULL,
-    hr_entrada VARCHAR(5) NOT NULL,
-    hr_saida VARCHAR(5) NOT NULL,
-    folga VARCHAR(50) NOT NULL
-);
-
 CREATE TABLE funcionarios (
     id_func INT PRIMARY KEY AUTO_INCREMENT,
     cpf_func VARCHAR(11),

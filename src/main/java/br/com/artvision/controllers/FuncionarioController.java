@@ -11,7 +11,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/funcionario")
+@WebServlet("/funcionario") //mudar aqui nome da página front
 public class FuncionarioController extends HttpServlet {
 
     private FuncionarioService funcionarioService = new FuncionarioService();
@@ -71,8 +71,8 @@ public class FuncionarioController extends HttpServlet {
     private void listarFuncionarios(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<FuncionarioDTO> lista = funcionarioService.listarFuncionarios();
-        request.setAttribute("funcionario", lista);
-        request.getRequestDispatcher("funcionario.html").forward(request, response); // ou JSP se usar
+        request.setAttribute("funcionario", lista); //mudar aqui nome da página front
+        request.getRequestDispatcher("funcionario").forward(request, response); // mudar aqui nome da página front
     }
 
     private void buscarFuncionarioPorId(HttpServletRequest request, HttpServletResponse response)
@@ -82,8 +82,8 @@ public class FuncionarioController extends HttpServlet {
             Funcionario funcionario = funcionarioService.buscarFuncionarioPorId(id);
 
             if (funcionario != null) {
-                request.setAttribute("funcionario", funcionario);
-                request.getRequestDispatcher("editar-funcionario.html").forward(request, response);
+                request.setAttribute("funcionario", funcionario); //mudar aqui nome da página front
+                request.getRequestDispatcher("editar-funcionario.html").forward(request, response); //aqui tbm
             } else {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Funcionário não encontrado.");
             }
@@ -105,7 +105,7 @@ public class FuncionarioController extends HttpServlet {
 
         boolean sucesso = funcionarioService.cadastrarFuncionario(funcionario);
         if (sucesso) {
-            response.sendRedirect("/funcionario");
+            response.sendRedirect("/funcionario"); // aqui tbm
         } else {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao cadastrar funcionário!");
         }
@@ -124,7 +124,7 @@ public class FuncionarioController extends HttpServlet {
 
         boolean sucesso = funcionarioService.atualizarFuncionario(funcionario);
         if (sucesso) {
-            response.sendRedirect("/funcionario");
+            response.sendRedirect("/funcionario"); // aqui tbm
         } else {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao atualizar funcionário!");
         }
@@ -135,7 +135,7 @@ public class FuncionarioController extends HttpServlet {
         boolean sucesso = funcionarioService.excluirFuncionario(id);
 
         if (sucesso) {
-            response.sendRedirect("/funcionario");
+            response.sendRedirect("/funcionario"); // aqui tbm
         } else {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao excluir funcionário!");
         }
