@@ -11,6 +11,13 @@ public class Departamento {
         this.idSetor = idSetor;
     }
 
+    public Departamento(int idDepto, String nomeDepto, int idSetor) {
+    }
+
+    public Departamento() {
+
+    }
+
     public int getIdDepto() {
         return idDepto;
     }
