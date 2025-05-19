@@ -95,6 +95,7 @@ public class SetorController extends HttpServlet {
 
     private void atualizarSetor(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
+
         int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
         String ala = request.getParameter("ala");

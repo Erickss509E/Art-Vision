@@ -114,16 +114,22 @@ public class CargoController extends HttpServlet {
         }
     }
 
-    private void atualizarCargo(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Cargo cargo = new Cargo();
-        cargo.setNome(request.getParameter("nome_cargo"));
-        cargo.setIdSetor(Integer.parseInt(request.getParameter("id_setor")));
+    private void atualizarCargo(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        try {
+            Cargo cargo = new Cargo();
+            cargo.setId(Integer.parseInt(request.getParameter("id_cargo"))); // Definindo o ID do cargo
+            cargo.setNome(request.getParameter("nome_cargo"));
+            cargo.setIdSetor(Integer.parseInt(request.getParameter("id_setor")));
 
-        boolean sucesso = cargoService.cadastrarCargos(cargo);
-        if (sucesso) {
-            response.sendRedirect("/cargo"); // aqui tbm
-        } else {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao atualizar cargo!");
+            boolean sucesso = cargoService.atualizarCargos(cargo); // Chamada correta para atualizar
+            if (sucesso) {
+                response.sendRedirect("/cargo?action=listar"); // Redireciona para a listagem atualizada
+            } else {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao atualizar cargo!");
+            }
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parâmetro inválido.");
         }
     }
 

@@ -113,16 +113,21 @@ public class DepartamentoController extends HttpServlet {
     }
 
     private void atualizarDepartamento(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Departamento departamento = new Departamento();
-        departamento.setNomeDepto(request.getParameter("nome_depto"));
-        departamento.setIdSetor(request.getParameter("id_setor"));
 
+        try {
+            Departamento departamento = new Departamento();
+            departamento.setIdDepto(Integer.parseInt(request.getParameter("id_depto")));
+            departamento.setNomeDepto(request.getParameter("nome_depto"));
+            departamento.setIdSetor(request.getParameter("id_setor"));
 
-        boolean sucesso = departamentoService.cadastrarDepto(departamento);
-        if (sucesso) {
-            response.sendRedirect("/departamento"); // aqui tbm
-        } else {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao atualizar departamento!");
+            boolean sucesso = departamentoService.cadastrarDepto(departamento);
+            if (sucesso) {
+                response.sendRedirect("/departamento"); // aqui tbm
+            } else {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao atualizar departamento!");
+            }
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID inválido!");
         }
     }
 

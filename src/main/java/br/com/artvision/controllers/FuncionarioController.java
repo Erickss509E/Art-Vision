@@ -111,22 +111,29 @@ public class FuncionarioController extends HttpServlet {
         }
     }
 
-    private void atualizarFuncionario(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Funcionario funcionario = new Funcionario();
-        funcionario.setIdFunc(Integer.parseInt(request.getParameter("id_func")));
-        funcionario.setCpfFunc(request.getParameter("cpf_func"));
-        funcionario.setNomeFunc(request.getParameter("nome_func"));
-        funcionario.setTelefoneFunc(request.getParameter("telefone_func"));
-        funcionario.setEmailFunc(request.getParameter("email_func"));
-        funcionario.setIdCargo(Integer.parseInt(request.getParameter("id_cargo")));
-        funcionario.setIdSetor(Integer.parseInt(request.getParameter("id_setor")));
-        funcionario.setIdDepto(Integer.parseInt(request.getParameter("id_depto")));
+    private void atualizarFuncionario(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
 
-        boolean sucesso = funcionarioService.atualizarFuncionario(funcionario);
-        if (sucesso) {
-            response.sendRedirect("/funcionario"); // aqui tbm
-        } else {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao atualizar funcionário!");
+        try {
+
+            Funcionario funcionario = new Funcionario();
+            funcionario.setIdFunc(Integer.parseInt(request.getParameter("id_func")));
+            funcionario.setCpfFunc(request.getParameter("cpf_func"));
+            funcionario.setNomeFunc(request.getParameter("nome_func"));
+            funcionario.setTelefoneFunc(request.getParameter("telefone_func"));
+            funcionario.setEmailFunc(request.getParameter("email_func"));
+            funcionario.setIdCargo(Integer.parseInt(request.getParameter("id_cargo")));
+            funcionario.setIdSetor(Integer.parseInt(request.getParameter("id_setor")));
+            funcionario.setIdDepto(Integer.parseInt(request.getParameter("id_depto")));
+
+            boolean sucesso = funcionarioService.atualizarFuncionario(funcionario);
+            if (sucesso) {
+                response.sendRedirect("/funcionario"); // aqui tbm
+            } else {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao atualizar funcionário!");
+            }
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST,"ID inválido!");
         }
     }
 

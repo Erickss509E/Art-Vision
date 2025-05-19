@@ -17,7 +17,7 @@ public class LoginController extends HttpServlet {
             // Conectar ao banco (ajuste os dados da conexão)
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/artvision", "root", "TbX77HHVdbXWca");
+                    "jdbc:mysql://localhost:3306/artvision", "root", "1234");
 
             PreparedStatement stmt = conn.prepareStatement(
                     "SELECT * FROM usuarios WHERE email = ? AND senha = ?");
@@ -28,6 +28,7 @@ public class LoginController extends HttpServlet {
 
             if (rs.next()) {
                 response.getWriter().println("Login realizado com sucesso!");
+                response.sendRedirect("/funcionario");
             } else {
                 response.getWriter().println("Email ou senha inválidos.");
             }

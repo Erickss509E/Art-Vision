@@ -133,32 +133,35 @@ public class ManutencaoController extends HttpServlet {
     private void atualizarManutencao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Manutencao manutencao = new Manutencao();
-
-        manutencao.setNomeManutencao(request.getParameter("nome_manutencao"));
-
-        String dataStr = request.getParameter("data_manutencao");
-        System.out.println("Data recebida (atualizar): " + dataStr);
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate data = LocalDate.parse(dataStr, formatter);
-            manutencao.setDataManutencao(data);
-        } catch (DateTimeParseException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Formato de data inválido!");
-            return;
-        }
+            Manutencao manutencao = new Manutencao();
+            manutencao.setIdManutencao(Integer.parseInt(request.getParameter("id_manutencao")));
+            manutencao.setNomeManutencao(request.getParameter("nome_manutencao"));
+            String dataStr = request.getParameter("data_manutencao");
+            System.out.println("Data recebida (atualizar): " + dataStr);
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate data = LocalDate.parse(dataStr, formatter);
+                manutencao.setDataManutencao(data);
+            } catch (DateTimeParseException e) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Formato de data inválido!");
+                return;
+            }
 
-        manutencao.setObservacao(request.getParameter("observacao"));
-        manutencao.setIdObra(Integer.parseInt(request.getParameter("id_obra")));
-        manutencao.setIdFunc(Integer.parseInt(request.getParameter("id_func")));
-        manutencao.setIdUsuario(Integer.parseInt(request.getParameter("id_usuario")));
+            manutencao.setObservacao(request.getParameter("observacao"));
+            manutencao.setIdObra(Integer.parseInt(request.getParameter("id_obra")));
+            manutencao.setIdFunc(Integer.parseInt(request.getParameter("id_func")));
+            manutencao.setIdUsuario(Integer.parseInt(request.getParameter("id_usuario")));
 
-        boolean sucesso = manutencaoService.atualizarManutencao(manutencao);
+            boolean sucesso = manutencaoService.atualizarManutencao(manutencao);
 
-        if (sucesso) {
-            response.sendRedirect("manutencao"); // aqui tbm
-        } else {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao atualizar manutenção!");
+            if (sucesso) {
+                response.sendRedirect("manutencao"); // aqui tbm
+            } else {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao atualizar manutenção!");
+            }
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID inválido!");
         }
     }
 

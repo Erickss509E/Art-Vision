@@ -78,7 +78,7 @@ public class UsuarioController extends HttpServlet {
         Usuario usuario = new Usuario();
         usuario.setNome(req.getParameter("nome"));
         usuario.setEmail(req.getParameter("email"));
-        usuario.setSenha(req.getParameter("senha"));
+        usuario.setSenha(req.getParameter("senha_usuario"));
         usuario.setCpf(req.getParameter("cpf"));
         usuario.setEmpresa(req.getParameter("empresa"));
 
@@ -92,22 +92,26 @@ public class UsuarioController extends HttpServlet {
     }
 
     private void atualizar(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
-        Usuario usuario = new Usuario(
-                id,
-                req.getParameter("nome"),
-                req.getParameter("email"),
-                req.getParameter("senha"),
-                req.getParameter("cpf"),
-                req.getParameter("empresa")
-        );
 
-        boolean sucesso = usuarioService.atualizarUsuario(usuario);
+        try {
 
-        if (sucesso) {
-            resp.sendRedirect("usuario");
-        } else {
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao atualizar usuário.");
+            Usuario usuario = new Usuario();
+            usuario.setId(Integer.parseInt(req.getParameter("id_usuario")));
+            usuario.setNome(req.getParameter("nome"));
+            usuario.setEmail(req.getParameter("email"));
+            usuario.setSenha(req.getParameter("senha_usuario"));
+            usuario.setCpf(req.getParameter("cpf"));
+            usuario.setEmpresa(req.getParameter("empresa"));
+
+            boolean sucesso = usuarioService.atualizarUsuario(usuario);
+
+            if (sucesso) {
+                resp.sendRedirect("usuario");
+            } else {
+                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao atualizar usuário.");
+            }
+        } catch (NumberFormatException e) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST,"ID inválido!");
         }
     }
 
