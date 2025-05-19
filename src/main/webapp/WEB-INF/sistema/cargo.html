@@ -13,9 +13,9 @@
         <section class="content-area">
             <div class="content-header">
                 <h1>Cargos</h1>
-                <a href="add_cargo.html" class="btn btn-primary">
+                <button onclick="handlePopupCad(true)" class="btn btn-primary">
                     <span class="material-icons">add</span> Adicionar Novo Cargo
-                </a>
+                </button>
             </div>
             <div class="table-container">
                 <table>
@@ -54,8 +54,52 @@
                     </tbody>
                 </table>
             </div>
+            <div id="popup_add" class="popup">
+                <main class="main-content-popup">
+                    <section class="content-area">
+                        <div class="content-header-popup">
+                            <h1>Adicionar Novo Cargo</h1>
+                            <button class="btn btn-secondary" onclick="handlePopupCad(false)">
+                                <span class="material-icons">arrow_back</span> Voltar para Listagem
+                            </button>
+                        </div>
+                        <div class="form-container">
+                            <form id="formCargo">
+                                <div class="form-section">
+                                    <h3>Informações do Cargo</h3>
+                                    <div class="form-group">
+                                        <label for="nomeCargo">Nome do Cargo</label>
+                                        <input type="text" id="nomeCargo" name="nomeCargo" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="setorCargo">Setor</label>
+                                        <select id="setorCargo" name="setorCargo" required>
+                                            <option value="" disabled selected>Selecione o Setor</option>
+                                            <option value="1">Conservação e Restauro</option>
+                                            <option value="2">Pinturas Clássicas</option>
+                                            <option value="3">Esculturas</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-cancel">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Salvar Cargo</button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </main>
+            </div>
         </section>
     </main>
 </div>
 </body>
+<script>
+    const popup_add = document.getElementById('popup_add');
+
+    function handlePopupCad(open) {
+        popup_add.classList[open ? 'add' : 'remove']('opened');
+    }
+</script>
 </html>

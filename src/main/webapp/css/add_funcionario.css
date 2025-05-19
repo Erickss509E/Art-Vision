@@ -4,14 +4,22 @@
     align-items: center;
     margin-bottom: 20px;
 }
-
+.dashboard-container{
+display:flex;
+justify-content:center;
+align-items:center;
+}
+.main-content{
+width:86%;
+padding-top:40px;
+}
 .content-header h1 {
     font-size: 22px;
     color: #333;
 }
 
 .btn-secondary {
-    background-color: #6c757d;
+    background-color: #8c2845;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -20,6 +28,7 @@
     display: flex;
     align-items: center;
     font-size: 14px;
+    text-decoration: none;
 }
 
 .btn-secondary .material-icons {
@@ -145,7 +154,7 @@
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background-color: #8c2845;
     color: white;
 }
 
