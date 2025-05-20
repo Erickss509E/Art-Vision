@@ -8,19 +8,19 @@
 <h1>Teste de Funcionalidades de Setor</h1>
 
 <!-- Cadastrar Setor -->
-<h2>Cadastrar Setor</h2>
-<form action="setor" method="post">
+<h2>Cadastrar Cargo</h2>
+<form action="cargo" method="post">
     <input type="hidden" name="action" value="cadastrar">
-    <label>Nome: <input type="text" name="nome" required></label><br>
-    <label>Ala: <input type="text" name="ala" required></label><br>
+    <label>Nome: <input type="text" name="nome_cargo" required></label><br>
+    <label>Ala: <input type="number" name="id_setor" required></label><br>
     <button type="submit">Cadastrar</button>
 </form>
 
 <hr>
 
 <!-- Listar Setores -->
-<h2>Listar Setores</h2>
-<form action="setor" method="get">
+<h2>Listar CArgos</h2>
+<form action="cargo" method="get">
     <input type="hidden" name="action" value="listar">
     <button type="submit">Listar</button>
 </form>
@@ -28,8 +28,8 @@
 <hr>
 
 <!-- Buscar Setor por ID -->
-<h2>Buscar Setor por ID</h2>
-<form action="setor" method="get">
+<h2>Buscar CArgo por ID</h2>
+<form action="cargo" method="get">
     <input type="hidden" name="action" value="buscar">
     <label>ID: <input type="number" name="id" required></label><br>
     <button type="submit">Buscar</button>
@@ -38,8 +38,8 @@
 <hr>
 
 <!-- Atualizar Setor -->
-<h2>Atualizar Setor</h2>
-<form action="setor" method="post">
+<h2>Atualizar CArgo</h2>
+<form action="cargo" method="post">
     <input type="hidden" name="action" value="atualizar">
     <label>Nome: <input type="text" name="nome" required></label><br>
     <label>Ala: <input type="text" name="ala" required></label><br>
@@ -50,8 +50,8 @@
 <hr>
 
 <!-- Excluir Setor -->
-<h2>Excluir Setor</h2>
-<form action="setor" method="post">
+<h2>Excluir CArgo</h2>
+<form action="cargo" method="post">
     <input type="hidden" name="action" value="excluir">
     <label>ID: <input type="number" name="id" required></label><br>
     <button type="submit">Excluir</button>

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/cargo")
+@WebServlet("/sistema/cargo")
 public class CargoController extends HttpServlet {
 
     private CargoService cargoService = new CargoService();
@@ -108,7 +108,7 @@ public class CargoController extends HttpServlet {
 
         boolean sucesso = cargoService.cadastrarCargos(cargo);
         if (sucesso) {
-            response.sendRedirect("/cargo"); // aqui tbm
+            response.sendRedirect("/sistema/cargo"); // aqui tbm
         } else {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao cadastrar cargo!");
         }

@@ -16,7 +16,7 @@ public class CargoDAO    {
     private static String INSERT_INTO_SQL = "INSERT INTO cargos (nome_cargo, id_setor) VALUES (?, ?)";
     private static String SELECT_CARGO_SQL = "SELECT * FROM cargos";
     private static final String SELECT_CARGO_BY_ID_SQL = "SELECT * FROM cargos WHERE id_cargo = ?";
-    private static final String UPDATE_CARGO_SQL = "UPDATE cargos SET nome_cargo=?, id_cargo=?";
+    private static final String UPDATE_CARGO_SQL = "UPDATE cargos SET nome_cargo=?, id_setor=? WHERE id_setor=?";
     private static final String DELETE_CARGO_SQL = "DELETE FROM departamentos WHERE id_cargo = ?";
 
     public boolean cadastrarCargo(Cargo cargo) {

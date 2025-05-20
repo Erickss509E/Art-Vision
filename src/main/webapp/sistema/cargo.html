@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listagem de Departamentos - ArtVision</title>
-    <link rel="stylesheet" href="../../css/departamento.css">
+    <title>Listagem de Cargos - ArtVision</title>
+    <link rel="stylesheet" href="../css/cargo.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -12,23 +12,23 @@
     <main class="main-content">
         <section class="content-area">
             <div class="content-header">
-                <h1>Departamentos</h1>
-                <button class="btn btn-primary" onclick="handlePopupCad(true)">
-                    <span class="material-icons">add</span> Adicionar Novo Departamento
+                <h1>Cargos</h1>
+                <button onclick="handlePopupCad(true)" class="btn btn-primary">
+                    <span class="material-icons">add</span> Adicionar Novo Cargo
                 </button>
             </div>
             <div class="table-container">
                 <table>
                     <thead>
                     <tr>
-                        <th>Nome do Departamento</th>
+                        <th>Nome do Cargo</th>
                         <th>Setor</th>
                         <th>Ações</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Departamento de Curadoria</td>
+                        <td>Curador Chefe</td>
                         <td>Conservação e Restauro</td>
                         <td class="actions">
                             <button class="btn-icon" title="Editar"><span class="material-icons">edit</span></button>
@@ -36,7 +36,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Departamento de Restauração de Pinturas</td>
+                        <td>Restauradora Júnior</td>
                         <td>Conservação e Restauro</td>
                         <td class="actions">
                             <button class="btn-icon" title="Editar"><span class="material-icons">edit</span></button>
@@ -44,7 +44,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Departamento de Exposições Temporárias</td>
+                        <td>Recepcionista de Galeria</td>
                         <td>Pinturas Clássicas</td>
                         <td class="actions">
                             <button class="btn-icon" title="Editar"><span class="material-icons">edit</span></button>
@@ -58,34 +58,33 @@
                 <main class="main-content-popup">
                     <section class="content-area">
                         <div class="content-header-popup">
-                            <h1>Adicionar Novo Depatamento</h1>
+                            <h1>Adicionar Novo Cargo</h1>
                             <button class="btn btn-secondary" onclick="handlePopupCad(false)">
                                 <span class="material-icons">arrow_back</span> Voltar para Listagem
                             </button>
                         </div>
                         <div class="form-container">
-                            <form id="formDepartamento">
+                            <form id="formCargo">
                                 <div class="form-section">
-                                    <h3>Informações do Departamento</h3>
+                                    <h3>Informações do Cargo</h3>
                                     <div class="form-group">
-                                        <label for="nomeDepartamento">Nome do Departamento</label>
-                                        <input type="text" id="nomeDepartamento" name="nomeDepartamento" required>
+                                        <label for="nomeCargo">Nome do Cargo</label>
+                                        <input type="text" id="nomeCargo" name="action" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="setorDepartamento">Setor</label>
-                                        <select id="setorDepartamento" name="setorDepartamento" required>
+                                        <label for="setorCargo">Setor</label>
+                                        <select id="setorCargo" name="action" required>
                                             <option value="" disabled selected>Selecione o Setor</option>
                                             <option value="1">Conservação e Restauro</option>
                                             <option value="2">Pinturas Clássicas</option>
                                             <option value="3">Esculturas</option>
-                                            <!-- Adicionar mais opções de setor dinamicamente -->
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="form-actions">
-                                    <button type="button" class="btn btn-cancel" onclick="window.location.href=\'departamentos_listagem.html\'">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Salvar Departamento</button>
+                                    <button type="button" class="btn btn-cancel">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Salvar Cargo</button>
                                 </div>
                             </form>
                         </div>

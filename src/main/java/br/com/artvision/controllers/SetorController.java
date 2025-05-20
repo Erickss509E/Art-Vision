@@ -2,6 +2,7 @@ package br.com.artvision.controllers;
 
 import br.com.artvision.dao.SetorDAO;
 import br.com.artvision.dto.SetorDTO;
+import br.com.artvision.models.Funcionario;
 import br.com.artvision.models.Setor;
 import br.com.artvision.services.SetorService;
 
@@ -33,9 +34,9 @@ public class SetorController extends HttpServlet {
                 case "listar":
                     listarSetores(request, response);
                     break;
-                /*case "buscar":
+                case "buscar":
                     buscarSetorPorId(request, response);
-                    break;*/
+                    break;
                 default:
                     response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação GET não reconhecida.");
                     break;
@@ -91,6 +92,23 @@ public class SetorController extends HttpServlet {
         request.setAttribute("setores", setores);
         RequestDispatcher dispatcher = request.getRequestDispatcher("listar_setores.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void buscarSetorPorId(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id_setor"));
+            Setor setor = setorService.buscarSetoresPorId(id);
+
+            if (setor != null) {
+                request.setAttribute("setor", setor); //mudar aqui nome da página front
+                request.getRequestDispatcher("editar-setor.html").forward(request, response); //aqui tbm
+            } else {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Setor não encontrado.");
+            }
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID inválido.");
+        }
     }
 
     private void atualizarSetor(HttpServletRequest request, HttpServletResponse response)
