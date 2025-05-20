@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/cargo")
+@WebServlet("/sistema/cargo")
 public class CargoController extends HttpServlet {
 
     private CargoService cargoService = new CargoService();
