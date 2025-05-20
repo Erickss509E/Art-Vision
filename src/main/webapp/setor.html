@@ -21,7 +21,7 @@
 <!-- Listar Setores -->
 <h2>Listar Setores</h2>
 <form action="setor" method="get">
-    <input type="hidden" name="acao" value="listar">
+    <input type="hidden" name="action" value="listar">
     <button type="submit">Listar</button>
 </form>
 
@@ -30,7 +30,7 @@
 <!-- Buscar Setor por ID -->
 <h2>Buscar Setor por ID</h2>
 <form action="setor" method="get">
-    <input type="hidden" name="acao" value="buscar">
+    <input type="hidden" name="action" value="buscar">
     <label>ID: <input type="number" name="id" required></label><br>
     <button type="submit">Buscar</button>
 </form>
@@ -40,10 +40,10 @@
 <!-- Atualizar Setor -->
 <h2>Atualizar Setor</h2>
 <form action="setor" method="post">
-    <input type="hidden" name="acao" value="atualizar">
-    <label>ID: <input type="number" name="id" required></label><br>
+    <input type="hidden" name="action" value="atualizar">
     <label>Nome: <input type="text" name="nome" required></label><br>
     <label>Ala: <input type="text" name="ala" required></label><br>
+    <label>ID: <input type="number" name="id" required></label><br>
     <button type="submit">Atualizar</button>
 </form>
 
@@ -52,7 +52,7 @@
 <!-- Excluir Setor -->
 <h2>Excluir Setor</h2>
 <form action="setor" method="post">
-    <input type="hidden" name="acao" value="excluir">
+    <input type="hidden" name="action" value="excluir">
     <label>ID: <input type="number" name="id" required></label><br>
     <button type="submit">Excluir</button>
 </form>
