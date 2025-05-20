@@ -68,13 +68,13 @@ public class    FuncionarioDAO {
         return funcionarios;
     }
 
-    public Funcionario buscarFuncionarioPorId(int id) {
+    public Funcionario buscarFuncionarioPorId(int id_func) {
         Funcionario funcionario = null;
 
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID_SQL)){
 
-            stmt.setInt(1, id);
+            stmt.setInt(1, id_func);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     funcionario = new Funcionario(
