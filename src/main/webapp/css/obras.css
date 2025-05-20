@@ -1,17 +1,32 @@
+.dashboard-container{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.content-area{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 43px;
+}
 .content-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    width: 97%;
 }
 
 .content-header h1 {
-    font-size: 24px;
-    color: #333;
+    color: black;
+    padding: 0px 27px;
+    font-weight: bold;
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background-color: #8c2845;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -19,6 +34,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
 
 .btn-primary .material-icons {
@@ -30,7 +46,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow-x: auto;
+    width: 90%;
 }
 
 table {
@@ -43,7 +59,6 @@ table th, table td {
     text-align: left;
     border-bottom: 1px solid #eee;
     vertical-align: middle;
-    font-size: 13px;
 }
 
 table th {
@@ -54,6 +69,14 @@ table th {
 
 table tbody tr:hover {
     background-color: #f1f1f1;
+}
+
+.table-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
 }
 
 .actions .btn-icon {
@@ -68,7 +91,9 @@ table tbody tr:hover {
 .actions .btn-icon .material-icons {
     font-size: 20px;
 }
-
+.main-content{
+width:90%;
+}
 .actions .btn-icon:hover {
     color: #007bff;
 }
@@ -103,22 +128,3 @@ table tbody tr:hover {
 .pagination .btn-icon:hover {
     background-color: #e0e0e0;
 }
-
-.sidebar-nav ul li.active a {
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-}
-
-.sidebar-nav ul li.active a .material-icons {
-    color: white;
-}
-
-.main-content .content-area .content-header .btn-primary {
-    font-size: 14px;
-}
-
-.main-content .content-area .content-header h1 {
-    font-size: 22px;
-}
-

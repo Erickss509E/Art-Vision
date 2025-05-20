@@ -169,6 +169,7 @@ table tbody tr:hover {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .content-header-popup h1 {
@@ -197,6 +198,7 @@ table tbody tr:hover {
     /* padding: 30px; */
     /* border-radius: 8px; */
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    width: 93%;
 }
 
 .form-section {

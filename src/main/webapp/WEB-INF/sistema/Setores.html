@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Cargos - ArtVision</title>
+    <link rel="stylesheet" href="../../css/cargo.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<div class="dashboard-container">
+    <main class="main-content">
+        <section class="content-area">
+            <div class="content-header">
+                <h1>Cargos</h1>
+                <button onclick="handlePopupCad(true)" class="btn btn-primary">
+                    <span class="material-icons">add</span> Adicionar Novo Cargo
+                </button>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Nome do Setor</th>
+                        <th>Ala</th>
+                        <th>Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Conservação e Restauro</td>
+                        <td>Norte</td>
+                        <td class="actions">
+                            <button class="btn-icon" title="Editar" onclick="window.location.href='setores_formulario.html'"><span class="material-icons">edit</span></button>
+                            <button class="btn-icon btn-icon-delete" title="Excluir"><span class="material-icons">delete</span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pinturas Clássicas</td>
+                        <td>Sul</td>
+                        <td class="actions">
+                            <button class="btn-icon" title="Editar" onclick="window.location.href='setores_formulario.html'"><span class="material-icons">edit</span></button>
+                            <button class="btn-icon btn-icon-delete" title="Excluir"><span class="material-icons">delete</span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Esculturas</td>
+                        <td>Leste</td>
+                        <td class="actions">
+                            <button class="btn-icon" title="Editar" onclick="window.location.href='setores_formulario.html'"><span class="material-icons">edit</span></button>
+                            <button class="btn-icon btn-icon-delete" title="Excluir"><span class="material-icons">delete</span></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="popup_add" class="popup">
+                <main class="main-content-popup">
+                    <section class="content-area">
+                        <div class="content-header-popup">
+                            <h1>Adicionar Novo Cargo</h1>
+                            <button class="btn btn-secondary" onclick="handlePopupCad(false)">
+                                <span class="material-icons">arrow_back</span> Voltar para Listagem
+                            </button>
+                        </div>
+                        <div class="form-container">
+                            <form id="formSetor">
+                                <div class="form-section">
+                                    <h3>Informações do Setor</h3>
+                                    <div class="form-group">
+                                        <label for="nomeSetor">Nome do Setor</label>
+                                        <input type="text" id="nomeSetor" name="nomeSetor" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="alaSetor">Ala</label>
+                                        <input type="text" id="alaSetor" name="alaSetor" placeholder="Ex: Norte, Sul, Ala A">
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-cancel" onclick="window.location.href='setores_listagem.html'">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Salvar Setor</button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+<script>
+    const popup_add = document.getElementById('popup_add');
+
+    function handlePopupCad(open) {
+        popup_add.classList[open ? 'add' : 'remove']('opened');
+    }
+</script>
+</html>
