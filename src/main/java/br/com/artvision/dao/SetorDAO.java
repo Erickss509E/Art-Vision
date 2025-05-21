@@ -10,16 +10,12 @@ import java.util.List;
 
 public class SetorDAO {
 
-    private static final String INSERT_INTO_SQL = "INSERT INTO setores (nome_setor, ala) VALUES (?, ?)";
-    private static final String SELECT_ALL_SETORES_SQL = "SELECT * FROM setores";
-    private static final String SELECT_BY_SETOR_ID_SQL = "SELECT * FROM setores WHERE id_setor = ?";
-    private static final String UPDATE_SETOR_SQL = "UPDATE setores SET nome_setor = ?, ala = ? WHERE id_setor = ?";
-    private static final String DELETE_SETOR_SQL = "DELETE FROM setores WHERE id_setor = ?";
-
     public boolean cadastrarSetor(Setor setor) {
 
+        String sql = "INSERT INTO setores (nome_setor, ala) VALUES (?, ?)";
+
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = connection.prepareStatement(INSERT_INTO_SQL)) {
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, setor.getNome());
             stmt.setString(2, setor.getAla());
@@ -35,10 +31,11 @@ public class SetorDAO {
 
     public List<Setor> listarSetor() {
         List<Setor> setores = new ArrayList<>();
+        String sql = "SELECT * FROM setores";
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
              Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(SELECT_ALL_SETORES_SQL)) {
+             ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Setor setor = new Setor(
@@ -57,9 +54,10 @@ public class SetorDAO {
 
     public Setor buscarSetorPorId(int id_setor) {
         Setor setor = null;
+        String sql = "SELECT * FROM setores WHERE id_setor = ?";
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = connection.prepareStatement(SELECT_BY_SETOR_ID_SQL)) {
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setInt(1, id_setor);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -79,8 +77,11 @@ public class SetorDAO {
     }
 
     public boolean atualizarSetor(Setor setor) {
+
+        String sql = "UPDATE setores SET nome_setor = ?, ala = ? WHERE id_setor = ?";
+
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = connection.prepareStatement(UPDATE_SETOR_SQL)) {
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, setor.getNome());
             stmt.setString(2, setor.getAla());
@@ -96,8 +97,11 @@ public class SetorDAO {
     }
 
     public boolean excluirSetor(int id_setor) {
+
+        String sql = "DELETE FROM setores WHERE id_setor = ?";
+
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = connection.prepareStatement(DELETE_SETOR_SQL)) {
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setInt(1, id_setor);
             return stmt.executeUpdate() > 0;

@@ -10,21 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class    FuncionarioDAO {
-    public static String COUNT_FUNC_SQL = "SELECT s.nome_setor, c.nome_cargo, COUNT(f.id_func) AS total " +
-            "FROM funcionarios f " +
-            "JOIN setores s ON f.id_setor = s.id_setor " +
-            "JOIN cargos c ON f.id_cargo = c.id_cargo " +
-            "GROUP BY s.nome_setor, c.nome_cargo";
-    public static String INSERT_INTO_SQL = "INSERT INTO funcionarios (cpf_func, nome_func, telefone_func, email_func, id_cargo, id_setor, id_depto) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    public static String SELECT_FUNC_SQL = "SELECT * FROM funcionarios";
-    public static String SELECT_BY_ID_SQL = "SELECT * FROM funcionarios WHERE id_func = ?";
-    public static String UPDATE_FUNC_SQL = "UPDATE funcionarios SET cpf_func = ?, nome_func = ?, telefone_func = ?, email_func = ?, id_cargo = ?, id_setor = ?, id_depto = ? WHERE id_func = ?";
-    public static String DELETE_FUNC_SQL = "DELETE FROM funcionarios WHERE id_func = ?";
 
     public boolean cadastrarFuncionario(Funcionario funcionario) {
 
+        String sql = "INSERT INTO funcionarios (cpf_func, nome_func, telefone_func, email_func, id_cargo, id_setor, id_depto) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(INSERT_INTO_SQL)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, funcionario.getCpfFunc());
             stmt.setString(2, funcionario.getNomeFunc());
@@ -43,9 +35,10 @@ public class    FuncionarioDAO {
 
     public List<Funcionario> listarFuncionarios() {
         List<Funcionario> funcionarios = new ArrayList<>();
+        String sql = "SELECT * FROM funcionarios";
 
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(SELECT_FUNC_SQL);
+             PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
@@ -70,9 +63,10 @@ public class    FuncionarioDAO {
 
     public Funcionario buscarFuncionarioPorId(int id_func) {
         Funcionario funcionario = null;
+        String sql = "SELECT * FROM funcionarios WHERE id_func = ?";
 
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID_SQL)){
+             PreparedStatement stmt = conn.prepareStatement(sql)){
 
             stmt.setInt(1, id_func);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -96,8 +90,10 @@ public class    FuncionarioDAO {
 
     public boolean atualizarFuncionario(Funcionario funcionario) {
 
+        String sql = "UPDATE funcionarios SET cpf_func = ?, nome_func = ?, telefone_func = ?, email_func = ?, id_cargo = ?, id_setor = ?, id_depto = ? WHERE id_func = ?";
+
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(UPDATE_FUNC_SQL)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, funcionario.getCpfFunc());
             stmt.setString(2, funcionario.getNomeFunc());
@@ -118,8 +114,10 @@ public class    FuncionarioDAO {
 
     public boolean excluirFuncionario(int id_func) {
 
+        String sql = "DELETE FROM funcionarios WHERE id_func = ?";
+
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(DELETE_FUNC_SQL)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id_func);
             return stmt.executeUpdate() > 0;

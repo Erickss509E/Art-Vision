@@ -9,15 +9,12 @@ import java.util.List;
 
 public class UsuarioDAO {
 
-    private static final String INSERT_USUARIO_SQL = "INSERT INTO usuarios (nome, email, senha_usuario, cpf, empresa) VALUES (?, ?, ?, ?, ?)";
-    private static final String SELECT_ALL_USUARIOS_SQL = "SELECT * FROM usuarios";
-    private static final String SELECT_USUARIO_BY_ID = "SELECT * FROM usuarios WHERE id_usuario = ?";
-    private static final String UPDATE_USUARIO_SQL = "UPDATE usuarios SET nome = ?, email = ?, senha_usuario = ?, cpf = ?, empresa = ? WHERE id_usuario = ?";
-    private static final String DELETE_USUARIO_SQL = "DELETE FROM usuarios WHERE id_usuario = ?";
-
     public boolean cadastrarUsuario(Usuario usuario) {
+
+        String sql = "INSERT INTO usuarios (nome, email, senha_usuario, cpf, empresa) VALUES (?, ?, ?, ?, ?)";
+
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = connection.prepareStatement(INSERT_USUARIO_SQL)) {
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
@@ -35,10 +32,11 @@ public class UsuarioDAO {
 
     public List<Usuario> listarUsuario() {
         List<Usuario> usuarios = new ArrayList<>();
+        String sql = "SELECT * FROM usuarios";
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
              Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(SELECT_ALL_USUARIOS_SQL)) {
+             ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Usuario usuario = new Usuario(
@@ -61,9 +59,10 @@ public class UsuarioDAO {
 
     public Usuario buscarUsuarioPorId(int id_usuario) {
         Usuario usuario = null;
+        String sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = connection.prepareStatement(SELECT_USUARIO_BY_ID)) {
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setInt(1, id_usuario);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -87,8 +86,11 @@ public class UsuarioDAO {
     }
 
     public boolean atualizarUsuario(Usuario usuario) {
+
+        String sql = "UPDATE usuarios SET nome = ?, email = ?, senha_usuario = ?, cpf = ?, empresa = ? WHERE id_usuario = ?";
+
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = connection.prepareStatement(UPDATE_USUARIO_SQL)) {
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
@@ -106,8 +108,11 @@ public class UsuarioDAO {
     }
 
     public boolean excluirUsuario(int id_usuario) {
+
+        String sql = "DELETE FROM usuarios WHERE id_usuario = ?";
+
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = connection.prepareStatement(DELETE_USUARIO_SQL)) {
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setInt(1, id_usuario);
             return stmt.executeUpdate() > 0;

@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ObraDAO {
-    private static final String insert_sql = "INSERT INTO obras (nome, descricao) VALUES (?, ?)";
-    private static final String list_sql = "SELECT o.*, MAX(m.data_manutencao) AS ultima_manutencao " + "FROM obras o LEFT JOIN manutencoes m ON o.id = m.id_obra " + "GROUP BY o.id, o.nome, o.nome_autor, o.data_entrada_museu, o.valor_estimado, o.localizacao, o.descricao, o.area_museu";
-    private static final String read_sql = "SELECT * FROM obras WHERE id = ?";
-    private static final String list_all_sql = "SELECT * FROM obras";
 
-    public boolean cadastrar(Obra obra) {
+    private static final String list_sql = "SELECT o.*, MAX(m.data_manutencao) AS ultima_manutencao " + "FROM obras o LEFT JOIN manutencoes m ON o.id = m.id_obra " + "GROUP BY o.id, o.nome, o.nome_autor, o.data_entrada_museu, o.valor_estimado, o.localizacao, o.descricao, o.area_museu";
+
+    public boolean cadastrarObra(Obra obra) {
+
+        String sql = "INSERT INTO obras (nome_obra, descricao) VALUES (?, ?)";
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
-        PreparedStatement stmt = connection.prepareStatement(insert_sql)) {
+        PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, "nome");
             stmt.setString(2, "descricao");
@@ -33,11 +33,12 @@ public class ObraDAO {
         }
     }
 
-    public Obra buscarPorId(int id) {
+    public Obra buscarObraPorId(int id) {
         Obra obra = null;
+        String sql = "SELECT * FROM obras WHERE id_obra = ?";
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = connection.prepareStatement(read_sql)) {
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -58,10 +59,11 @@ public class ObraDAO {
 
     public List<Obra> listarObras() {
         List<Obra> obras = new ArrayList<>();
+        String sql = "SELECT * FROM obras";
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
              Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(list_all_sql)) {
+             ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Obra obra = new Obra(
@@ -76,5 +78,21 @@ public class ObraDAO {
         }
 
         return obras;
+    }
+
+    public boolean excluirObra(int id_obra) {
+
+        String sql = "DELETE FROM obras WHERE id_obra = ?";
+
+        try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setInt(1, id_obra);
+            return stmt.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
