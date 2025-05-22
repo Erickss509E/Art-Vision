@@ -91,7 +91,7 @@ public class CargoController extends HttpServlet {
 
             if (cargo != null) {
                 request.setAttribute("cargo", cargo); //mudar aqui nome da página front
-                request.getRequestDispatcher("editar-cargo.html").forward(request, response); //aqui tbm
+                request.getRequestDispatcher("editar-cargo.jsp").forward(request, response); //aqui tbm
             } else {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Cargo não encontrado.");
             }

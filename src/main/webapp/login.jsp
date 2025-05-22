@@ -41,7 +41,7 @@
 
       <div class="form-footer">
         <b class="registro">Ainda não possui cadastro?
-          <a href="cadastro.jsp" style="text-decoration: none">
+          <a href="${pageContext.request.contextPath}/cadastro.jsp" style="text-decoration: none">
             <span style="color: #8c2a44"><b>Registre-se.</b></span>
           </a></b>
       </div>

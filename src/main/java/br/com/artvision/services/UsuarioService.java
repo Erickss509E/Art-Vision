@@ -46,4 +46,5 @@ public class UsuarioService {
     public boolean excluirUsuario(int id) {
         return usuarioDAO.excluirUsuario(id);
     }
+
 }

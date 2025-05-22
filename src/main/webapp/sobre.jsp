@@ -18,9 +18,9 @@
       <div> <img class="logo" src="assets/img/logo_avt.png" alt=""></div>
       <div class="navbar">
         <ul>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="index.jsp">Home</a></li>
           <li><a href="sobre.html">Sobre</a></li>
-          <li><a href="calculadora.html">Calculadora</a></li>
+          <li><a href="calculadora.jsp">Calculadora</a></li>
           <li class="login"><a href="login.jsp" target="_blank"><b>Login</b></a></li>
         </ul>
       </div>
@@ -113,9 +113,9 @@
       <div class="navegacao-footer">
         <h3> NAVEGAÇÃO </h3>
         <ul>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="index.jsp">Home</a></li>
           <li><a href="sobre.html">Sobre</a></li>
-          <li><a href="calculadora.html">Calculadora</a></li>
+          <li><a href="calculadora.jsp">Calculadora</a></li>
         </ul>
       </div>
       <div class="sobre-footer">

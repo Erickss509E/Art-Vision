@@ -89,7 +89,7 @@ public class DepartamentoController extends HttpServlet {
 
             if (departamento != null) {
                 request.setAttribute("departamento", departamento); //mudar aqui nome da página front
-                request.getRequestDispatcher("editar-departamento.html").forward(request, response); //aqui tbm
+                request.getRequestDispatcher("editar-departamento.jsp").forward(request, response); //aqui tbm
             } else {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Departamento não encontrado.");
             }

@@ -83,7 +83,7 @@ public class FuncionarioController extends HttpServlet {
 
             if (funcionario != null) {
                 request.setAttribute("funcionario", funcionario); //mudar aqui nome da página front
-                request.getRequestDispatcher("editar-funcionario.html").forward(request, response); //aqui tbm
+                request.getRequestDispatcher("editar-funcionario.jsp").forward(request, response); //aqui tbm
             } else {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Funcionário não encontrado.");
             }

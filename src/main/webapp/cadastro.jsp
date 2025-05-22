@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,40 +18,45 @@
             <p class="titulo2">A ArtVision Tech Software</p>
         </div>
     </div>
+
     <div class="quadro2">
         <div class="container-quadro2">
             <h1 class="titulo">Registre-se</h1>
-            <div class="formulario">
+
+            <form action="usuario?acao=cadastrar" method="post" class="formulario">
+
                 <div class="campos">
-                    <input type="text" id="input_nome" placeholder="Nome">
+                    <input type="text" id="input_nome" name="nome" placeholder="Nome" required>
                     <div id="div_nome"></div>
                 </div>
 
                 <div class="campos">
-                    <input type="text" id="input_email" placeholder="Email">
+                    <input type="text" id="input_email" name="email" placeholder="Email" required>
                     <div id="div_email"></div>
                 </div>
 
                 <div class="campos">
                     <span>Empresas</span>
-                    <select id="listaMuseus">
-                        <option selected></option>
+                    <select id="listaMuseus" name="empresa" required>
+                        <option value="">Selecione</option>
+                        <option value="Empresa A">Empresa A</option>
+                        <option value="Empresa B">Empresa B</option>
                     </select>
                     <div id="div_empresa"></div>
                 </div>
 
                 <div class="campos">
-                    <input id="input_CPF" placeholder="CPF">
+                    <input id="input_CPF" name="cpf" placeholder="CPF" required>
                     <div id="div_cpf"></div>
                 </div>
 
                 <div class="campos">
-                    <input type="password" id="input_senha" placeholder="Senha">
+                    <input type="password" id="input_senha" name="senha_usuario" placeholder="Senha" required>
                     <div id="div_senha"></div>
                 </div>
-            </div>
 
-            <button onclick="cadastrar()" class="botao">Criar conta</button>
+                <button type="submit" class="botao">Criar conta</button>
+            </form>
 
             <div class="form-footer">
                 <b class="registro">
@@ -65,26 +71,3 @@
 </div>
 </body>
 </html>
-
-<script>
-    function cadastrar() {
-        const nome = document.getElementById("input_nome").value;
-        const email = document.getElementById("input_email").value;
-        const senha = document.getElementById("input_senha").value;
-        const cpf = document.getElementById("input_CPF").value;
-        const empresa = document.getElementById("listaMuseus").value;
-
-        fetch("/art-vision/usuario?acao=cadastrar", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded"
-  },
-  body: `nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&senha=${encodeURIComponent(senha)}&cpf=${encodeURIComponent(cpf)}&empresa=${encodeURIComponent(empresa)}`
-});
-
-
-
-
-    }
-
-</script>
