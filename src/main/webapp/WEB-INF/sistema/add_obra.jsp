@@ -13,7 +13,7 @@
         <section class="content-area">
             <div class="content-header">
                 <h1>Adicionar Nova Obra</h1>
-                <a href="obras.html" class="btn btn-secondary">
+                <a href="obras.jsp" class="btn btn-secondary">
                     <span class="material-icons">arrow_back</span> Voltar para Listagem
                 </a>
             </div>

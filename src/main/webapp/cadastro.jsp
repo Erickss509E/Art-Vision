@@ -55,7 +55,7 @@
             <div class="form-footer">
                 <b class="registro">
                     Já possui uma conta?
-                    <a href="login.html" style="text-decoration: none;">
+                    <a href="login.jsp" style="text-decoration: none;">
                         <span style="color: #8c2a44;"><b>Login</b></span>
                     </a>
                 </b>

@@ -13,7 +13,7 @@
         <section class="content-area">
             <div class="content-header">
                 <h1>Adicionar Novo Funcionário</h1>
-                <a href="funcionario.html" class="btn btn-secondary" onclick="window.location.href='funcionarios_listagem.html'">
+                <a href="funcionario.jsp" class="btn btn-secondary" onclick="window.location.href='funcionarios_listagem.html'">
                     <span class="material-icons">arrow_back</span> Voltar para Listagem
                 </a>
             </div>

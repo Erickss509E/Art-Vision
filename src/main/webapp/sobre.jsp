@@ -21,7 +21,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="sobre.html">Sobre</a></li>
           <li><a href="calculadora.html">Calculadora</a></li>
-          <li class="login"><a href="login.html" target="_blank"><b>Login</b></a></li>
+          <li class="login"><a href="login.jsp" target="_blank"><b>Login</b></a></li>
         </ul>
       </div>
     </div>
@@ -102,7 +102,7 @@
         <h3 class="texto-registrar">Contrate-nos para saber mais sobre como <br>
           podemos ajudar sua instituição a alcançar a <br>
           excelência na conservação museológica!</h3>
-       <a href="cadastro.html"><button class="botao-registrar" onclick="Registrar()"> REGISTRE-SE</button></a>
+       <a href="cadastro.jsp"><button class="botao-registrar" onclick="Registrar()"> REGISTRE-SE</button></a>
       </div>
       <img class="foto-redonda" src="assets/img/foto_redonda_final_sobre.png" alt="">
     </div>

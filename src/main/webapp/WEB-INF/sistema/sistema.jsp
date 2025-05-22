@@ -19,25 +19,25 @@
             </div>
             <div class="nav">
                 <div>
-                    <a href="funcionario.html" target="main"><img src="../../assets/img/funcionario.png">Funcionario</a>
+                    <a href="funcionario.jsp" target="main"><img src="../../assets/img/funcionario.png">Funcionario</a>
                 </div>
                 <div>
-                    <a href="perfil.html" target="main"><img src="../../assets/img/Person.png">Perfil</a>
+                    <a href="perfil.jsp" target="main"><img src="../../assets/img/Person.png">Perfil</a>
                 </div>
                 <div>
-                    <a href="cargo.html" target="main"><img src="../../assets/img/cargo.png">Cargo</a>
+                    <a href="cargo.jsp" target="main"><img src="../../assets/img/cargo.png">Cargo</a>
                 </div>
                 <div>
-                    <a href="departamento.html" target="main"><img src="../../assets/img/Departmento.png">Departamento</a>
+                    <a href="departamento.jsp" target="main"><img src="../../assets/img/Departmento.png">Departamento</a>
                 </div>
                 <div>
-                    <a href="./Setores.html" target="main"><img src="../../assets/img/setor.png">Setores</a>
+                    <a href="setores.jsp" target="main"><img src="../../assets/img/setor.png">Setores</a>
                 </div>
                 <div>
-                    <a href="manutencao.html" target="main"><img src="../../assets/img/Wrench.png">Manutenção</a>
+                    <a href="manutencao.jsp" target="main"><img src="../../assets/img/Wrench.png">Manutenção</a>
                 </div>
                 <div>
-                    <a href="./obras.html" target="main"><img src="../../assets/img/Paintbrush.png">Obra</a>
+                    <a href="obras.jsp" target="main"><img src="../../assets/img/Paintbrush.png">Obra</a>
                 </div>
                 <div>
                     <a href="" target="main"><img src="../../assets/img/logout.png">Sair</a>
@@ -49,25 +49,25 @@
                 </div>
                 <div class="nav">
                     <div>
-                        <a href="funcionario.html" target="main"><img src="../assets/img/funcionario.png">Funcionario</a>
+                        <a href="funcionario.jsp" target="main"><img src="../assets/img/funcionario.png">Funcionario</a>
                     </div>
                     <div>
-                        <a href="perfil.html" target="main"><img src="../assets/img/Person.png">Perfil</a>
+                        <a href="perfil.jsp" target="main"><img src="../assets/img/Person.png">Perfil</a>
                     </div>
                     <div>
-                        <a href="cargo.html" target="main"><img src="../assets/img/cargo.png">Cargo</a>
+                        <a href="cargo.jsp" target="main"><img src="../assets/img/cargo.png">Cargo</a>
                     </div>
                     <div>
-                        <a href="departamento.html" target="main"><img src="../assets/img/Departmento.png">Departamento</a>
+                        <a href="departamento.jsp" target="main"><img src="../assets/img/Departmento.png">Departamento</a>
                     </div>
                     <div>
-                        <a href="./Setores.html" target="main"><img src="../assets/img/setor.png">Setores</a>
+                        <a href="setores.jsp" target="main"><img src="../assets/img/setor.png">Setores</a>
                     </div>
                     <div>
-                        <a href="manutencao.html" target="main"><img src="../assets/img/Wrench.png">Manutenção</a>
+                        <a href="manutencao.jsp" target="main"><img src="../assets/img/Wrench.png">Manutenção</a>
                     </div>
                     <div>
-                        <a href="./Obras.html" target="main"><img src="../assets/img/Paintbrush.png">Obra</a>
+                        <a href="obras.jsp" target="main"><img src="../assets/img/Paintbrush.png">Obra</a>
                     </div>
                     <div>
                         <a href="" target="main"><img src="../assets/img/logout.png">Sair</a>
@@ -78,7 +78,7 @@
         </div>
     </div>
     <div class="iframe">
-        <iframe src="funcionario.html" name="main"></iframe>
+        <iframe src="funcionario.jsp" name="main"></iframe>
     </div>
 </main>
 </body>

@@ -23,7 +23,7 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="sobre.html">Sobre</a></li>
                     <li><a href="calculadora.html">Calculadora</a></li>
-                    <li class="login"><a href="login.html" target="_blank"><b>Login</b></a></li>
+                    <li class="login"><a href="login.jsp" target="_blank"><b>Login</b></a></li>
                 </ul>
             </div>
         </div>
