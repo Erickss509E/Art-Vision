@@ -2,7 +2,6 @@ package br.com.artvision.dao;
 
 import br.com.artvision.database.ConnectionPoolConfig;
 import br.com.artvision.models.Setor;
-import br.com.artvision.models.Usuario;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import java.util.List;
 public class SetorDAO {
 
     public boolean cadastrarSetor(Setor setor) {
-
         String sql = "INSERT INTO setores (nome_setor, ala) VALUES (?, ?)";
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
@@ -20,8 +18,8 @@ public class SetorDAO {
             stmt.setString(1, setor.getNome());
             stmt.setString(2, setor.getAla());
 
-            stmt.execute();
-            return true;
+            int linhasAfetadas = stmt.executeUpdate();
+            return linhasAfetadas > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -31,7 +29,7 @@ public class SetorDAO {
 
     public List<Setor> listarSetor() {
         List<Setor> setores = new ArrayList<>();
-        String sql = "SELECT * FROM setores";
+        String sql = "SELECT id_setor, nome_setor, ala FROM setores";
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
              Statement stmt = connection.createStatement();
@@ -39,9 +37,10 @@ public class SetorDAO {
 
             while (rs.next()) {
                 Setor setor = new Setor(
-                        rs.getString("nome"),
+                        rs.getString("nome_setor"),
                         rs.getString("ala")
                 );
+                setor.setId(rs.getInt("id_setor"));
                 setores.add(setor);
             }
 
@@ -54,7 +53,7 @@ public class SetorDAO {
 
     public Setor buscarSetorPorId(int id_setor) {
         Setor setor = null;
-        String sql = "SELECT * FROM setores WHERE id_setor = ?";
+        String sql = "SELECT id_setor, nome_setor, ala FROM setores WHERE id_setor = ?";
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -66,6 +65,7 @@ public class SetorDAO {
                             rs.getString("nome_setor"),
                             rs.getString("ala")
                     );
+                    setor.setId(rs.getInt("id_setor"));
                 }
             }
 
@@ -77,7 +77,6 @@ public class SetorDAO {
     }
 
     public boolean atualizarSetor(Setor setor) {
-
         String sql = "UPDATE setores SET nome_setor = ?, ala = ? WHERE id_setor = ?";
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
@@ -86,7 +85,6 @@ public class SetorDAO {
             stmt.setString(1, setor.getNome());
             stmt.setString(2, setor.getAla());
             stmt.setInt(3, setor.getId());
-
 
             return stmt.executeUpdate() > 0;
 
@@ -97,7 +95,6 @@ public class SetorDAO {
     }
 
     public boolean excluirSetor(int id_setor) {
-
         String sql = "DELETE FROM setores WHERE id_setor = ?";
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();

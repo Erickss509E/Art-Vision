@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/sistema/cargo")
+@WebServlet("/cargo")
 public class CargoController extends HttpServlet {
 
     private CargoService cargoService = new CargoService();
@@ -91,7 +91,7 @@ public class CargoController extends HttpServlet {
 
             if (cargo != null) {
                 request.setAttribute("cargo", cargo); //mudar aqui nome da página front
-                request.getRequestDispatcher("editar-cargo.jsp").forward(request, response); //aqui tbm
+                request.getRequestDispatcher("editar-cargo.html").forward(request, response); //aqui tbm
             } else {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Cargo não encontrado.");
             }
@@ -108,7 +108,7 @@ public class CargoController extends HttpServlet {
 
         boolean sucesso = cargoService.cadastrarCargos(cargo);
         if (sucesso) {
-            response.sendRedirect("/sistema/cargo"); // aqui tbm
+            response.sendRedirect("/cargo"); // aqui tbm
         } else {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao cadastrar cargo!");
         }

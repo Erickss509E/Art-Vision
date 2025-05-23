@@ -13,12 +13,16 @@ import java.util.List;
 
 public class CargoDAO    {
 
+    private static String INSERT_INTO_SQL = "INSERT INTO cargos (nome_cargo, id_setor) VALUES (?, ?)";
+    private static String SELECT_CARGO_SQL = "SELECT * FROM cargos";
+    private static final String SELECT_CARGO_BY_ID_SQL = "SELECT * FROM cargos WHERE id_cargo = ?";
+    private static final String UPDATE_CARGO_SQL = "UPDATE cargos SET nome_cargo=?, id_cargo=?";
+    private static final String DELETE_CARGO_SQL = "DELETE FROM departamentos WHERE id_cargo = ?";
+
     public boolean cadastrarCargo(Cargo cargo) {
 
-        String sql = "INSERT INTO cargos (nome_cargo, id_setor) VALUES (?, ?)";
-
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(INSERT_INTO_SQL)) {
 
             stmt.setString(1, cargo.getNome());
             stmt.setInt(2, cargo.getIdSetor());
@@ -34,10 +38,9 @@ public class CargoDAO    {
 
     public List<Cargo> listarCargos() {
         List<Cargo> cargos = new ArrayList<>();
-        String sql = "SELECT * FROM cargos";
 
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
+             PreparedStatement stmt = conn.prepareStatement(SELECT_CARGO_SQL);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
@@ -58,10 +61,9 @@ public class CargoDAO    {
 
     public Cargo buscarCargosPorId(int id) {
         Cargo cargo = null;
-        String sql = "SELECT * FROM cargos WHERE id_cargo = ?";
 
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)){
+             PreparedStatement stmt = conn.prepareStatement(SELECT_CARGO_BY_ID_SQL)){
 
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -81,10 +83,8 @@ public class CargoDAO    {
 
     public boolean atualizarCargo(Cargo cargo) {
 
-        String sql = "UPDATE cargos SET nome_cargo=?, id_setor=? WHERE id_setor=?";
-
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(UPDATE_CARGO_SQL)) {
 
             stmt.setString(1, cargo.getNome());
             stmt.setString(2, cargo.getNome());
@@ -99,10 +99,8 @@ public class CargoDAO    {
 
     public boolean excluirCargo(int id_cargo) {
 
-        String sql = "DELETE FROM departamentos WHERE id_cargo = ?";
-
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(DELETE_CARGO_SQL)) {
 
             stmt.setInt(1, id_cargo);
             return stmt.executeUpdate() > 0;

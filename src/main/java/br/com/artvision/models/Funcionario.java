@@ -2,25 +2,17 @@ package br.com.artvision.models;
 
 public class Funcionario {
     private int idFunc;
-    private String cpfFunc;
     private String nomeFunc;
-    private String telefoneFunc;
+    private String cpfFunc;
     private String emailFunc;
+    private String telefoneFunc;
+    private String matriculaFunc;
+
     private int idCargo;
     private int idSetor;
     private int idDepto;
 
-    public Funcionario() {}
-
-    public Funcionario(int idFunc, String nomeFunc, String telefoneFunc, String emailFunc, int idCargo, int idSetor, int idDepto) {
-        this.idFunc = idFunc;
-        this.nomeFunc = nomeFunc;
-        this.telefoneFunc = telefoneFunc;
-        this.emailFunc = emailFunc;
-        this.idCargo = idCargo;
-        this.idSetor = idSetor;
-        this.idDepto = idDepto;
-    }
+    // Getters e Setters
 
     public int getIdFunc() {
         return idFunc;
@@ -28,14 +20,6 @@ public class Funcionario {
 
     public void setIdFunc(int idFunc) {
         this.idFunc = idFunc;
-    }
-
-    public String getCpfFunc() {
-        return cpfFunc;
-    }
-
-    public void setCpfFunc(String cpfFunc) {
-        this.cpfFunc = cpfFunc;
     }
 
     public String getNomeFunc() {
@@ -46,12 +30,12 @@ public class Funcionario {
         this.nomeFunc = nomeFunc;
     }
 
-    public String getTelefoneFunc() {
-        return telefoneFunc;
+    public String getCpfFunc() {
+        return cpfFunc;
     }
 
-    public void setTelefoneFunc(String telefoneFunc) {
-        this.telefoneFunc = telefoneFunc;
+    public void setCpfFunc(String cpfFunc) {
+        this.cpfFunc = cpfFunc;
     }
 
     public String getEmailFunc() {
@@ -60,6 +44,22 @@ public class Funcionario {
 
     public void setEmailFunc(String emailFunc) {
         this.emailFunc = emailFunc;
+    }
+
+    public String getTelefoneFunc() {
+        return telefoneFunc;
+    }
+
+    public void setTelefoneFunc(String telefoneFunc) {
+        this.telefoneFunc = telefoneFunc;
+    }
+
+    public String getMatriculaFunc() {
+        return matriculaFunc;
+    }
+
+    public void setMatriculaFunc(String matriculaFunc) {
+        this.matriculaFunc = matriculaFunc;
     }
 
     public int getIdCargo() {
@@ -85,6 +85,4 @@ public class Funcionario {
     public void setIdDepto(int idDepto) {
         this.idDepto = idDepto;
     }
-
 }
-

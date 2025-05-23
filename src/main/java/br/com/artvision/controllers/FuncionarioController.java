@@ -1,150 +1,121 @@
 package br.com.artvision.controllers;
 
 import br.com.artvision.dao.FuncionarioDAO;
-import br.com.artvision.dto.FuncionarioDTO;
 import br.com.artvision.models.Funcionario;
-import br.com.artvision.services.FuncionarioService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/funcionario") //mudar aqui nome da página front
+@WebServlet("/funcionario")
 public class FuncionarioController extends HttpServlet {
 
-    private FuncionarioService funcionarioService = new FuncionarioService();
+    private FuncionarioDAO funcionarioDAO;
 
     @Override
     public void init() {
-        funcionarioService = new FuncionarioService();
+        funcionarioDAO = new FuncionarioDAO();
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action == null) action = "listar";
 
-        switch (action) {
-            case "listar":
+        try {
+            if (action == null) {
                 listarFuncionarios(request, response);
-                break;
-
-            case "buscar":
-                buscarFuncionarioPorId(request, response);
-                break;
-
-            default:
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação GET não reconhecida.");
+            } else {
+                switch (action) {
+                    case "listar":
+                        listarFuncionarios(request, response);
+                        break;
+                    case "editar":
+                        mostrarFormularioEdicao(request, response);
+                        break;
+                    case "excluir":
+                        excluirFuncionario(request, response);
+                        break;
+                    default:
+                        listarFuncionarios(request, response);
+                        break;
+                }
+            }
+        } catch (Exception e) {
+            throw new ServletException(e);
         }
     }
-
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idFuncStr = request.getParameter("idFunc");
 
-        String action = request.getParameter("action");
-        if (action == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parâmetro 'action' é obrigatório.");
-            return;
-        }
-
-        switch (action) {
-            case "cadastrar":
-                cadastrarFuncionario(request, response);
-                break;
-            case "atualizar":
-                atualizarFuncionario(request, response);
-                break;
-            case "excluir":
-                excluirFuncionario(request, response);
-                break;
-            default:
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação POST não reconhecida.");
-        }
-    }
-
-    private void listarFuncionarios(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        List<FuncionarioDTO> lista = funcionarioService.listarFuncionarios();
-        request.setAttribute("funcionario", lista); //mudar aqui nome da página front
-        request.getRequestDispatcher("funcionario").forward(request, response); // mudar aqui nome da página front
-    }
-
-    private void buscarFuncionarioPorId(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            int id = Integer.parseInt(request.getParameter("id_func"));
-            Funcionario funcionario = funcionarioService.buscarFuncionarioPorId(id);
-
-            if (funcionario != null) {
-                request.setAttribute("funcionario", funcionario); //mudar aqui nome da página front
-                request.getRequestDispatcher("editar-funcionario.jsp").forward(request, response); //aqui tbm
-            } else {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Funcionário não encontrado.");
-            }
-        } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID inválido.");
-        }
-    }
-
-    private void cadastrarFuncionario(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        Funcionario funcionario = new Funcionario();
-        funcionario.setCpfFunc(request.getParameter("cpf_func"));
-        funcionario.setNomeFunc(request.getParameter("nome_func"));
-        funcionario.setTelefoneFunc(request.getParameter("telefone_func"));
-        funcionario.setEmailFunc(request.getParameter("email_func"));
-        funcionario.setIdCargo(Integer.parseInt(request.getParameter("id_cargo")));
-        funcionario.setIdSetor(Integer.parseInt(request.getParameter("id_setor")));
-        funcionario.setIdDepto(Integer.parseInt(request.getParameter("id_depto")));
-
-        boolean sucesso = funcionarioService.cadastrarFuncionario(funcionario);
-        if (sucesso) {
-            response.sendRedirect("/funcionario"); // aqui tbm
+        if (idFuncStr == null || idFuncStr.isEmpty()) {
+            cadastrarFuncionario(request, response);
         } else {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao cadastrar funcionário!");
+            atualizarFuncionario(request, response);
         }
     }
 
-    private void atualizarFuncionario(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-
-        try {
-
-            Funcionario funcionario = new Funcionario();
-            funcionario.setIdFunc(Integer.parseInt(request.getParameter("id_func")));
-            funcionario.setCpfFunc(request.getParameter("cpf_func"));
-            funcionario.setNomeFunc(request.getParameter("nome_func"));
-            funcionario.setTelefoneFunc(request.getParameter("telefone_func"));
-            funcionario.setEmailFunc(request.getParameter("email_func"));
-            funcionario.setIdCargo(Integer.parseInt(request.getParameter("id_cargo")));
-            funcionario.setIdSetor(Integer.parseInt(request.getParameter("id_setor")));
-            funcionario.setIdDepto(Integer.parseInt(request.getParameter("id_depto")));
-
-            boolean sucesso = funcionarioService.atualizarFuncionario(funcionario);
-            if (sucesso) {
-                response.sendRedirect("/funcionario"); // aqui tbm
-            } else {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao atualizar funcionário!");
-            }
-        } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST,"ID inválido!");
-        }
+    // LISTAR FUNCIONÁRIOS
+    private void listarFuncionarios(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("listaFuncionarios", funcionarioDAO.listarFuncionarios());
+        request.getRequestDispatcher("funcionario-lista.jsp").forward(request, response);
     }
 
+    // MOSTRAR FORMULÁRIO DE EDIÇÃO
+    private void mostrarFormularioEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int idFunc = Integer.parseInt(request.getParameter("idFunc"));
+        Funcionario funcionario = funcionarioDAO.buscarFuncionarioPorId(idFunc);
+        request.setAttribute("funcionario", funcionario);
+        request.getRequestDispatcher("funcionario-form.jsp").forward(request, response);
+    }
+
+    // CADASTRAR FUNCIONÁRIO
+    private void cadastrarFuncionario(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Funcionario funcionario = criarFuncionarioAPartirDoRequest(request);
+        funcionarioDAO.cadastrarFuncionario(funcionario);
+        response.sendRedirect("funcionario?action=listar");
+    }
+
+    // ATUALIZAR FUNCIONÁRIO
+    private void atualizarFuncionario(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Funcionario funcionario = criarFuncionarioAPartirDoRequest(request);
+        funcionario.setIdFunc(Integer.parseInt(request.getParameter("idFunc")));
+        funcionarioDAO.atualizarFuncionario(funcionario);
+        response.sendRedirect("funcionario?action=listar");
+    }
+
+    // EXCLUIR FUNCIONÁRIO
     private void excluirFuncionario(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int id = Integer.parseInt(request.getParameter("id_func"));
-        boolean sucesso = funcionarioService.excluirFuncionario(id);
-
-        if (sucesso) {
-            response.sendRedirect("/funcionario"); // aqui tbm
-        } else {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao excluir funcionário!");
-        }
+        int idFunc = Integer.parseInt(request.getParameter("idFunc"));
+        funcionarioDAO.excluirFuncionario(idFunc);
+        response.sendRedirect("funcionario?action=listar");
     }
+
+    // MÉTODO AUXILIAR PARA CRIAR FUNCIONÁRIO A PARTIR DO REQUEST
+    private Funcionario criarFuncionarioAPartirDoRequest(HttpServletRequest request) {
+        Funcionario funcionario = new Funcionario();
+
+        funcionario.setNomeFunc(request.getParameter("nomeFunc"));
+        funcionario.setCpfFunc(request.getParameter("cpfFunc"));
+        funcionario.setEmailFunc(request.getParameter("emailFunc"));
+        funcionario.setTelefoneFunc(request.getParameter("telefoneFunc"));
+        funcionario.setMatriculaFunc(request.getParameter("matriculaFunc"));
+
+        funcionario.setIdCargo(parseIntOrZero(request.getParameter("idCargo")));
+        funcionario.setIdSetor(parseIntOrZero(request.getParameter("idSetor")));
+
+        funcionario.setIdDepto(parseIntOrZero(request.getParameter("idDepto")));
+
+        return funcionario;
+    }
+    private int parseIntOrZero(String param) {
+        if (param == null || param.trim().isEmpty()) {
+            return 0;  // ou lança uma exceção controlada se for obrigatório
+        }
+        return Integer.parseInt(param);
+    }
+
+
 }

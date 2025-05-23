@@ -33,7 +33,6 @@
             </section>
             <aside class="logo-container">
                 <div class="logo-placeholder">
-                    <!-- Placeholder para o logo -->
                     <p class="logo-text-artemis">ARTEMIS</p>
                     <p class="logo-text-vintage">vintage</p>
                 </div>

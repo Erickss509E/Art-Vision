@@ -14,23 +14,7 @@ public class FuncionarioService {
     FuncionarioDAO FuncionarioDAO = new FuncionarioDAO();
 
     public List<FuncionarioDTO> listarFuncionarios() {
-        List<Funcionario> funcionarios = FuncionarioDAO.listarFuncionarios();
-        List<FuncionarioDTO> dtos = new ArrayList<>();
-
-        for (Funcionario funcionario : funcionarios) {
-            FuncionarioDTO dto = new FuncionarioDTO(
-                    funcionario.getIdFunc(),
-                    funcionario.getNomeFunc(),
-                    funcionario.getEmailFunc(),
-                    funcionario.getTelefoneFunc(),
-                    funcionario.getIdCargo(),
-                    funcionario.getIdSetor(),
-                    funcionario.getIdDepto()
-            );
-            dtos.add(dto);
-        }
-
-        return dtos;
+        return FuncionarioDAO.listarFuncionarios();
     }
 
     public boolean cadastrarFuncionario(Funcionario funcionario) {

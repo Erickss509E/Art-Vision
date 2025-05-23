@@ -3,24 +3,16 @@ package br.com.artvision.dto;
 public class FuncionarioDTO {
     private int idFunc;
     private String nomeFunc;
-    private String telefoneFunc;
+    private String cpfFunc;
     private String emailFunc;
-    private int idCargo;
-    private int idSetor;
-    private int idDepto;
+    private String telefoneFunc;
+    private String matriculaFunc;
 
-    public FuncionarioDTO() {
-    }
+    private String nomeCargo;
+    private String nomeSetor;
+    private String nomeDepto;
 
-    public FuncionarioDTO(int idFunc, String nomeFunc, String telefoneFunc, String emailFunc, int idCargo, int idSetor, int idDepto) {
-        this.idFunc = idFunc;
-        this.nomeFunc = nomeFunc;
-        this.telefoneFunc = telefoneFunc;
-        this.emailFunc = emailFunc;
-        this.idCargo = idCargo;
-        this.idSetor = idSetor;
-        this.idDepto = idDepto;
-    }
+    // Getters e Setters
 
     public int getIdFunc() {
         return idFunc;
@@ -38,12 +30,12 @@ public class FuncionarioDTO {
         this.nomeFunc = nomeFunc;
     }
 
-    public String getTelefoneFunc() {
-        return telefoneFunc;
+    public String getCpfFunc() {
+        return cpfFunc;
     }
 
-    public void setTelefoneFunc(String telefoneFunc) {
-        this.telefoneFunc = telefoneFunc;
+    public void setCpfFunc(String cpfFunc) {
+        this.cpfFunc = cpfFunc;
     }
 
     public String getEmailFunc() {
@@ -54,27 +46,43 @@ public class FuncionarioDTO {
         this.emailFunc = emailFunc;
     }
 
-    public int getIdCargo() {
-        return idCargo;
+    public String getTelefoneFunc() {
+        return telefoneFunc;
     }
 
-    public void setIdCargo(int idCargo) {
-        this.idCargo = idCargo;
+    public void setTelefoneFunc(String telefoneFunc) {
+        this.telefoneFunc = telefoneFunc;
     }
 
-    public int getIdSetor() {
-        return idSetor;
+    public String getMatriculaFunc() {
+        return matriculaFunc;
     }
 
-    public void setIdSetor(int idSetor) {
-        this.idSetor = idSetor;
+    public void setMatriculaFunc(String matriculaFunc) {
+        this.matriculaFunc = matriculaFunc;
     }
 
-    public int getIdDepto() {
-        return idDepto;
+    public String getNomeCargo() {
+        return nomeCargo;
     }
 
-    public void setIdDepto(int idDepto) {
-        this.idDepto = idDepto;
+    public void setNomeCargo(String nomeCargo) {
+        this.nomeCargo = nomeCargo;
+    }
+
+    public String getNomeSetor() {
+        return nomeSetor;
+    }
+
+    public void setNomeSetor(String nomeSetor) {
+        this.nomeSetor = nomeSetor;
+    }
+
+    public String getNomeDepto() {
+        return nomeDepto;
+    }
+
+    public void setNomeDepto(String nomeDepto) {
+        this.nomeDepto = nomeDepto;
     }
 }
