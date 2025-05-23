@@ -43,12 +43,7 @@
                 </div>
 
                 <div class="campos">
-                    <span>Empresas</span>
-                    <select id="listaMuseus" name="empresa" required>
-                        <option value="">Selecione</option>
-                        <option value="Empresa A">Empresa A</option>
-                        <option value="Empresa B">Empresa B</option>
-                    </select>
+                    <input type="text" id="input_email" name="email" placeholder="Empresa" required>
                     <div id="div_empresa"></div>
                 </div>
 

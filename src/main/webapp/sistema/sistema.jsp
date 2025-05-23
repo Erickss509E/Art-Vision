@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,9 +19,6 @@
                 <div class="nav">
                     <div>
                         <a href="./funcionario.jsp" target="main"><img src="${pageContext.request.contextPath}/assets/img/funcionario.png">Funcionario</a>
-                    </div>
-                    <div>
-                        <a href="./perfil.jsp" target="main"><img src="${pageContext.request.contextPath}/assets/img/Person.png">Perfil</a>
                     </div>
                     <div>
                         <a href="./cargo.jsp" target="main"><img src="${pageContext.request.contextPath}/assets/img/cargo.png">Cargo</a>
@@ -44,7 +43,7 @@
         </div>
     </div>
     <div class="iframe">
-        <iframe src="${pageContext.request.contextPath}/cargo.jsp" name="main"></iframe>
+        <iframe src="./funcionario.jsp" name="main"></iframe>
     </div>
 </main>
 </body>
