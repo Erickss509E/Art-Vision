@@ -1,5 +1,6 @@
 package br.com.artvision.controllers;
 
+import br.com.artvision.models.Usuario;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,12 +30,20 @@ public class LoginController extends HttpServlet {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                HttpSession session = request.getSession();
-                session.setAttribute("usuario", email);
+                // Criar objeto Usuario com todos os dados
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id_usuario"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setCpf(rs.getString("cpf"));
+                usuario.setEmpresa(rs.getString("empresa"));
 
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/sistema/sistema.jsp"); // pessoal, essa é a funcionalidade que redireciona a página
-                                                                                                                // para uma página privada
-                dispatcher.forward(request, response);
+                // Armazenar o objeto Usuario completo na sessão
+                HttpSession session = request.getSession();
+                session.setAttribute("usuario", usuario);
+
+                // Redirecionar para a página correta do sistema
+                response.sendRedirect(request.getContextPath() + "/sistema/sistema.jsp");
             } else {
                 request.setAttribute("erroLogin", "Email ou senha inválidos.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -50,11 +59,12 @@ public class LoginController extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("usuario") != null) {
-            request.getRequestDispatcher("/WEB-INF/sistema/funcionarios.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/sistema/sistema.jsp");
         } else {
             response.sendRedirect("login.jsp");
         }

@@ -27,22 +27,22 @@
                             <th>Autor</th>
                             <th>Data de Entrada</th>
                             <th>Valor Estimado</th>
-                            <th>Localização</th>
-                            <th>Área do Museu</th>
-                            <th>Última Manutenção</th>
+                            <th>Setor</th>
+                            <th>Funcionário</th>
+                            <th>Usuário</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="obra" items="${obras}">
                             <tr>
-                                <td>${obra.nome}</td>
+                                <td>${obra.nomeObra}</td>
                                 <td>${obra.nomeAutor}</td>
-                                <td><fmt:formatDate value="${obra.dataEntradaMuseu}" pattern="dd/MM/yyyy"/></td>
+                                <td><fmt:formatDate value="${obra.dataEntrada}" pattern="dd/MM/yyyy"/></td>
                                 <td>R$ <fmt:formatNumber value="${obra.valorEstimado}" type="number" minFractionDigits="2" maxFractionDigits="2"/></td>
-                                <td>${obra.localizacao}</td>
-                                <td>${obra.areaMuseu}</td>
-                                <td><fmt:formatDate value="${obra.ultimaManutencao}" pattern="dd/MM/yyyy"/></td>
+                                <td>${obra.nomeSetor}</td>
+                                <td>${obra.nomeFuncionario}</td>
+                                <td>${obra.nomeUsuario}</td>
                                 <td class="actions">
                                     <a href="${pageContext.request.contextPath}/sistema/obra?action=editar&id=${obra.id}" class="btn-icon" title="Editar">
                                         <span class="material-icons">edit</span>

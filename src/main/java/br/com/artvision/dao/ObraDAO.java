@@ -20,7 +20,7 @@ public class ObraDAO {
                     "LEFT JOIN funcionarios f ON o.id_func = f.id_func " +
                     "LEFT JOIN usuarios u ON o.id_usuario = u.id_usuario";
 
-        try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
+        try (Connection conn = ConnectionPoolConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -49,7 +49,7 @@ public class ObraDAO {
         Obra obra = null;
         String sql = "SELECT * FROM obras WHERE id_obra = ?";
 
-        try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
+        try (Connection conn = ConnectionPoolConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
@@ -79,7 +79,7 @@ public class ObraDAO {
         String sql = "INSERT INTO obras (nome_obra, nome_autor, data_entrada, data_saida, " +
                     "valor_estimado, id_setor, id_func, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection()) {
+        try (Connection conn = ConnectionPoolConfig.getConnection()) {
             System.out.println("\n=== DEBUG: Iniciando cadastro de obra ===");
             System.out.println("Conexão com o banco estabelecida: " + (conn != null));
             
@@ -181,7 +181,7 @@ public class ObraDAO {
                     "data_saida = ?, valor_estimado = ?, id_setor = ?, id_func = ?, " +
                     "id_usuario = ? WHERE id_obra = ?";
 
-        try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
+        try (Connection conn = ConnectionPoolConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, obra.getNomeObra());
@@ -205,7 +205,7 @@ public class ObraDAO {
     public boolean excluirObra(int id) {
         String sql = "DELETE FROM obras WHERE id_obra = ?";
 
-        try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
+        try (Connection conn = ConnectionPoolConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);

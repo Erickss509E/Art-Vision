@@ -23,7 +23,14 @@
         <div class="container-quadro2">
             <h1 class="titulo">Registre-se</h1>
 
-            <form action="usuario?acao=cadastrar" method="post" class="formulario">
+            <% if (request.getAttribute("erroCadastro") != null) { %>
+                <div class="erro-cadastro">
+                    <%= request.getAttribute("erroCadastro") %>
+                </div>
+            <% } %>
+
+            <form action="usuario" method="post" class="formulario">
+                <input type="hidden" name="action" value="cadastrar">
 
                 <div class="campos">
                     <input type="text" id="input_nome" name="nome" placeholder="Nome" required>

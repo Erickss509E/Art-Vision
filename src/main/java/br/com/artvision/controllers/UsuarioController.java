@@ -19,14 +19,16 @@ public class UsuarioController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String acao = req.getParameter("acao");
+        String action = req.getParameter("action");
+        System.out.println("\n=== DEBUG: UsuarioController doGet ===");
+        System.out.println("Action: " + action);
 
-        if (acao == null) {
+        if (action == null) {
             listar(req, resp);
             return;
         }
 
-        switch (acao) {
+        switch (action) {
             case "editar":
                 editar(req, resp);
                 break;
@@ -40,14 +42,16 @@ public class UsuarioController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String acao = req.getParameter("acao");
+        String action = req.getParameter("action");
+        System.out.println("\n=== DEBUG: UsuarioController doPost ===");
+        System.out.println("Action: " + action);
 
-        if (acao == null) {
+        if (action == null) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Ação não informada.");
             return;
         }
 
-        switch (acao) {
+        switch (action) {
             case "cadastrar":
                 cadastrar(req, resp);
                 break;
@@ -74,27 +78,42 @@ public class UsuarioController extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 
-    private void cadastrar(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Usuario usuario = new Usuario();
-        usuario.setNome(req.getParameter("nome"));
-        usuario.setEmail(req.getParameter("email"));
-        usuario.setSenha(req.getParameter("senha_usuario"));
-        usuario.setCpf(req.getParameter("cpf"));
-        usuario.setEmpresa(req.getParameter("empresa"));
+    private void cadastrar(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        System.out.println("\n=== DEBUG: Iniciando cadastro de usuário ===");
+        try {
+            Usuario usuario = new Usuario();
+            usuario.setNome(req.getParameter("nome"));
+            usuario.setEmail(req.getParameter("email"));
+            usuario.setSenha(req.getParameter("senha_usuario"));
+            usuario.setCpf(req.getParameter("cpf"));
+            usuario.setEmpresa(req.getParameter("empresa"));
 
-        boolean sucesso = usuarioService.cadastrarUsuario(usuario);
+            System.out.println("Dados do usuário a ser cadastrado:");
+            System.out.println("Nome: " + usuario.getNome());
+            System.out.println("Email: " + usuario.getEmail());
+            System.out.println("CPF: " + usuario.getCpf());
+            System.out.println("Empresa: " + usuario.getEmpresa());
 
-        if (sucesso) {
-            resp.sendRedirect("login.jsp");
-        } else {
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao cadastrar usuário.");
+            boolean sucesso = usuarioService.cadastrarUsuario(usuario);
+
+            if (sucesso) {
+                System.out.println("Usuário cadastrado com sucesso!");
+                resp.sendRedirect("login.jsp");
+            } else {
+                System.out.println("Falha ao cadastrar usuário");
+                req.setAttribute("erroCadastro", "Erro ao cadastrar usuário. Por favor, tente novamente.");
+                req.getRequestDispatcher("cadastro.jsp").forward(req, resp);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
+            e.printStackTrace();
+            req.setAttribute("erroCadastro", "Erro ao cadastrar usuário: " + e.getMessage());
+            req.getRequestDispatcher("cadastro.jsp").forward(req, resp);
         }
     }
 
     private void atualizar(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
         try {
-
             Usuario usuario = new Usuario();
             usuario.setId(Integer.parseInt(req.getParameter("id_usuario")));
             usuario.setNome(req.getParameter("nome"));

@@ -37,7 +37,7 @@
                         <a href="./obras.jsp" target="main"><img src="${pageContext.request.contextPath}/assets/img/Paintbrush.png">Obra</a>
                     </div>
                     <div>
-                        <a href="" target="main"><img src="${pageContext.request.contextPath}/assets/img/logout.png">Sair</a>
+                        <a href="${pageContext.request.contextPath}/logout"><img src="${pageContext.request.contextPath}/assets/img/logout.png">Sair</a>
                     </div>
                 </div>
             </div>
