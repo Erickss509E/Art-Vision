@@ -55,3 +55,6 @@ main .iframe>iframe{
     height: 99%;
     border: none;
 }
+main .sidbar>div>.nav>div:last-child{
+padding: 0px;
+}

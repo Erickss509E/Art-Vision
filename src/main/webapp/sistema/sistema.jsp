@@ -30,13 +30,10 @@
                         <a href="./setores.jsp" target="main"><img src="${pageContext.request.contextPath}/assets/img/setor.png">Setores</a>
                     </div>
                     <div>
-                        <a href="./manutencao.jsp" target="main"><img src="${pageContext.request.contextPath}/assets/img/Wrench.png">Manutenção</a>
-                    </div>
-                    <div>
                         <a href="./obras.jsp" target="main"><img src="${pageContext.request.contextPath}/assets/img/Paintbrush.png">Obra</a>
                     </div>
                     <div>
-                        <a href="${pageContext.request.contextPath}/logout"><img src="${pageContext.request.contextPath}/assets/img/logout.png">Sair</a>
+                        <a href="../index.jsp"><img src="${pageContext.request.contextPath}/assets/img/logout.png">Sair</a>
                     </div>
                 </div>
             </div>

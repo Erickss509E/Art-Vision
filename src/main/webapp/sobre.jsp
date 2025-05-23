@@ -37,7 +37,7 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-image">
-                    <img src="images/about-image.jpg" alt="Equipe ArtVision">
+                    <img src="./assets/img/NossaEquipe.webp" width="500px" alt="Equipe ArtVision">
                 </div>
                 <div class="about-text">
                     <h2>Nossa História</h2>

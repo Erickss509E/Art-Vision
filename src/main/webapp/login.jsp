@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles_login.css" />
-  <title>Login</title>
+  <title>Login - ArtVision</title>
+  <link rel="stylesheet" href="css/styles_cadastro.css" />
 </head>
 <body>
 <div class="container">
@@ -20,32 +20,32 @@
     <div class="container-quadro2">
       <h1 class="titulo">Login</h1>
 
-      <% String erro = (String) request.getAttribute("erroLogin"); %>
-      <% if (erro != null) { %>
-      <div style="color:red;"><%= erro %></div>
+      <% if (request.getAttribute("erroLogin") != null) { %>
+      <div class="erro-login">
+        <%= request.getAttribute("erroLogin") %>
+      </div>
       <% } %>
 
-      <form action="login" method="post">
-        <div class="formulario">
-          <div class="campos">
-            <input type="text" name="email" placeholder="Email" />
-            <div style="color: red;" id="div_email"></div>
-          </div>
-          <div class="campos">
-            <input type="password" name="senha" placeholder="Senha" />
-            <div style="color: red;" id="div_senha"></div>
-          </div>
+      <form action="login" method="post" class="formulario">
+        <div class="campos">
+          <input type="text" id="input_email" name="email" placeholder="Email" required />
+        </div>
+        <div class="campos">
+          <input type="password" id="input_senha" name="senha" placeholder="Senha" required />
         </div>
         <button type="submit" class="botao">Entrar</button>
       </form>
 
       <div class="form-footer">
-        <b class="registro">Ainda não possui cadastro?
-          <a href="${pageContext.request.contextPath}/cadastro.jsp" style="text-decoration: none">
-            <span style="color: #8c2a44"><b>Registre-se.</b></span>
-          </a></b>
+        <b class="registro">
+          Não possui uma conta?
+          <a href="cadastro.jsp" style="text-decoration: none;">
+            <span style="color: #8c2a44;"><b>Registre-se</b></span>
+          </a>
+        </b>
       </div>
     </div>
   </div>
 </div>
 </body>
+</html>

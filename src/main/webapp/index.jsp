@@ -1,55 +1,181 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
-    <title>Login - ArtVision</title>
-    <link rel="stylesheet" href="css/styles_cadastro.css">
+    <title>ArtVision - Sistema de Gestão para Museus e Galerias</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
-
 <body>
-<div class="container">
-    <div class="quadro1">
-        <div class="texto-quadro1">
-            <h1 class="titulo1">Bem-Vindo!</h1>
-            <p class="titulo2">A ArtVision Tech Software</p>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Art<span>Vision</span></div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.jsp" class="active">Início</a></li>
+                    <li><a href="sobre.jsp">Sobre</a></li>
+                    <li><a href="login.jsp" class="btn btn-primary">Acessar Sistema</a></li>
+                </ul>
+                <div class="menu-hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
         </div>
-    </div>
+    </header>
 
-    <div class="quadro2">
-        <div class="container-quadro2">
-            <h1 class="titulo">Login</h1>
-
-            <% if (request.getAttribute("erroLogin") != null) { %>
-                <div class="erro-login">
-                    <%= request.getAttribute("erroLogin") %>
+    <section class="hero" style="background-image: url('img/hero-bg.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transforme a gestão do seu acervo artístico</h1>
+                <p>O ArtVision é um sistema completo para gerenciamento de obras de arte, funcionários e manutenções em museus e galerias.</p>
+                <div class="hero-buttons">
+                    <a href="login.jsp" class="btn btn-primary">Acessar Sistema</a>
+                    <a href="sobre.jsp" class="btn btn-outline">Saiba Mais</a>
                 </div>
-            <% } %>
-
-            <form action="login" method="post" class="formulario">
-                <div class="campos">
-                    <input type="text" id="input_email" name="email" placeholder="Email" required>
-                </div>
-
-                <div class="campos">
-                    <input type="password" id="input_senha" name="senha" placeholder="Senha" required>
-                </div>
-
-                <button type="submit" class="botao">Entrar</button>
-            </form>
-
-            <div class="form-footer">
-                <b class="registro">
-                    Não possui uma conta?
-                    <a href="cadastro.jsp" style="text-decoration: none;">
-                        <span style="color: #8c2a44;"><b>Registre-se</b></span>
-                    </a>
-                </b>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Recursos Principais</h2>
+                <p>Conheça as funcionalidades que tornam o ArtVision a escolha ideal para instituições culturais</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="./assets/img/GestaoObra.jpg" alt="Gestão de Obras">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Gestão de Obras</h3>
+                        <p class="card-text">Cadastre, organize e monitore todas as obras do seu acervo com facilidade. Mantenha registros detalhados de cada peça.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="./assets/img/GestaoFuncio.webp" alt="Gestão de Funcionários">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Gestão de Funcionários</h3>
+                        <p class="card-text">Administre equipes, departamentos e escalas de trabalho. Otimize a alocação de recursos humanos.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="./assets/img/GestaoMuseu.webp" alt="Controle de Manutenções">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Controle de Manutenções</h3>
+                        <p class="card-text">Agende e acompanhe manutenções preventivas e corretivas. Garanta a preservação adequada do seu acervo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Por que escolher o ArtVision?</h2>
+                <p>Benefícios que fazem a diferença na gestão do seu museu ou galeria</p>
+            </div>
+            <div class="benefits">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <img src="img/icon-efficiency.svg" alt="Eficiência">
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Eficiência Operacional</h3>
+                        <p>Automatize processos e reduza o tempo gasto em tarefas administrativas, permitindo que sua equipe se concentre no que realmente importa.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <img src="./assets/img/SegurancaDados.wepb" alt="Segurança">
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Segurança de Dados</h3>
+                        <p>Proteja informações sensíveis com nosso sistema de permissões e controle de acesso avançado.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <img src="img/icon-reports.svg" alt="Relatórios">
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Relatórios Detalhados</h3>
+                        <p>Obtenha insights valiosos com relatórios personalizados sobre seu acervo, equipe e operações.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <img src="img/icon-interface.svg" alt="Interface">
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Interface Intuitiva</h3>
+                        <p>Navegue com facilidade em uma plataforma projetada para ser simples e agradável de usar, mesmo para iniciantes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Pronto para transformar a gestão do seu acervo?</h2>
+                <p>Entre em contato conosco para uma demonstração personalizada ou acesse o sistema agora mesmo.</p>
+                <div class="cta-buttons">
+                    <a href="contato.jsp" class="btn btn-secondary">Solicitar Demonstração</a>
+                    <a href="login.jsp" class="btn btn-primary">Acessar Sistema</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">Art<span>Vision</span></div>
+                    <p>Sistema completo para gestão de museus e galerias de arte, desenvolvido para otimizar processos e preservar o patrimônio cultural.</p>
+                    <div class="social-links">
+                        <a href="#"><img src="img/icon-facebook.svg" alt="Facebook"></a>
+                        <a href="#"><img src="img/icon-instagram.svg" alt="Instagram"></a>
+                        <a href="#"><img src="img/icon-linkedin.svg" alt="LinkedIn"></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.jsp">Início</a></li>
+                        <li><a href="sobre.jsp">Sobre</a></li>
+                        <li><a href="contato.jsp">Contato</a></li>
+                        <li><a href="login.jsp">Acessar Sistema</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li>contato@artvision.com.br</li>
+                        <li>(11) 3456-7890</li>
+                        <li>Av. Paulista, 1000 - São Paulo, SP</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 ArtVision. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
 </body>
 </html>
