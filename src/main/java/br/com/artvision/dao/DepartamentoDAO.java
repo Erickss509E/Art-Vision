@@ -2,10 +2,12 @@ package br.com.artvision.dao;
 
 import br.com.artvision.database.ConnectionPoolConfig;
 import br.com.artvision.models.Departamento;
+import br.com.artvision.utils.CascadeDeleteUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,12 +90,17 @@ public class DepartamentoDAO {
     }
 
     public boolean excluirDepartamento(int idDepto) {
-        String sql = "DELETE FROM departamentos WHERE id_depto = ?";
-        try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, idDepto);
-            return stmt.executeUpdate() > 0;
-        } catch (Exception e) {
+        Connection connection = null;
+        try {
+            connection = CascadeDeleteUtil.iniciarTransacao();
+            boolean sucesso = CascadeDeleteUtil.deleteDepartamento(connection, idDepto);
+            CascadeDeleteUtil.finalizarTransacao(connection, sucesso);
+            return sucesso;
+        } catch (SQLException e) {
+            if (connection != null) {
+                CascadeDeleteUtil.finalizarTransacao(connection, false);
+            }
+            System.out.println("Erro ao excluir departamento: " + e.getMessage());
             e.printStackTrace();
             return false;
         }

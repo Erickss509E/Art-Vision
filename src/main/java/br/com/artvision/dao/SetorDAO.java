@@ -2,6 +2,7 @@ package br.com.artvision.dao;
 
 import br.com.artvision.database.ConnectionPoolConfig;
 import br.com.artvision.models.Setor;
+import br.com.artvision.utils.CascadeDeleteUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -96,17 +97,106 @@ public class SetorDAO {
         }
     }
 
-    public boolean excluirSetor(int id_setor) {
-        String sql = "DELETE FROM setores WHERE id_setor = ?";
+    public boolean temDependencias(int id_setor) {
+        String sql = "SELECT COUNT(*) as total FROM (" +
+                    "SELECT id_setor FROM cargos WHERE id_setor = ? UNION ALL " +
+                    "SELECT id_setor FROM departamentos WHERE id_setor = ? UNION ALL " +
+                    "SELECT id_setor FROM obras WHERE id_setor = ?) as deps";
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setInt(1, id_setor);
-            return stmt.executeUpdate() > 0;
+            stmt.setInt(2, id_setor);
+            stmt.setInt(3, id_setor);
 
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total") > 0;
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return true; // Em caso de erro, assume que tem dependências por segurança
+    }
+
+    public String listarDependencias(int id_setor) {
+        StringBuilder deps = new StringBuilder();
+        
+        // Verificar cargos
+        String sqlCargos = "SELECT nome_cargo FROM cargos WHERE id_setor = ?";
+        try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sqlCargos)) {
+            stmt.setInt(1, id_setor);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    deps.append("Cargo: ").append(rs.getString("nome_cargo")).append("\n");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Verificar departamentos
+        String sqlDeps = "SELECT nome_depto FROM departamentos WHERE id_setor = ?";
+        try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sqlDeps)) {
+            stmt.setInt(1, id_setor);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    deps.append("Departamento: ").append(rs.getString("nome_depto")).append("\n");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Verificar obras
+        String sqlObras = "SELECT nome_obra FROM obras WHERE id_setor = ?";
+        try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sqlObras)) {
+            stmt.setInt(1, id_setor);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    deps.append("Obra: ").append(rs.getString("nome_obra")).append("\n");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return deps.toString();
+    }
+
+    public boolean excluirSetor(int id_setor) {
+        Connection connection = null;
+        try {
+            System.out.println("Iniciando exclusão do setor ID: " + id_setor);
+            
+            // Verificar se existem dependências
+            String deps = listarDependencias(id_setor);
+            if (!deps.isEmpty()) {
+                System.out.println("Dependências encontradas:\n" + deps);
+            }
+            
+            connection = CascadeDeleteUtil.iniciarTransacao();
+            boolean sucesso = CascadeDeleteUtil.deleteSetor(connection, id_setor);
+            CascadeDeleteUtil.finalizarTransacao(connection, sucesso);
+            
+            if (sucesso) {
+                System.out.println("Setor excluído com sucesso");
+            } else {
+                System.out.println("Nenhum setor foi excluído");
+            }
+            
+            return sucesso;
+        } catch (SQLException e) {
+            System.err.println("Erro ao excluir setor: " + e.getMessage());
+            e.printStackTrace();
+            if (connection != null) {
+                CascadeDeleteUtil.finalizarTransacao(connection, false);
+            }
             return false;
         }
     }

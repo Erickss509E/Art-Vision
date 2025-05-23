@@ -4,7 +4,6 @@ import br.com.artvision.dao.ManutencaoDAO;
 import br.com.artvision.dto.ManutencaoDTO;
 import br.com.artvision.models.Manutencao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ManutencaoService {
@@ -12,27 +11,11 @@ public class ManutencaoService {
     private ManutencaoDAO manutencaoDAO = new ManutencaoDAO();
 
     public List<ManutencaoDTO> listarManu() {
-        List<Manutencao> manutencoes = manutencaoDAO.listarManu();
-        List<ManutencaoDTO> dtos = new ArrayList<>();
-
-        for (Manutencao manutencao : manutencoes) {
-            ManutencaoDTO dto = new ManutencaoDTO(
-                    manutencao.getIdManutencao(),
-                    manutencao.getNomeManutencao(),
-                    manutencao.getDataManutencao(),
-                    manutencao.getObservacao(),
-                    manutencao.getIdObra(),
-                    manutencao.getIdFunc(),
-                    manutencao.getIdUsuario()
-            );
-            dtos.add(dto);
-        }
-
-        return dtos;
+        return manutencaoDAO.listarManu();
     }
 
-    public Manutencao buscarPorObra(int idObra) {
-        return manutencaoDAO.buscarManutencaoPorId(idObra);
+    public Manutencao buscarPorId(int idManutencao) {
+        return manutencaoDAO.buscarManutencaoPorId(idManutencao);
     }
 
     public boolean cadastrarManu(Manutencao manutencao) {

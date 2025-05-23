@@ -28,8 +28,12 @@ public class DepartamentoController extends HttpServlet {
                 case "buscar":
                     buscarDepartamentoPorId(request, response);
                     break;
+                case "listar":
+                case "":
+                    listarDepartamentos(request, response);
+                    break;
                 default:
-                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação GET não reconhecida.");
+                    listarDepartamentos(request, response);
             }
         } catch (Exception e) {
             throw new ServletException(e);
@@ -40,7 +44,7 @@ public class DepartamentoController extends HttpServlet {
             throws ServletException, IOException {
         List<DepartamentoDTO> lista = departamentoService.listarDepartamentos();
         request.setAttribute("departamentos", lista);
-        request.getRequestDispatcher("/sistema/departamento/departamentos_listagem.jsp").forward(request, response);
+        request.getRequestDispatcher("/sistema/departamento.jsp").forward(request, response);
     }
 
     private void buscarDepartamentoPorId(HttpServletRequest request, HttpServletResponse response)
@@ -118,12 +122,16 @@ public class DepartamentoController extends HttpServlet {
     }
 
     private void excluirDepartamento(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        int id = Integer.parseInt(request.getParameter("id_depto"));
-        if (departamentoService.excluirDepto(id)) {
-            response.sendRedirect(request.getContextPath() + "/sistema/departamento.jsp");
-        } else {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao excluir departamento!");
+            throws IOException, ServletException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id_depto"));
+            if (departamentoService.excluirDepto(id)) {
+                listarDepartamentos(request, response);
+            } else {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao excluir departamento!");
+            }
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID inválido!");
         }
     }
 }

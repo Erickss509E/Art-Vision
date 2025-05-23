@@ -1,6 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@page import="br.com.artvision.dto.ObraDTO" %>
+<%@ page import="java.util.List" %>
+<jsp:useBean id="obraService" class="br.com.artvision.services.ObraService" />
+<%
+    List<ObraDTO> obras = obraService.listarObras();
+    request.setAttribute("obras", obras);
+%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

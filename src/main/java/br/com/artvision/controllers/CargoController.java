@@ -42,8 +42,16 @@ public class CargoController extends HttpServlet {
         try {
             int id = Integer.parseInt(request.getParameter("id_cargo"));
             Cargo cargo = cargoService.buscarCargoPorId(id);
-            request.setAttribute("cargo", cargo);
-            listarCargos(request, response);
+            
+            if (cargo != null) {
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                String json = String.format("{\"id\":%d,\"nome\":\"%s\",\"idSetor\":%d}", 
+                    cargo.getId(), cargo.getNome(), cargo.getIdSetor());
+                response.getWriter().write(json);
+            } else {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Cargo não encontrado.");
+            }
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID inválido.");
         }

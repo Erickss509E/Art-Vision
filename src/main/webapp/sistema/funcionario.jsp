@@ -1,5 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="br.com.artvision.dto.FuncionarioDTO" %>
+<%@ page import="java.util.List" %>
+<jsp:useBean id="funcionarioService" class="br.com.artvision.services.FuncionarioService" />
+<%
+    List<FuncionarioDTO> funcionarios = funcionarioService.listarFuncionarios();
+    request.setAttribute("funcionarios", funcionarios);
+%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

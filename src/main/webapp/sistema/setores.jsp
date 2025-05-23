@@ -36,6 +36,13 @@
                 </button>
             </div>
 
+            <c:if test="${not empty sessionScope.erro}">
+                <div class="alert alert-danger" style="margin: 20px 0; padding: 15px; border: 1px solid #f5c6cb; border-radius: 4px; color: #721c24; background-color: #f8d7da;">
+                    <pre style="margin: 0; white-space: pre-wrap;">${sessionScope.erro}</pre>
+                </div>
+                <% session.removeAttribute("erro"); %>
+            </c:if>
+
             <div class="table-container">
                 <table>
                     <thead>
@@ -58,9 +65,9 @@
                                             <span class="material-icons">edit</span>
                                         </button>
                                     </form>
-                                    <form action="setores" method="post" style="display:inline;" onsubmit="return confirm('Deseja realmente excluir este setor?');">
+                                    <form action="setores" method="post" style="display:inline;" onsubmit="return confirmarExclusao();">
                                         <input type="hidden" name="action" value="excluir"/>
-                                        <input type="hidden" name="id" value="${setor.id}"/>
+                                        <input type="hidden" name="id_setor" value="${setor.id}"/>
                                         <button type="submit" class="btn-icon btn-icon-delete" title="Excluir">
                                             <span class="material-icons">delete</span>
                                         </button>
@@ -151,6 +158,14 @@
             return false;
         }
         return true;
+    }
+
+    function confirmarExclusao() {
+        return confirm('ATENÇÃO: Isso irá excluir:\n\n' +
+                      '- Todos os cargos deste setor\n' +
+                      '- Todos os departamentos deste setor\n' +
+                      '- Remover a vinculação de todas as obras com este setor\n\n' +
+                      'Tem certeza que deseja continuar?');
     }
 </script>
 </body>

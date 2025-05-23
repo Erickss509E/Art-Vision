@@ -5,12 +5,14 @@
 <%@page import="br.com.artvision.dto.DepartamentoDTO" %>
 <%@ page import="java.util.List" %>
 <jsp:useBean id="setor" class="br.com.artvision.services.SetorService" />
-<jsp:useBean id="departamento" class="br.com.artvision.services.DepartamentoService" />
+<jsp:useBean id="departamentoService" class="br.com.artvision.services.DepartamentoService" />
 <%
     List<SetorDTO> setores = setor.listarSetor();
     request.setAttribute("setores", setores);
-    List<DepartamentoDTO> departamentos = departamento.listarDepartamentos();
-    request.setAttribute("departamentos", departamentos);
+    if (request.getAttribute("departamentos") == null) {
+        List<DepartamentoDTO> departamentos = departamentoService.listarDepartamentos();
+        request.setAttribute("departamentos", departamentos);
+    }
 %>
 
 <!DOCTYPE html>
@@ -138,7 +140,24 @@
 
     function excluirDepartamento(id) {
         if (confirm("Tem certeza que deseja excluir este departamento?")) {
-            window.location.href = `/sistema/departamento?action=excluir&id_depto=${id}`;
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '${pageContext.request.contextPath}/sistema/departamento';
+            
+            const actionInput = document.createElement('input');
+            actionInput.type = 'hidden';
+            actionInput.name = 'action';
+            actionInput.value = 'excluir';
+            
+            const idInput = document.createElement('input');
+            idInput.type = 'hidden';
+            idInput.name = 'id_depto';
+            idInput.value = id;
+            
+            form.appendChild(actionInput);
+            form.appendChild(idInput);
+            document.body.appendChild(form);
+            form.submit();
         }
     }
 </script>

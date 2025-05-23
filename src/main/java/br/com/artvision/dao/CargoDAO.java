@@ -2,6 +2,7 @@ package br.com.artvision.dao;
 
 import br.com.artvision.database.ConnectionPoolConfig;
 import br.com.artvision.models.Cargo;
+import br.com.artvision.utils.CascadeDeleteUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -98,15 +99,17 @@ public class CargoDAO {
     }
 
     public boolean excluirCargo(int idCargo) {
-        String sql = "DELETE FROM cargos WHERE id_cargo = ?";
-        try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, idCargo);
-            int linhas = stmt.executeUpdate();
-            return linhas > 0;
-
+        Connection connection = null;
+        try {
+            connection = CascadeDeleteUtil.iniciarTransacao();
+            boolean sucesso = CascadeDeleteUtil.deleteCargo(connection, idCargo);
+            CascadeDeleteUtil.finalizarTransacao(connection, sucesso);
+            return sucesso;
         } catch (SQLException e) {
+            if (connection != null) {
+                CascadeDeleteUtil.finalizarTransacao(connection, false);
+            }
+            System.out.println("Erro ao excluir cargo: " + e.getMessage());
             e.printStackTrace();
             return false;
         }

@@ -106,7 +106,20 @@
     }
 
     function abrirPopupEdicao(id) {
-        window.location.href = contextPath + '/sistema/cargo?action=buscar&id_cargo=' + id + '&popup=true';
+        fetch(contextPath + '/sistema/cargo?action=buscar&id_cargo=' + id)
+            .then(response => response.json())
+            .then(cargo => {
+                document.getElementById('popupTitle').textContent = 'Editar Cargo';
+                document.getElementById('formAction').value = 'atualizar';
+                document.getElementById('idCargo').value = cargo.id;
+                document.getElementById('nomeCargo').value = cargo.nome;
+                document.getElementById('setorCargo').value = cargo.idSetor;
+                document.getElementById('popup_add').classList.add('opened');
+            })
+            .catch(error => {
+                console.error('Erro ao buscar cargo:', error);
+                alert('Erro ao carregar dados do cargo');
+            });
     }
 
     function fecharPopupCadastro() {

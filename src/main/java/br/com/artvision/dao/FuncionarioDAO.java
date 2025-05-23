@@ -3,10 +3,12 @@ package br.com.artvision.dao;
 import br.com.artvision.database.ConnectionPoolConfig;
 import br.com.artvision.dto.FuncionarioDTO;
 import br.com.artvision.models.Funcionario;
+import br.com.artvision.utils.CascadeDeleteUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,18 +130,26 @@ public class FuncionarioDAO {
     }
 
     public boolean excluirFuncionario(int idFunc) {
-        String sql = "DELETE FROM funcionarios WHERE id_func = ?";
-
-        try (Connection conn = ConnectionPoolConfig.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, idFunc);
-
-            int rowsDeleted = stmt.executeUpdate();
-            return rowsDeleted > 0;
-
-        } catch (Exception e) {
+        Connection connection = null;
+        try {
+            System.out.println("Iniciando exclusão do funcionário ID: " + idFunc);
+            connection = CascadeDeleteUtil.iniciarTransacao();
+            boolean sucesso = CascadeDeleteUtil.deleteFuncionario(connection, idFunc);
+            CascadeDeleteUtil.finalizarTransacao(connection, sucesso);
+            
+            if (sucesso) {
+                System.out.println("Funcionário excluído com sucesso");
+            } else {
+                System.out.println("Nenhum funcionário foi excluído");
+            }
+            
+            return sucesso;
+        } catch (SQLException e) {
+            System.err.println("Erro ao excluir funcionário: " + e.getMessage());
             e.printStackTrace();
+            if (connection != null) {
+                CascadeDeleteUtil.finalizarTransacao(connection, false);
+            }
             return false;
         }
     }

@@ -34,6 +34,10 @@ public class SetorController extends HttpServlet {
                 case "buscar":
                     buscarSetorParaEditar(request, response);
                     break;
+                case "listar":
+                case "":
+                    listarSetores(request, response);
+                    break;
                 default:
                     response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação GET não reconhecida.");
                     break;
@@ -150,11 +154,22 @@ public class SetorController extends HttpServlet {
 
     private void excluirSetor(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-
         try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            boolean sucesso = setorService.excluirSetor(id);
+            int id = Integer.parseInt(request.getParameter("id_setor"));
+            SetorDAO setorDAO = new SetorDAO();
+            
+            if (setorDAO.temDependencias(id)) {
+                String dependencias = setorDAO.listarDependencias(id);
+                String mensagem = "Não é possível excluir o setor pois existem os seguintes itens vinculados a ele:\n\n" + 
+                                dependencias + 
+                                "\nPor favor, remova primeiro estes vínculos antes de excluir o setor.";
+                
+                request.getSession().setAttribute("erro", mensagem);
+                response.sendRedirect(request.getContextPath() + "/sistema/setores?action=listar");
+                return;
+            }
 
+            boolean sucesso = setorService.excluirSetor(id);
             if (sucesso) {
                 response.sendRedirect(request.getContextPath() + "/sistema/setores?action=listar");
             } else {

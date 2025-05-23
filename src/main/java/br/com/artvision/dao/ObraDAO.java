@@ -3,6 +3,7 @@ package br.com.artvision.dao;
 import br.com.artvision.database.ConnectionPoolConfig;
 import br.com.artvision.dto.ObraDTO;
 import br.com.artvision.models.Obra;
+import br.com.artvision.utils.CascadeDeleteUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -216,4 +217,23 @@ public class ObraDAO {
             return false;
         }
     }
-} 
+
+    public boolean corrigirEncodingNome(int idObra, String novoNome) {
+        String sql = "UPDATE obras SET nome_obra = ? WHERE id_obra = ?";
+
+        try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, novoNome);
+            stmt.setInt(2, idObra);
+            
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+            
+        } catch (SQLException e) {
+            System.err.println("Erro ao atualizar nome da obra: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+}
