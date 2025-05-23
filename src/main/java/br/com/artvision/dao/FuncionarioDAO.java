@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FuncionarioDAO {
-
     public List<FuncionarioDTO> listarFuncionarios() {
         List<FuncionarioDTO> funcionarios = new ArrayList<>();
         String sql = "SELECT f.id_func, f.nome_func, f.cpf_func, f.email_func, f.telefone_func, f.matricula_func, " +
@@ -128,13 +127,13 @@ public class FuncionarioDAO {
         }
     }
 
-    public boolean excluirFuncionario(int id) {
+    public boolean excluirFuncionario(int idFunc) {
         String sql = "DELETE FROM funcionarios WHERE id_func = ?";
 
         try (Connection conn = ConnectionPoolConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
+            stmt.setInt(1, idFunc);
 
             int rowsDeleted = stmt.executeUpdate();
             return rowsDeleted > 0;

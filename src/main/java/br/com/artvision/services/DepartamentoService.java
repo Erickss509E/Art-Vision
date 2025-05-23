@@ -11,15 +11,20 @@ public class DepartamentoService {
     private DepartamentoDAO departamentoDAO = new DepartamentoDAO();
 
     public List<DepartamentoDTO> listarDepartamentos() {
+        System.out.println("DepartamentoService: Iniciando listagem de departamentos");
         List<Departamento> departamentos = departamentoDAO.listarDepartamentos();
         List<DepartamentoDTO> dtos = new ArrayList<>();
 
-        for (Departamento departamento : departamentos) {
-            dtos.add(new DepartamentoDTO(
-                    departamento.getIdDepto(),
-                    departamento.getNomeDepto(),
-                    departamento.getIdSetor()
-            ));
+        System.out.println("DepartamentoService: Número de departamentos encontrados: " + (departamentos != null ? departamentos.size() : 0));
+
+        if (departamentos != null) {
+            for (Departamento departamento : departamentos) {
+                dtos.add(new DepartamentoDTO(
+                        departamento.getIdDepto(),
+                        departamento.getNomeDepto(),
+                        departamento.getIdSetor()
+                ));
+            }
         }
         return dtos;
     }

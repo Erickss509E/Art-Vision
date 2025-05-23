@@ -12,11 +12,16 @@ public class CargoService {
     private CargoDAO cargoDAO = new CargoDAO();
 
     public List<CargoDTO> listarCargos() {
+        System.out.println("CargoService: Iniciando listagem de cargos");
         List<Cargo> cargos = cargoDAO.listarCargosComNomeSetor();
         List<CargoDTO> listaDTO = new ArrayList<>();
 
-        for (Cargo c : cargos) {
-            listaDTO.add(new CargoDTO(c.getId(), c.getNome(), c.getIdSetor(), c.getNomeSetor()));
+        System.out.println("CargoService: Número de cargos encontrados: " + (cargos != null ? cargos.size() : 0));
+
+        if (cargos != null) {
+            for (Cargo c : cargos) {
+                listaDTO.add(new CargoDTO(c.getId(), c.getNome(), c.getIdSetor(), c.getNomeSetor()));
+            }
         }
 
         return listaDTO;

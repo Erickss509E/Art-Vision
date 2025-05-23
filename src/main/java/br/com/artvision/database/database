@@ -38,6 +38,7 @@ CREATE TABLE funcionarios (
     email_func VARCHAR(50) NOT NULL,
     matricula_func VARCHAR(4),
     telefone_func VARCHAR(11),
+    escala VARCHAR(3),
     id_cargo INT,
     id_setor INT,
     id_depto INT,

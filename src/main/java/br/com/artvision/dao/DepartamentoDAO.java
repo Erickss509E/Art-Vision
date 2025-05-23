@@ -28,7 +28,9 @@ public class DepartamentoDAO {
 
     public List<Departamento> listarDepartamentos() {
         List<Departamento> departamentos = new ArrayList<>();
-        String sql = "SELECT * FROM departamentos";
+        String sql = "SELECT d.id_depto, d.nome_depto, d.id_setor, s.nome_setor " +
+                "FROM departamentos d " +
+                "LEFT JOIN setores s ON d.id_setor = s.id_setor";
 
         try (Connection conn = ConnectionPoolConfig.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -41,8 +43,10 @@ public class DepartamentoDAO {
                         rs.getInt("id_setor")
                 );
                 departamentos.add(depto);
+                System.out.println("Departamento encontrado: ID=" + depto.getIdDepto() + ", Nome=" + depto.getNomeDepto());
             }
         } catch (Exception e) {
+            System.out.println("Erro ao listar departamentos: " + e.getMessage());
             e.printStackTrace();
         }
         return departamentos;

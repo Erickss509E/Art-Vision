@@ -22,6 +22,7 @@ public class SetorDAO {
             return linhasAfetadas > 0;
 
         } catch (SQLException e) {
+            System.out.println("Erro ao cadastrar setor: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -32,19 +33,20 @@ public class SetorDAO {
         String sql = "SELECT id_setor, nome_setor, ala FROM setores";
 
         try (Connection connection = ConnectionPoolConfig.getDataSource().getConnection();
-             Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+             PreparedStatement stmt = connection.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                Setor setor = new Setor(
-                        rs.getString("nome_setor"),
-                        rs.getString("ala")
-                );
+                Setor setor = new Setor();
                 setor.setId(rs.getInt("id_setor"));
+                setor.setNome(rs.getString("nome_setor"));
+                setor.setAla(rs.getString("ala"));
                 setores.add(setor);
+                System.out.println("Setor encontrado: ID=" + setor.getId() + ", Nome=" + setor.getNome());
             }
 
         } catch (Exception e) {
+            System.out.println("Erro ao listar setores: " + e.getMessage());
             e.printStackTrace();
         }
 

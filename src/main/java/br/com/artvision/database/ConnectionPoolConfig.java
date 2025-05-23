@@ -10,6 +10,7 @@ public class ConnectionPoolConfig {
 
     public static BasicDataSource getDataSource() {
         if (dataSource == null) {
+            System.out.println("Configurando conexão com o banco de dados...");
             dataSource = new BasicDataSource();
             dataSource.setUrl("jdbc:mysql://localhost:3306/artvision");
             dataSource.setUsername("root"); // substitua seu usuario caso seja necessario
@@ -19,14 +20,21 @@ public class ConnectionPoolConfig {
             dataSource.setMaxIdle(10);
             dataSource.setMaxTotal(20);
 
-            System.out.println("Sucesso na conexão com o banco de dados!");
+            try {
+                Connection testConn = dataSource.getConnection();
+                System.out.println("Conexão com o banco de dados estabelecida com sucesso!");
+                testConn.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao conectar com o banco de dados: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
         return dataSource;
     }
     public static Connection getConnection() throws SQLException {
-
-        return getDataSource().getConnection();
-
+        Connection conn = getDataSource().getConnection();
+        System.out.println("Nova conexão obtida do pool");
+        return conn;
     }
 }
 

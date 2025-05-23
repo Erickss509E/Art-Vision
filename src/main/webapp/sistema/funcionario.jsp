@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -12,7 +13,7 @@
         <section class="content-area">
             <div class="content-header">
                 <h1>Funcionários</h1>
-                <a href="add_funcionario.jsp" class="btn btn-primary">
+                <a href="${pageContext.request.contextPath}/sistema/add_funcionario.jsp" class="btn btn-primary">
                     <span class="material-icons">add</span> Adicionar Novo Funcionário
                 </a>
             </div>
@@ -33,18 +34,25 @@
                     <tbody>
                         <c:forEach var="func" items="${funcionarios}">
                             <tr>
-                                <td><img src="../assets/img/user-01.png" alt="Foto do Funcionário" class="table-avatar" /></td>
-                                <td>${func.idFunc}</td>
+                                <td>
+                                    <img src="${pageContext.request.contextPath}/assets/img/user-01.png"
+                                         alt="Foto do Funcionário"
+                                         class="table-avatar" />
+                                </td>
+                                <td>${func.matriculaFunc}</td>
                                 <td>${func.nomeFunc}</td>
                                 <td>${func.cpfFunc}</td>
                                 <td>${func.emailFunc}</td>
-                                <td>${func.idCargo}</td>
-                                <td>${func.idSetor}</td>
+                                <td>${func.nomeCargo}</td>
+                                <td>${func.nomeSetor}</td>
                                 <td class="actions">
-                                    <a href="funcionario?action=buscar&id_func=${func.idFunc}" class="btn-icon" title="Editar">
+                                    <a href="${pageContext.request.contextPath}/sistema/funcionario?action=editar&id_func=${func.idFunc}"
+                                       class="btn-icon" title="Editar">
                                         <span class="material-icons">edit</span>
                                     </a>
-                                    <a href="funcionario?action=excluir&id_func=${func.idFunc}" class="btn-icon btn-icon-delete" title="Excluir" onclick="return confirm('Confirma exclusão?');">
+                                    <a href="${pageContext.request.contextPath}/sistema/funcionario?action=excluir&id_func=${func.idFunc}"
+                                       class="btn-icon btn-icon-delete" title="Excluir"
+                                       onclick="return confirm('Confirma exclusão?');">
                                         <span class="material-icons">delete</span>
                                     </a>
                                 </td>

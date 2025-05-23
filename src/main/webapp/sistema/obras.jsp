@@ -1,10 +1,12 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listagem de Obras - ArtVision</title>
-    <link rel="stylesheet" href="../css/obras.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/obras.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -13,51 +15,47 @@
         <section class="content-area">
             <div class="content-header">
                 <h1>Obras</h1>
-                <a href="add_obra.html" class="btn btn-primary" onclick="window.location.href='obras_formulario.html'">
+                <a href="${pageContext.request.contextPath}/sistema/obra?action=novo" class="btn btn-primary">
                     <span class="material-icons">add</span> Adicionar Nova Obra
                 </a>
             </div>
             <div class="table-container">
                 <table>
                     <thead>
-                    <tr>
-                        <th>Nome da Obra</th>
-                        <th>Autor</th>
-                        <th>Data de Entrada</th>
-                        <th>Data de Saída</th>
-                        <th>Valor Estimado</th>
-                        <th>Setor</th>
-                        <th>Funcionário Responsável</th>
-                        <th>Ações</th>
-                    </tr>
+                        <tr>
+                            <th>Nome da Obra</th>
+                            <th>Autor</th>
+                            <th>Data de Entrada</th>
+                            <th>Valor Estimado</th>
+                            <th>Localização</th>
+                            <th>Área do Museu</th>
+                            <th>Última Manutenção</th>
+                            <th>Ações</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Mona Lisa</td>
-                        <td>Leonardo da Vinci</td>
-                        <td>01/01/2023</td>
-                        <td>-</td>
-                        <td>R$ 5.000.000,00</td>
-                        <td>Pinturas Clássicas</td>
-                        <td>João Silva</td>
-                        <td class="actions">
-                            <button class="btn-icon" title="Editar"><span class="material-icons">edit</span></button>
-                            <button class="btn-icon btn-icon-delete" title="Excluir"><span class="material-icons">delete</span></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>O Pensador</td>
-                        <td>Auguste Rodin</td>
-                        <td>15/03/2023</td>
-                        <td>-</td>
-                        <td>R$ 2.500.000,00</td>
-                        <td>Esculturas</td>
-                        <td>Maria Oliveira</td>
-                        <td class="actions">
-                            <button class="btn-icon" title="Editar"><span class="material-icons">edit</span></button>
-                            <button class="btn-icon btn-icon-delete" title="Excluir"><span class="material-icons">delete</span></button>
-                        </td>
-                    </tr>
+                        <c:forEach var="obra" items="${obras}">
+                            <tr>
+                                <td>${obra.nome}</td>
+                                <td>${obra.nomeAutor}</td>
+                                <td><fmt:formatDate value="${obra.dataEntradaMuseu}" pattern="dd/MM/yyyy"/></td>
+                                <td>R$ <fmt:formatNumber value="${obra.valorEstimado}" type="number" minFractionDigits="2" maxFractionDigits="2"/></td>
+                                <td>${obra.localizacao}</td>
+                                <td>${obra.areaMuseu}</td>
+                                <td><fmt:formatDate value="${obra.ultimaManutencao}" pattern="dd/MM/yyyy"/></td>
+                                <td class="actions">
+                                    <a href="${pageContext.request.contextPath}/sistema/obra?action=editar&id=${obra.id}" class="btn-icon" title="Editar">
+                                        <span class="material-icons">edit</span>
+                                    </a>
+                                    <a href="${pageContext.request.contextPath}/sistema/obra?action=excluir&id=${obra.id}" 
+                                       class="btn-icon" 
+                                       title="Excluir"
+                                       onclick="return confirm('Tem certeza que deseja excluir esta obra?')">
+                                        <span class="material-icons">delete</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>

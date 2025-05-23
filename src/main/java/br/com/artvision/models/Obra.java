@@ -4,30 +4,17 @@ import java.util.Date;
 
 public class Obra {
     private int id;
-    private String nome;
+    private String nomeObra;
     private String nomeAutor;
-    private Date dataEntradaMuseu;
+    private Date dataEntrada;
+    private Date dataSaida;
     private double valorEstimado;
-    private String localizacao;
-    private String descricao;
-    private java.util.Date ultimaManutencao;
-    private long tempoDesdeUltimaManutencao; 
-    private String areaMuseu;
+    private int idSetor;
+    private int idFunc;
+    private int idUsuario;
 
-    public Obra(int id, String nome, String nomeAutor, Date dataEntradaMuseu, double valorEstimado, String localizacao, String descricao, Date ultimaManutencao, long tempoDesdeUltimaManutencao, String areaMuseu) {
-        this.id = id;
-        this.nome = nome;
-        this.nomeAutor = nomeAutor;
-        this.dataEntradaMuseu = dataEntradaMuseu;
-        this.valorEstimado = valorEstimado;
-        this.localizacao = localizacao;
-        this.descricao = descricao;
-        this.ultimaManutencao = ultimaManutencao;
-        this.tempoDesdeUltimaManutencao = tempoDesdeUltimaManutencao;
-        this.areaMuseu = areaMuseu;
+    public Obra() {
     }
-
-    public Obra(String nome, String descricao) {}
 
     public int getId() {
         return id;
@@ -37,12 +24,12 @@ public class Obra {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeObra() {
+        return nomeObra;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeObra(String nomeObra) {
+        this.nomeObra = nomeObra;
     }
 
     public String getNomeAutor() {
@@ -53,12 +40,20 @@ public class Obra {
         this.nomeAutor = nomeAutor;
     }
 
-    public Date getDataEntradaMuseu() {
-        return dataEntradaMuseu;
+    public Date getDataEntrada() {
+        return dataEntrada;
     }
 
-    public void setDataEntradaMuseu(Date dataEntradaMuseu) {
-        this.dataEntradaMuseu = dataEntradaMuseu;
+    public void setDataEntrada(Date dataEntrada) {
+        this.dataEntrada = dataEntrada;
+    }
+
+    public Date getDataSaida() {
+        return dataSaida;
+    }
+
+    public void setDataSaida(Date dataSaida) {
+        this.dataSaida = dataSaida;
     }
 
     public double getValorEstimado() {
@@ -69,43 +64,27 @@ public class Obra {
         this.valorEstimado = valorEstimado;
     }
 
-    public String getLocalizacao() {
-        return localizacao;
+    public int getIdSetor() {
+        return idSetor;
     }
 
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
+    public void setIdSetor(int idSetor) {
+        this.idSetor = idSetor;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public int getIdFunc() {
+        return idFunc;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setIdFunc(int idFunc) {
+        this.idFunc = idFunc;
     }
 
-    public Date getUltimaManutencao() {
-        return ultimaManutencao;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setUltimaManutencao(Date ultimaManutencao) {
-        this.ultimaManutencao = ultimaManutencao;
-    }
-
-    public long getTempoDesdeUltimaManutencao() {
-        return tempoDesdeUltimaManutencao;
-    }
-
-    public void setTempoDesdeUltimaManutencao(long tempoDesdeUltimaManutencao) {
-        this.tempoDesdeUltimaManutencao = tempoDesdeUltimaManutencao;
-    }
-
-    public String getAreaMuseu() {
-        return areaMuseu;
-    }
-
-    public void setAreaMuseu(String areaMuseu) {
-        this.areaMuseu = areaMuseu;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }
