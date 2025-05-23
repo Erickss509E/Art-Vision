@@ -1,49 +1,40 @@
 package br.com.artvision.services;
 
 import br.com.artvision.dao.CargoDAO;
-import br.com.artvision.dao.DepartamentoDAO;
 import br.com.artvision.dto.CargoDTO;
-import br.com.artvision.dto.DepartamentoDTO;
 import br.com.artvision.models.Cargo;
-import br.com.artvision.models.Departamento;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CargoService {
 
-    CargoDAO CargoDAO = new CargoDAO();
+    private CargoDAO cargoDAO = new CargoDAO();
 
     public List<CargoDTO> listarCargos() {
-        List<Cargo> cargos = CargoDAO.listarCargos();
-        List<CargoDTO> dtos = new ArrayList<>();
+        List<Cargo> cargos = cargoDAO.listarCargosComNomeSetor();
+        List<CargoDTO> listaDTO = new ArrayList<>();
 
-        for (Cargo cargo : cargos) {
-            CargoDTO dto = new CargoDTO(
-                    cargo.getId(),
-                    cargo.getNome(),
-                    cargo.getIdSetor()
-            );
-            dtos.add(dto);
+        for (Cargo c : cargos) {
+            listaDTO.add(new CargoDTO(c.getId(), c.getNome(), c.getIdSetor(), c.getNomeSetor()));
         }
 
-        return dtos;
+        return listaDTO;
     }
 
-    public Cargo buscarCargosPorId(int id_cargo) {
-        return CargoDAO.buscarCargosPorId(id_cargo);
+    public Cargo buscarCargoPorId(int idCargo) {
+        return cargoDAO.buscarCargoPorId(idCargo);
     }
 
-    public boolean atualizarCargos(Cargo cargo) {
-        return CargoDAO.atualizarCargo(cargo);
+    public boolean atualizarCargo(Cargo cargo) {
+        return cargoDAO.atualizarCargo(cargo);
     }
 
-    public boolean cadastrarCargos(Cargo cargo) {
-        return CargoDAO.cadastrarCargo(cargo);
+    public boolean cadastrarCargo(Cargo cargo) {
+        return cargoDAO.cadastrarCargo(cargo);
     }
 
-    public boolean excluirCargo(int id_cargo) {
-        return CargoDAO.excluirCargo(id_cargo);
+    public boolean excluirCargo(int idCargo) {
+        return cargoDAO.excluirCargo(idCargo);
     }
-
 }

@@ -1,8 +1,11 @@
 package br.com.artvision.controllers;
 
 import br.com.artvision.dto.DepartamentoDTO;
+import br.com.artvision.dto.FuncionarioDTO;
 import br.com.artvision.models.Departamento;
+import br.com.artvision.models.Funcionario;
 import br.com.artvision.services.DepartamentoService;
+import br.com.artvision.services.FuncionarioService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -60,6 +63,7 @@ public class DepartamentoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String action = request.getParameter("action");
 
         if (action == null) {

@@ -1,6 +1,8 @@
 package br.com.artvision.controllers;
 
+import br.com.artvision.dao.SetorDAO;
 import br.com.artvision.dto.SetorDTO;
+import br.com.artvision.models.Funcionario;
 import br.com.artvision.models.Setor;
 import br.com.artvision.services.SetorService;
 
