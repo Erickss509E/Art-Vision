@@ -40,11 +40,9 @@ CREATE TABLE funcionarios (
     telefone_func VARCHAR(11),
     id_cargo INT,
     id_setor INT,
-    id_escala INT,
     id_depto INT,
     FOREIGN KEY (id_cargo) REFERENCES cargos(id_cargo),
     FOREIGN KEY (id_setor) REFERENCES setores(id_setor),
-    FOREIGN KEY (id_escala) REFERENCES escalas(id_escala),
     FOREIGN KEY (id_depto) REFERENCES departamentos(id_depto)
 );
 

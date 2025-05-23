@@ -5,12 +5,12 @@ public class Setor {
     private String nome;
     private String ala;
 
+    public Setor() {}
+
     public Setor(String nome, String ala) {
         this.nome = nome;
         this.ala = ala;
     }
-
-    public Setor () {}
 
     public int getId() {
         return id;
@@ -20,6 +20,7 @@ public class Setor {
         this.id = id;
     }
 
+
     public String getNome() {
         return nome;
     }
@@ -27,6 +28,7 @@ public class Setor {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 
     public String getAla() {
         return ala;

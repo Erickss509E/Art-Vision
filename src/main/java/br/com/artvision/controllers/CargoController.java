@@ -1,20 +1,12 @@
 package br.com.artvision.controllers;
 
 import br.com.artvision.dto.CargoDTO;
-import br.com.artvision.dto.DepartamentoDTO;
-import br.com.artvision.dto.FuncionarioDTO;
 import br.com.artvision.models.Cargo;
-import br.com.artvision.models.Departamento;
-import br.com.artvision.models.Funcionario;
 import br.com.artvision.services.CargoService;
-import br.com.artvision.services.DepartamentoService;
-import br.com.artvision.services.FuncionarioService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -24,123 +16,102 @@ public class CargoController extends HttpServlet {
     private CargoService cargoService = new CargoService();
 
     @Override
-    public void init() {
-        cargoService = new CargoService();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
-        try {
-            switch (action != null ? action : "") {
-                case "listar":
-                    listarCargos(request, response);
-                    break;
-                case "buscar":
-                    buscarCargoPorId(request, response);
-                    break;
-                default:
-                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação GET não reconhecida.");
-                    break;
-            }
-        } catch (Exception e) {
-            throw new ServletException(e);
+        if (action == null || action.equals("listar")) {
+            listarCargos(request, response);
+        } else if (action.equals("buscar")) {
+            buscarCargo(request, response);
+        } else if (action.equals("excluir")) {
+            excluirCargo(request, response);
+        } else if (action.equals("novo")) {
+            abrirPopupCadastro(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/sistema/cargo?action=listar");
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        String action = request.getParameter("action");
-        if (action == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parâmetro 'action' é obrigatório.");
-            return;
-        }
-
-        switch (action) {
-            case "cadastrar":
-                cadastrarCargo(request, response);
-                break;
-            case "atualizar":
-                atualizarCargo(request, response);
-                break;
-            case "excluir":
-                excluirCargo(request, response);
-                break;
-            default:
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ação POST não reconhecida.");
-        }
+    private void listarCargos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<CargoDTO> cargos = cargoService.listarCargos();
+        request.setAttribute("cargos", cargos);
+        request.getRequestDispatcher("/webapp/sistema/cargo.jsp").forward(request, response);
     }
 
-    private void listarCargos(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        List<CargoDTO> lista = cargoService.listarCargos();
-        request.setAttribute("cargo", lista); //mudar aqui nome da página front
-        request.getRequestDispatcher("cargo").forward(request, response); // mudar aqui nome da página front
-    }
-
-    private void buscarCargoPorId(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    private void buscarCargo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id_cargo"));
-            Cargo cargo = cargoService.buscarCargosPorId(id);
-
-            if (cargo != null) {
-                request.setAttribute("cargo", cargo); //mudar aqui nome da página front
-                request.getRequestDispatcher("editar-cargo.jsp").forward(request, response); //aqui tbm
-            } else {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Cargo não encontrado.");
-            }
+            Cargo cargo = cargoService.buscarCargoPorId(id);
+            request.setAttribute("cargo", cargo);
+            listarCargos(request, response);
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID inválido.");
         }
     }
 
-    private void cadastrarCargo(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        Cargo cargo = new Cargo();
-        cargo.setNome(request.getParameter("nome_cargo"));
-        cargo.setIdSetor(Integer.parseInt(request.getParameter("id_setor")));
-
-        boolean sucesso = cargoService.cadastrarCargos(cargo);
-        if (sucesso) {
-            response.sendRedirect("/sistema/cargo"); // aqui tbm
-        } else {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao cadastrar cargo!");
+    private void excluirCargo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id_cargo"));
+            cargoService.excluirCargo(id);
+            response.sendRedirect(request.getContextPath() + "/sistema/cargo?action=listar");
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID inválido.");
         }
     }
 
-    private void atualizarCargo(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        try {
-            Cargo cargo = new Cargo();
-            cargo.setId(Integer.parseInt(request.getParameter("id_cargo"))); // Definindo o ID do cargo
-            cargo.setNome(request.getParameter("nome_cargo"));
-            cargo.setIdSetor(Integer.parseInt(request.getParameter("id_setor")));
+    private void abrirPopupCadastro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<CargoDTO> cargos = cargoService.listarCargos();
+        request.setAttribute("cargos", cargos);
+        request.setAttribute("abrirPopupCadastro", true);
+        request.getRequestDispatcher("/sistema/cargo.jsp").forward(request, response);
+    }
 
-            boolean sucesso = cargoService.atualizarCargos(cargo); // Chamada correta para atualizar
-            if (sucesso) {
-                response.sendRedirect("/cargo?action=listar"); // Redireciona para a listagem atualizada
-            } else {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao atualizar cargo!");
-            }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String action = request.getParameter("action");
+
+        if ("cadastrar".equals(action)) {
+            cadastrarCargo(request, response);
+        } else if ("atualizar".equals(action)) {
+            atualizarCargo(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/sistema/cargo?action=listar");
+        }
+    }
+
+    private void cadastrarCargo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            String nome = request.getParameter("nome_cargo");
+            int idSetor = Integer.parseInt(request.getParameter("id_setor"));
+
+            Cargo cargo = new Cargo();
+            cargo.setNome(nome);
+            cargo.setIdSetor(idSetor);
+
+            cargoService.cadastrarCargo(cargo);
+
+            response.sendRedirect(request.getContextPath() + "/sistema/cargo?action=listar");
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parâmetro inválido.");
         }
     }
 
-    private void excluirCargo(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int id = Integer.parseInt(request.getParameter("id_cargo"));
-        boolean sucesso = cargoService.excluirCargo(id);
+    private void atualizarCargo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            int id = Integer.parseInt(request.getParameter("id_cargo"));
+            String nome = request.getParameter("nome_cargo");
+            int idSetor = Integer.parseInt(request.getParameter("id_setor"));
 
-        if (sucesso) {
-            response.sendRedirect("/cargo"); // aqui tbm
-        } else {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao excluir cargo!");
+            Cargo cargo = new Cargo();
+            cargo.setId(id);
+            cargo.setNome(nome);
+            cargo.setIdSetor(idSetor);
+
+            cargoService.atualizarCargo(cargo);
+
+            response.sendRedirect(request.getContextPath() + "/sistema/cargo?action=listar");
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parâmetro inválido.");
         }
     }
 }

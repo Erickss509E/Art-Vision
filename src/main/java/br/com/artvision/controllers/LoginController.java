@@ -19,7 +19,7 @@ public class LoginController extends HttpServlet {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/artvision", "root", "1234");
+                    "jdbc:mysql://localhost:3306/Artvision", "root", "1234");
 
             PreparedStatement stmt = conn.prepareStatement(
                     "SELECT * FROM usuarios WHERE email = ? AND senha_usuario = ?");
